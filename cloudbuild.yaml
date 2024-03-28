@@ -1,0 +1,13 @@
+# This YAML file defines the build steps for your Cloud Build trigger
+
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/karijerko-front', '.']
+
+  # Push the image to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/karijerko-front']
+
+# Replace placeholders:
+#  * $PROJECT_ID: This will be automatically populated with your Google Cloud project ID.
