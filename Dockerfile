@@ -1,32 +1,14 @@
-FROM node:18-alpine AS runtime
-
-# Build stage with Node.js for building
-FROM node:18-alpine AS builder
+FROM node:18-alpine3.17 as build
 
 WORKDIR /app
+COPY . /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install --silent
-
-# Copy the rest of the application files
-COPY . .
-
-# Build the production bundle
+RUN npm install
 RUN npm run build
 
-# Copy the production build to the runtime image
-FROM runtime
-
-WORKDIR /usr/share/nginx/html
-
-# Copy the production build from the builder stage
-COPY --from=builder /app/dist .
-
-# Expose the port (replace 80 with your desired port)
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install nginx -y
+COPY --from=build /app/dist /var/www/html/
 EXPOSE 80
-
-# Use Nginx to serve the static content
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx","-g","daemon off;"]
