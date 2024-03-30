@@ -1,18 +1,22 @@
 steps:
-  # Install npm dependencies
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['install']
-
-  # Build the production bundle
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'build']
-
-  # Build the Docker image
+  # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/karijerko-front', '.']
-
-  # Push the Docker image to Container Registry
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/karijerko-front:$COMMIT_SHA', '.']
+  # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/karijerko-front']
+    args: ['push', 'gcr.io/$PROJECT_ID/karijerko-front:$COMMIT_SHA']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'karijerko-front'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/karijerko-front:$COMMIT_SHA'
+      - '--region'
+      - 'europe-west3'
+images:
+  - 'gcr.io/$PROJECT_ID/karijerko-front:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY
