@@ -2,8 +2,8 @@ import React from 'react'
 
 function Navbar() {
   return (
-    <div className='border-solid'>
-      <h1 className='text-7xl text-green-300 border-solid'>Karijerko</h1>
+    <div className='border-b border-solid'>
+      <h1 className='text-5xl text-[#58CC02] border-solid'>Karijerko</h1>
       <p></p>
     </div>
 
