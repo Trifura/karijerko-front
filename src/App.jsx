@@ -5,7 +5,6 @@ import ItemCardInfo from './Components/ItemCardInfo'
 import Navbar from './Components/Navbar'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -13,6 +12,7 @@ function App() {
     <div className='md:flex flex-row h-screen'>
       <div className='flex-grow'></div>
       <Itemcard/>
+      <div className='w-[10px]'></div>
       <ItemCardInfo/>
       <div className='flex-grow'></div>
     </div>
