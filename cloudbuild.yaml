@@ -15,7 +15,7 @@ steps:
       - '--image'
       - 'gcr.io/$PROJECT_ID/karijerko-front:$COMMIT_SHA'
       - '--region'
-      - 'europe-west3'
+      - 'europe-west4'
 images:
   - 'gcr.io/$PROJECT_ID/karijerko-front:$COMMIT_SHA'
 options:
