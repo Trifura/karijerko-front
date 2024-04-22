@@ -1,78 +1,71 @@
-import React, { useState } from "react";
-import ItemCardInfo from "./ItemCardInfo";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./ItemCard.css";
-import { CiBookmark } from "react-icons/ci";
-import { GiCancel } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
-function ItemCard() {
+function ItemCard({ onJobSelect }) {
+  const [jobPosts, setJobPosts] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [error, setError] = useState("");
 
-  const jobPosts = [
-    {
-      title:
-        "Agent/ica za video identifikaciju na njemačkom jeziku (min. B1 razina)",
-      company: "Media one d.o.o.",
-      location: "Zagreb",
-      description:
-        "· svakodnevna komunikacija s novim korisnicima\n· provjeravanje identifikacijskih dokumenata putem video poziva\n· isključivo pozivi podrške korisnicima (nema prodajnih poziva).",
-      postedDate: new Date("2024-04-06"),
-    },
-    {
-      title: "Another Title",
-      company: "Another Company",
-      location: "Location 2",
-      description: "Another Description",
-      postedDate: new Date("2024-03-25"),
-    },
-    {
-      title: "Yet Another Title",
-      company: "Another Company",
-      location: "Location 3",
-      description: "Yet Another Description",
-      postedDate: new Date("2024-03-18"),
-    },
-  ];
+  useEffect(() => {
+    axios.get('https://karijerko-api-qo5qt47cea-ez.a.run.app/job-ads/')
+      .then(response => {
+        setJobPosts(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setError("Failed to fetch job postings. Please try again later.");
+      });
+  }, []);
 
-  const handleClick = (index) => {
-    setSelectedItem(index === selectedItem ? null : index);
-  };
+  const handleClick = (event, index) => {
+    event.stopPropagation(); // Prevents event bubbling up to parent elements
+    const postId = jobPosts[index].id;
+
+    // Toggle selection: if the current selected item is clicked again, deselect it
+    if (postId === selectedItem) {
+        setSelectedItem(null);  // Deselect item
+        onJobSelect(null);      // Clear the job details panel
+    } else {
+        setSelectedItem(postId);  // Select new item
+        onJobSelect(postId);      // Display the new job details
+    }
+};
+
 
   const timeDifference = (postedDate) => {
-    const difference = new Date() - postedDate;
+    const difference = new Date() - new Date(postedDate);
     const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
     return `Objavljeno prije ${daysDifference} dana`;
   };
 
   return (
     <div>
+      {error && <div className="error-message">{error}</div>}
       {jobPosts.map((post, index) => (
-        <div key={index} className="job-post flex flex-row">
-          <div
-            className=" p-10 border-b border-solid sm:w-[600px] md:w-[300px] lg:w-[470px] "
-            onClick={() => handleClick(index)}
-          >
-            <div className="width-3 flex justify-between">
+        <div key={index} className="job-post flex flex-row relative" onClick={(e) => handleClick(e, index)}>
+          <div className="p-10 border-b border-solid sm:w-[600px] md:w-[300px] lg:w-[470px]">
+            <div className="flex justify-between">
               <div>
-                <div>Company: {post.company}</div>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleClick(index)}
-                >
-                  Title: {post.title}
+                <div className="text-lg font-bold">{post.title}</div>
+                <div className="text-sm" style={{ cursor: "pointer" }}>
+                  {post.company}
                 </div>
               </div>
-              <div className="">
-                <CiBookmark className="bookmark-icon" />
-                <GiCancel className="cancel-icon" />
-              </div>
             </div>
-            <div>Location: {post.location}</div>
-            <div>{post.description}</div>
-            <div className="bottom-0 left-0">
-              {timeDifference(post.postedDate)}
+            <div className="text-xs">{post.address}</div>
+            <div className="text-[#58CC02] p-2 text-sm">{post.payFixed}€ po satu</div>
+            <div className="text-sm p-1">
+              {post.description.split('\n').map((line, i) => (
+                <p key={i}>{line}</p>
+              ))}
             </div>
+            <div className="absolute bottom-0 left-0 text-xs text-[#AFAFAF] p-2">
+              {timeDifference(post.createdAt)}
+            </div>
+            {selectedItem === index && <ItemCardInfo post={post} url={`http://yourdomain.com/job/${post.id}`} />}
           </div>
-          {selectedItem === index && <ItemCardInfo {...post} />}
         </div>
       ))}
     </div>
