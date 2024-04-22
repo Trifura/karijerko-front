@@ -28,6 +28,18 @@
   border: none;
 }
 
+.sczg-image {
+  width: 100%; /* Make the image fill its container */
+  height: 100%; /* Make the image fill its container */
+}
 
+
+
+.sczg-image-container {
+  width: 30px; /* Set a fixed width */
+  height: 30px; /* Set a fixed height */
+  display: flex; /* Use flexbox */
+  align-items: flex-start; /* Align items to the start (top) */
+}
 
 
