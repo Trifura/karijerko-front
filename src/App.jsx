@@ -13,7 +13,9 @@ function App() {
       <div className='h-[10px]'></div>
       <div className='md:flex flex-row h-screen'>
         <div className='flex-grow'></div>
-        <ItemCard onJobSelect={setSelectedJob}/>
+        <div className='sm:w-[600px] md:w-[300px] lg:w-[470px]'>
+          <ItemCard onJobSelect={setSelectedJob}/>
+        </div>
         <div className='w-[10px]'></div>
         <div className='sm:w-[600px] md:w-[300px] lg:w-[470px]'>
           {selectedJob && <ItemCardInfo id={selectedJob} />}

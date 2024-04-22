@@ -12,6 +12,7 @@ import { IoLocationOutline } from "react-icons/io5";
 
 function ItemCardInfo({ id }) {
   const [jobDetails, setJobDetails] = useState(null);
+  
 
   useEffect(() => {
     axios
@@ -62,22 +63,22 @@ function ItemCardInfo({ id }) {
             </div>
           
           <div>
-            <div>Plaća</div>
-            <div>{jobDetails.payFixed}€ po satu</div>
+            <div className="text-sm">Plaća</div>
+            <div className="gray-button text-xs">{jobDetails.payFixed}€ po satu</div>
           </div>
         </div>
-        <div className="flex flex-row">
+        <div className="flex flex-row p-1">
           <PiCertificateLight size={24} style={{ color: '#4b4b4b' }} />
           <div>
-            <div>Vrsta posla</div>
-            <div>{jobDetails.jobTypes[0].nameHr}</div>
+            <div className="text-sm">Vrsta posla</div>
+            <div className="gray-button text-xs">{jobDetails.jobTypes[0].nameHr}</div>
           </div>
         </div>
-        <div className="flex flex-row">
+        <div className="flex flex-row p-1">
           <CiClock1 size={24} style={{ color: '#4b4b4b' }} />
           <div>
-            <div>Radno vrijeme</div>
-            <div>
+            <div className="text-sm">Radno vrijeme</div>
+            <div className="gray-button text-xs">
               {jobDetails.hoursMin}-{jobDetails.hoursMax} sati tjedno
             </div>
           </div>
@@ -85,11 +86,11 @@ function ItemCardInfo({ id }) {
       </div>
 
       <div>
-        <div>Lokacija</div>
+        <div className="text-xl">Lokacija</div>
         <div className="flex flex-row">
-          <IoLocationOutline />
-          <div>{jobDetails.address}</div>
-          <img src={maps} alt="maps" className="w-[25px]" />
+          <IoLocationOutline className="" size={24}/>
+          <div className="text-lg">{jobDetails.address}</div>
+          <img src={maps} alt="maps" className="w-[35px] p-1" />
         </div>
       </div>
 
@@ -101,6 +102,10 @@ function ItemCardInfo({ id }) {
           ))}
         </div>
       </div>
+
+
+      <div className='p-6'></div>
+
 
       <div>
         <div>Opis posla</div>
