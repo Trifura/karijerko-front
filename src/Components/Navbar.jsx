@@ -1,11 +1,12 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="flex">
-        {/*<img src="../../public/logo.svg" alt=""/>*/}
-        <h1 className='text-5xl text-[#58CC02]'>Karijerko</h1>
-      <p></p>
+    <div className="px-5 py-4 shadow-md">
+        <Link to={"/"}>
+            <img src="../../public/logo-full.svg" alt=""/>
+        </Link>
     </div>
 
 

@@ -1,16 +1,14 @@
 import React from "react";
 import axios from "axios";
 import "./ItemCard.css";
-import sczg from "../../assets/sczg.png";
-import maps from "../../assets/maps.png";
-import { CiBookmark } from "react-icons/ci";
-import { GiCancel } from "react-icons/gi";
-import { CiWallet } from "react-icons/ci";
-import { PiCertificateLight } from "react-icons/pi";
-import { CiClock1 } from "react-icons/ci";
-import { IoLocationOutline } from "react-icons/io5";
-import {useLoaderData} from "react-router-dom";
-
+import {Link, useLoaderData} from "react-router-dom";
+import sczgLogo from "../../assets/sczg.png";
+import Close_round from "../../assets/icons/Close_round.svg";
+import Wallet from "../../assets/icons/Wallet.svg";
+import Certificate from "../../assets/icons/Certificate.svg";
+import Time from "../../assets/icons/Time.svg";
+import Pin_fill from "../../assets/icons/Pin_fill.svg";
+import GMaps from "../../assets/maps.png"
 
 export async function loader({ params }) {
     try {
@@ -29,123 +27,122 @@ export default function JobAdView() {
     }
 
     return (
-        <div className="job-post border-b border-solid sm:w-[600px] md:w-[320px] lg:w-[500px]">
-            <div className="p-10">
-                <div className="flex flex-row">
-                    <div className="flex flex-col">
-                        <div className="text-lg font-bold">{jobAd.title}</div>
-                        <div className="text-sm">{jobAd.company}</div>
-                        <div className="text-xs">{jobAd.address}</div>
-                    </div>
-                    <div className="flex-grow"></div>
-                    <div className="w-[30px]">
-                        <div className="sczg-image-container">
-                            <img src={sczg} alt="sczg" className="sczg-image" />
+        <div className="mt-3">
+            <div className="flex gap-4 p-4 shadow-md border-t border-[#E0E0E0] rounded-t-xl">
+                <div className="flex-grow">
+                    <Link to={'/'}>
+                        <img src={Close_round} className="mb-4" alt={'Close'}/>
+                    </Link>
+
+                    <div className="flex flex-col gap-4">
+                        <h2 className="text-xl font-bold">{jobAd.title}</h2>
+                        <div>
+                            <p>{jobAd.company}</p>
+                            <p>{jobAd.address}</p>
                         </div>
-                    </div>
-                </div>
-                <div className="text-[#58CC02] p-2 text-sm">
-                    {jobAd.payFixed}€ po satu
-                </div>
-                <div className="text-base">
-                    Prijave do {new Date(jobAd.deadline).toLocaleDateString()}
-                </div>
-                <div className="flex flex-row p-1">
-                    <a
-                        href={jobAd.adUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="green-button"
-                    >
-                        Otvori
-                    </a>
-                    <CiBookmark className="bookmark-icon invisible" />
-                    <GiCancel className="cancel-icon invisible" />
-                </div>
-            </div>
-            <div className="border-b sm:w-[600px] md:w-[300px] lg:w-[470px]"></div>
-
-            <div className="p-5">
-                <div className="text-xl p-1">Pojedinosti o poslu:</div>
-                <div className="flex flex-row">
-                    <div className="p-1">
-                        <CiWallet size={24} style={{ color: "#4b4b4b" }} />
-                    </div>
-
-                    <div>
-                        <div className="text-sm">Plaća</div>
-                        <div className="gray-button text-xs">
+                        <div className="text-lg text-[#58CC02]">
                             {jobAd.payFixed}€ po satu
                         </div>
+                        <div className="font-semibold">
+                            Prijave do {new Date(jobAd.deadline).toLocaleDateString()}
+                        </div>
+                        <a href={jobAd.adUrl}
+                           target="_blank"
+                           className="bg-[#58CC02] text-sm text-white px-5 py-2 rounded-md w-fit font-medium"
+                        >
+                            Otvori
+                        </a>
                     </div>
                 </div>
-                <div className="flex flex-row p-1">
-                    <PiCertificateLight size={24} style={{ color: "#4b4b4b" }} />
-                    <div>
-                        <div className="text-sm">Vrsta posla</div>
-                        <div className="gray-button text-xs">
-                            {jobAd.jobTypes[0].nameHr}
+                <div className="w-12 flex-none">
+                    <img src={sczgLogo} alt="SCZG" className="w-full rounded-md"/>
+                </div>
+            </div>
+            <div className='px-4 py-5 flex flex-col gap-4 border-b border-[#E0E0E0]'>
+                <div className="text-xl">Pojedinosti o poslu:</div>
+                <div className="flex flex-col gap-7">
+                    <div className="flex align-top gap-2.5">
+                        <img src={Wallet} alt="" className="w-6 h-6"/>
+                        <div className="flex flex-col gap-1">
+                            <div className="text-sm font-bold">Plaća</div>
+                            <div className="text-xs bg-[#E5E5E5] px-2 py-1.5 w-fit rounded-md">
+                                {jobAd.payFixed}€ po satu
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex flex-row p-1">
-                    <CiClock1 size={24} style={{ color: "#4b4b4b" }} />
-                    <div>
-                        <div className="text-sm">Radno vrijeme</div>
-                        <div className="gray-button text-xs">
-                            {jobAd.hoursMin}-{jobAd.hoursMax} sati tjedno
+                    <div className="flex align-top gap-2.5">
+                        <img src={Certificate} alt="" className="w-6 h-6"/>
+                        <div className="flex flex-col gap-1">
+                            <div className="text-sm font-bold">Vrsta posla</div>
+                            <div className="flex gap-1">
+                                {
+                                    jobAd.jobTypes.map((jobType, index) => (
+                                        <div
+                                            key={index}
+                                            className="text-xs bg-[#E5E5E5] px-2 py-1.5 w-fit rounded-md">
+                                            {jobType.nameHr}
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex align-top gap-2.5">
+                        <img src={Time} alt="" className="w-6 h-6"/>
+                        <div className="flex flex-col gap-1">
+                            <div className="text-sm font-bold">Radno vrijeme</div>
+                            <div className="flex gap-1">
+                                {
+                                    jobAd.scheduleTags.map((jobType, index) => (
+                                        <div
+                                            key={index}
+                                            className="text-xs bg-[#E5E5E5] px-2 py-1.5 w-fit rounded-md">
+                                            {jobType.nameHr}
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div className="border-b sm:w-[600px] md:w-[300px] lg:w-[470px]"></div>
-
-            <div className="p-5">
+            <div className="px-4 py-4 flex flex-col gap-2">
                 <div className="text-xl">Lokacija</div>
-                <div className="flex flex-row items-center">
-                    <IoLocationOutline className="mr-2" size={24} />
+                <div className="flex flex-row gap-2.5 items-center">
+                    <img src={Pin_fill} alt="Pin"/>
                     <div className="text-md">{jobAd.address}</div>
-                    <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                            jobAd.address
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-3"
-                    >
-                        <div className="pl-4">
-                            <img src={maps} alt="maps" className="w-[35px]" />
-                        </div>
-                    </a>
+                       <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                jobAd.address
+                            )}`}
+                            target="_blank"
+                            className="ml-3"
+                        >
+                           <img src={GMaps} alt="maps" className="w-[35px]" />
+                        </a>
                 </div>
             </div>
 
-            <div className="border-b sm:w-[600px] md:w-[300px] lg:w-[470px]"></div>
-
-            <div className="p-5">
-                {jobAd.supplementalPay.length > 0 && (
-                    <div>
-                        <div className="text-xl">Dodatne pogodnosti</div>
-                        <div>
-                            {jobAd.supplementalPay.map((benefit, index) => (
-                                <div className="text-md" key={index}>
+            {jobAd.supplementalPay.length ?
+                <div className="px-4 py-4 flex flex-col gap-2">
+                    <div className="text-xl">Dodatne pogodnosti</div>
+                    <div className="flex gap-2">
+                        {
+                            jobAd.supplementalPay.map((benefit, index) => (
+                                <div
+                                    key={index}
+                                    className="text-sm bg-[#E5E5E5] px-3 py-2 w-fit rounded-md">
                                     {benefit.nameHr}
                                 </div>
-                            ))}
-                        </div>
+                            ))
+                        }
                     </div>
-                )}
-
-                {jobAd.description && (
-                    <>
-                        <div className="pt-5"></div>
-                        <div>
-                            <div className="text-xl">Opis posla</div>
-                            <div className="text-md">{jobAd.description}</div>
-                        </div>
-                    </>
-                )}
+            </div> : ''}
+            <div className="px-4 py-4 flex flex-col gap-2">
+                <div className="text-xl">Opis posla:</div>
+                <div className="whitespace-pre-wrap">
+                    {jobAd.description}
+                </div>
             </div>
         </div>
     );
