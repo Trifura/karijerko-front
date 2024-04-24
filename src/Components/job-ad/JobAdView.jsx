@@ -27,8 +27,8 @@ export default function JobAdView() {
     }
 
     return (
-        <div className="mt-3">
-            <div className="flex gap-4 p-4 shadow-md border-t border-[#E0E0E0] rounded-t-xl">
+        <div className="mt-4 border border-[#E0E0E0] rounded-t-lg">
+            <div className="flex gap-4 p-4 shadow-md  rounded-t-lg">
                 <div className="flex-grow">
                     <Link to={'/'}>
                         <img src={Close_round} className="mb-4" alt={'Close'}/>
@@ -106,7 +106,7 @@ export default function JobAdView() {
                     </div>
                 </div>
             </div>
-            <div className="px-4 py-4 flex flex-col gap-2">
+            <div className="px-4 py-4 flex flex-col gap-2 border-b border-[#E0E0E0]">
                 <div className="text-xl">Lokacija</div>
                 <div className="flex flex-row gap-2.5 items-center">
                     <img src={Pin_fill} alt="Pin"/>
@@ -124,7 +124,7 @@ export default function JobAdView() {
             </div>
 
             {jobAd.supplementalPay.length ?
-                <div className="px-4 py-4 flex flex-col gap-2">
+                <div className="px-4 py-4 flex flex-col gap-2 border-b border-[#E0E0E0]">
                     <div className="text-xl">Dodatne pogodnosti</div>
                     <div className="flex gap-2">
                         {
