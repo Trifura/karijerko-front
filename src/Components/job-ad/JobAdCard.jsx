@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import sczgLogo from "../../assets/sczg.png";
 
 export default function JobAdCard({jobAd}) {
     const timeDifference = (postedDate) => {
@@ -11,22 +12,30 @@ export default function JobAdCard({jobAd}) {
     return (
         <Link
             to={`/oglas/${jobAd.id}`}
-            className="job-post flex flex-row relative cursor-pointer"
+            className="cursor-pointer px-4 py-5 border border-[#E0E0E0] rounded-lg block w-full"
         >
-            <div className="p-10 border-b border-solid sm:w-[600px] md:w-[320px] lg:w-[500px]">
-                <div className="flex justify-between">
+            <div className="flex">
+                <div className="flex-grow">
+                    <div className="flex flex-col gap-3">
+                        <h2 className="text-lg font-bold">{jobAd.title}</h2>
+                        <div>
+                            <p className="text-sm">{jobAd.company}</p>
+                            <p className="text-sm">{jobAd.address}</p>
+                        </div>
+                        <div className="font-semibold text-[#58CC02]">
+                            {jobAd.payFixed}€ po satu
+                        </div>
+                        <div className="whitespace-pre-wrap hidden md:block">
+                            {jobAd.description}
+                        </div>
+                    </div>
                     <div>
-                        <div className="text-lg font-bold">{jobAd.title}</div>
-                        <div className="text-sm">{jobAd.company}</div>
+                        <p className="text-sm text-[#AFAFAF] mt-6">{timeDifference(jobAd.createdAt)}</p>
                     </div>
                 </div>
-                <div className="text-xs">{jobAd.address}</div>
-                <div className="text-[#58CC02] p-2 text-sm">
-                    {jobAd.payFixed}€ po satu
-                </div>
-                <div className="text-sm p-1">{jobAd.description}</div>
-                <div className="absolute bottom-0 left-0 text-xs text-[#AFAFAF] p-2">
-                    {timeDifference(jobAd.createdAt)}
+                <div className="w-11 flex-none flex flex-col">
+                    <div className="flex-grow"></div>
+                    <img src={sczgLogo} alt="SCZG" className="w-9 h-9 rounded-md"/>
                 </div>
             </div>
         </Link>
