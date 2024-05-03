@@ -39,4 +39,3 @@ Please use GitHub issues to report potential bugs or request features.
 
 9. Contact Information
 For further assistance or to contact the maintainers, please email Trifura.tech@gmail.com
-![image](https://github.com/Trifura/karijerko-front/assets/51059710/5a9bd310-4aea-424b-afd2-8b64a6c41193)
