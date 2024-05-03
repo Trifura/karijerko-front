@@ -1,12 +1,12 @@
   Karijerko Front-end Documentation
 1. Overview
-Karijerko is a web-based application designed to facilitate company searching and advertisement. This platform allows users to view, post, and manage company advertisements with ease. The front-end is built using modern web technologies such as React, TailwindCSS, and Vite for efficient and responsive user interactions.
+  Karijerko is a web-based application designed to facilitate company searching and advertisement. This platform allows users to view, post, and manage company advertisements with ease.   The front-end is built using modern web technologies such as React, TailwindCSS, and Vite for efficient and responsive user interactions.
 
 2. Installation Instructions
-Prerequisites
-Node.js (v14.x or later)
-npm (v6.x or later)
-Local Setup
+  Prerequisites
+  Node.js (v14.x or later)
+  npm (v6.x or later)
+  Local Setup
   •	Clone the repository:
   •	git clone https://github.com/Trifura/karijerko-front
   cd karijerko-front
