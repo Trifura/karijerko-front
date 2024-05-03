@@ -8,15 +8,15 @@
   Node.js (v14.x or later)
   npm (v6.x or later)
   
-  4.Local Setup
-  •	Clone the repository:
-  •	git clone https://github.com/Trifura/karijerko-front
-  cd karijerko-front
-  •	Install dependencies:
-  •	npm install
-  •	Run the application:
-  •	npm run dev
-  •	This will start the development server. Access the application at http://localhost:3000 in your web browser.
+    4.Local Setup
+    •	Clone the repository:
+    •	git clone https://github.com/Trifura/karijerko-front
+    cd karijerko-front
+    •	Install dependencies:
+    •	npm install
+    •	Run the application:
+    •	npm run dev
+    •	This will start the development server. Access the application at http://localhost:3000 in your web browser.
   
   5. Usage and Features
   Key Features
