@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import LogoFull from "../assets/logo-full.svg";
+import LogoFull from "../../assets/logo-full.svg";
 
 function Navbar() {
   return (

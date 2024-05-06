@@ -6,23 +6,19 @@ import {
 } from "react-router-dom";
 import './index.css'
 import ErrorPage from "./error-page.jsx";
-import Root, { loader as rootLoader } from "./routes/root.jsx";
-import JobAdView, {loader as jobAdLoader} from "./Components/job-ad/JobAdView.jsx";
+import Root from "./routes/root.jsx";
+import Navbar from "./Components/_legacy/Navbar.jsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root />,
         errorElement: <ErrorPage />,
-        loader: rootLoader,
-        children: [
-            {
-                path: "oglas/:jobAdId",
-                element: <JobAdView />,
-                loader: jobAdLoader,
-            },
-        ],
     },
+    {
+        path: "/mentor",
+        element: <Navbar />,
+    }
 ]);
 
 
