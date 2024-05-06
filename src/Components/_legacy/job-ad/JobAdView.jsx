@@ -2,13 +2,13 @@ import React from "react";
 import axios from "axios";
 import "./ItemCard.css";
 import {Link, useLoaderData} from "react-router-dom";
-import sczgLogo from "../../assets/sczg.png";
-import Close_round from "../../assets/icons/Close_round.svg";
-import Wallet from "../../assets/icons/Wallet.svg";
-import Certificate from "../../assets/icons/Certificate.svg";
-import Time from "../../assets/icons/Time.svg";
-import Pin_fill from "../../assets/icons/Pin_fill.svg";
-import GMaps from "../../assets/maps.png"
+import sczgLogo from "../../../assets/sczg.png";
+import Close_round from "../../../assets/icons/Close_round.svg";
+import Wallet from "../../../assets/icons/Wallet.svg";
+import Certificate from "../../../assets/icons/Certificate.svg";
+import Time from "../../../assets/icons/Time.svg";
+import Pin_fill from "../../../assets/icons/Pin_fill.svg";
+import GMaps from "../../../assets/maps.png"
 
 export async function loader({ params }) {
     try {

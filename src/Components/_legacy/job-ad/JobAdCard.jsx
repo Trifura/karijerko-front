@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import sczgLogo from "../../assets/sczg.png";
+import sczgLogo from "../../../assets/sczg.png";
 
 export default function JobAdCard({jobAd}) {
     const timeDifference = (postedDate) => {
