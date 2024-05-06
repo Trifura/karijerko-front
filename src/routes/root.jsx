@@ -3,6 +3,7 @@ import Navbar from "../Components/Navbar";
 import JobAdList from "../Components/job-ad/JobAdList.jsx";
 import {Outlet, useLoaderData, useLocation} from "react-router-dom";
 import axios from "axios";
+import LandingPage from "../Components/LandingPage";
 
 function Root() {
     const { jobAds } = useLoaderData();
@@ -13,6 +14,8 @@ function Root() {
 
     return (
         <>
+
+{/* 
             <Navbar />
             <div className="h-[10px]"></div>
             <div className="md:flex md:flex-row gap-5 justify-center">
@@ -25,6 +28,10 @@ function Root() {
                     <Outlet />
                 </div>
             </div>
+
+        */}
+        <LandingPage/>
+
         </>
     );
 }
