@@ -4,7 +4,7 @@ import Send from "../../assets/icons/Send.svg";
 export default function Chat() {
     return (
         <div className="border-4 border-neutral-200 rounded-3xl w-full h-full py-4 flex flex-col">
-            <div className="flex flex-col gap-2 flex-grow overflow-y-auto px-5 pb-2">
+            <div className="flex flex-col gap-2 flex-grow overflow-y-auto px-5 pb-2 overscroll-none">
                 <MentorMessage message="Bok! Ja sam Karijerko, tvoj virtualni asistent za karijeru. Tu sam da ti pomognem razvijati vještine, postaviti i ostvariti profesionalne ciljeve te naći put do posla koji ti najviše odgovara. Ako imaš bilo kakva pitanja ili trebaš savjet vezan za svoju karijeru, slobodno se obrati! 😊" />
                 <UserMessage message={"Bok, zovem se Ivan Mikodanić i student sam 2. godine informatičkog dizajna na TVZ-u. Možeš li mi pomoći?"} />
                 <MentorMessage message="Bok Ivan! Drago mi je što si se javio. Super je čuti da studiraš informatički dizajn na TVZ-u. Možemo zajedno istražiti kako najbolje iskoristiti tvoje trenutne vještine i planirati tvoje buduće korake. Reci mi, imaš li već neko konkretno područje unutar informatičkog dizajna koje te posebno zanima ili neka specifična pitanja na koja želiš odgovor?" />
