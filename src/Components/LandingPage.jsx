@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import LogoFull from "../assets/Logo_full.svg";
 import Wave from "../assets/Landing_Wave.svg";
@@ -86,7 +85,7 @@ function LandingPage() {
               <div className="flex flex-col border border-gray-300 rounded-lg p-1">
                 <div className="flex items-center">
                   <img
-                    src={sczgLogo}
+                    src="https://media.licdn.com/dms/image/C4D0BAQGcVJKjYswmcw/company-logo_200_200/0/1645522385436/treblle_logo?e=1723075200&v=beta&t=3DeljCHCzA8o3D5UwoWYuj9NU6fr0WMaNH1xqPyuVhY"
                     alt="SCZG"
                     className="w-[40px] h-[40px] rounded-xl p-1"
                   />
@@ -102,7 +101,7 @@ function LandingPage() {
               <div className="flex flex-col border border-gray-300 rounded-lg p-1">
                 <div className="flex items-center">
                   <img
-                    src={sczgLogo}
+                    src="https://media.licdn.com/dms/image/C4D0BAQGcVJKjYswmcw/company-logo_200_200/0/1645522385436/treblle_logo?e=1723075200&v=beta&t=3DeljCHCzA8o3D5UwoWYuj9NU6fr0WMaNH1xqPyuVhY"
                     alt="SCZG"
                     className="w-[40px] h-[40px] rounded-xl p-1"
                   />
