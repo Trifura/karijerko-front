@@ -8,8 +8,10 @@ import './index.css'
 import ErrorPage from "./error-page.jsx";
 import Root from "./routes/root.jsx";
 import Mentor from "./routes/mentor.jsx";
-import Firme from "./routes/firme.jsx";
-import Firma from "./routes/firma.jsx";
+import Firme from "./routes/firme/firme.jsx";
+import Firma from "./routes/firma/firma.jsx";
+import {fetchCompanies} from "./routes/firme/firme.js";
+import {fetchCompany} from "./routes/firma/firma.js";
 
 const router = createBrowserRouter([
     {
@@ -24,10 +26,12 @@ const router = createBrowserRouter([
             {
                 element: <Firme />,
                 index: true,
+                loader: fetchCompanies,
             },
             {
                 path: 'firma/:companyId',
                 element: <Firma />,
+                loader: fetchCompany,
             }
         ]
     }

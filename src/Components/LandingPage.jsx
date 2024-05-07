@@ -38,7 +38,7 @@ function LandingPage() {
 
               <div className="flex flex-row justify-end mt-2">
                 <div className="bg-white rounded-lg px-2 py-1 text-sm">
-                  Započni razgovor
+                  <Link to={"/mentor"}>Započni razgovor</Link>
                 </div>
               </div>
             </div>
