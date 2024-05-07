@@ -9,3 +9,7 @@
     /*color: #292929;*/
     /*font-weight: 600;*/
 }
+
+.screen-height {
+    height: calc(100vh - 100px);
+}
