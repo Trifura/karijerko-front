@@ -7,7 +7,9 @@ import {
 import './index.css'
 import ErrorPage from "./error-page.jsx";
 import Root from "./routes/root.jsx";
-import Navbar from "./Components/_legacy/Navbar.jsx";
+import Mentor from "./routes/mentor.jsx";
+import Firme from "./routes/firme.jsx";
+import Firma from "./routes/firma.jsx";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +19,17 @@ const router = createBrowserRouter([
     },
     {
         path: "/mentor",
-        element: <Navbar />,
+        element: <Mentor />,
+        children: [
+            {
+                element: <Firme />,
+                index: true,
+            },
+            {
+                path: 'firma/:companyId',
+                element: <Firma />,
+            }
+        ]
     }
 ]);
 

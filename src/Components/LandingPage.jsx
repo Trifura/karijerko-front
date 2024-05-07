@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LogoFullW from "../assets/Logo_fullW.svg";
+import LogoFull from "../assets/Logo_full.svg";
 import Wave from "../assets/Landing_Wave.svg";
 import LogoB from "../assets/LogoBubble.svg";
 import Yellow_line from "../assets/Yellow_line.svg";
 import RightA from "../assets/icons/Right-arrow.svg";
 import Bottom from "../assets/Bottom.svg";
-import sczgLogo from "../assets/sczg.png";
 
 
 import "../index.css";
@@ -16,7 +15,7 @@ function LandingPage() {
     <div className="">
       <div className="bg-[#58CC02] px-3 py-2 shadow-md">
         <Link to={"/"}>
-          <img src={LogoFullW} alt="" />
+          <img src={LogoFull} alt="" />
         </Link>
       </div>
 
@@ -71,8 +70,8 @@ function LandingPage() {
               <div className="flex flex-col border border-gray-300 rounded-lg p-1">
                 <div className="flex items-center">
                   <img
-                    src={sczgLogo}
-                    alt="SCZG"
+                    src="https://media.licdn.com/dms/image/C4D0BAQGcVJKjYswmcw/company-logo_200_200/0/1645522385436/treblle_logo?e=1723075200&v=beta&t=3DeljCHCzA8o3D5UwoWYuj9NU6fr0WMaNH1xqPyuVhY"
+                    alt="Treblle"
                     className="w-[40px] h-[40px] rounded-xl p-1"
                   />
                   <div className="ml-1">
