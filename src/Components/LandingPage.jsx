@@ -8,6 +8,9 @@ import RightA from "../assets/icons/Right-arrow.svg";
 import Bottom from "../assets/Bottom.svg";
 import sczgLogo from "../assets/sczg.png";
 
+
+import "../index.css";
+
 function LandingPage() {
   return (
     <div className="">
@@ -21,15 +24,15 @@ function LandingPage() {
         <div className="flex-grow"></div>
         <div className="">
           <div className="flex sm:flex-row flex-col">
-            <div className="flex flex-col p-1 lg:h-[120px] lg:w-[120px] md:h-[100px] md:w-[100px] sm:h-[85px] sm:w-[85px] xs:h-[70px] xs:w-[70px]">
+            <div className="flex flex-col p-1 lg:h-[150px] lg:w-[150px] md:h-[120px] md:w-[120px] sm:h-[85px] sm:w-[85px] xs:h-[70px] xs:w-[70px]">
               <Link to={"/"}>
                 <img src={LogoB} alt="" />
               </Link>
             </div>
 
-            <div className="mt-2 flex flex-col">
+            <div className="mt-5 flex flex-col">
               <div>
-                <div className="border border-gray-300 p-2 w-[320px] h-[72px] text-sm bg-white rounded-tr-2xl rounded-bl-2xl rounded-br-2xl shadow-md">
+                <div className="text-[16px] border border-gray-300 p-4 md:w-[420px] xs:w-[200px] h-[95px] text-sm bg-white rounded-tr-2xl rounded-bl-2xl rounded-br-2xl shadow-md">
                   Bok, ja sam Karijerko. Predstavi mi se i uz moju pomoć pronađi
                   najbolju kompaniju za sebe te unaprijedi svoje vještine!
                 </div>
@@ -45,7 +48,7 @@ function LandingPage() {
         </div>
 
         <div className="md:flex-grow"></div>
-        <div className="w-[350px] text-[62px] text-white flex sm:flex-row flex-col">
+        <div className="w-[350px] text-[40px] md:text-[62px] text-white flex sm:flex-row flex-col">
           Tvoj virtualni mentor za karijerno usmjeravanje
         </div>
         <div className="md:flex-grow"></div>
