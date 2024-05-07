@@ -24,15 +24,15 @@ function LandingPage() {
         <div className="flex-grow"></div>
         <div className="">
           <div className="flex sm:flex-row flex-col">
-            <div className="flex flex-col p-1 lg:h-[150px] lg:w-[150px] md:h-[120px] md:w-[120px] sm:h-[85px] sm:w-[85px] xs:h-[70px] xs:w-[70px]">
+            <div className="flex flex-col p-1">
               <Link to={"/"}>
-                <img src={LogoB} alt="" />
+                <img src={LogoB} alt="" className="lg:h-[150px] lg:w-[150px] md:h-[120px] md:w-[120px] sm:h-[85px] sm:w-[85px] xs:h-[50px] xs:w-[50px]"/>
               </Link>
             </div>
 
             <div className="mt-5 flex flex-col">
               <div>
-                <div className="text-[16px] border border-gray-300 p-4 md:w-[420px] xs:w-[200px] h-[95px] text-sm bg-white rounded-tr-2xl rounded-bl-2xl rounded-br-2xl shadow-md">
+                <div className="md:text-[16px] sm:text-[16px] border border-gray-300 p-4 md:w-[420px] xs:w-[200px] h-[95px] text-sm bg-white rounded-tr-2xl rounded-bl-2xl rounded-br-2xl shadow-md">
                   Bok, ja sam Karijerko. Predstavi mi se i uz moju pomoć pronađi
                   najbolju kompaniju za sebe te unaprijedi svoje vještine!
                 </div>
@@ -46,12 +46,11 @@ function LandingPage() {
             </div>
           </div>
         </div>
-
-        <div className="md:flex-grow"></div>
-        <div className="w-[350px] text-[40px] md:text-[62px] text-white flex sm:flex-row flex-col">
+        <div className="flex-grow "></div>
+        <div className="w-[350px] text-[40px] lg:text-[58px] md:text-50px] text-white flex sm:flex-row flex-col p-5">
           Tvoj virtualni mentor za karijerno usmjeravanje
         </div>
-        <div className="md:flex-grow"></div>
+        <div className="flex-grow"></div>
       </div>
 
       <div>
@@ -76,7 +75,7 @@ function LandingPage() {
                     className="w-[40px] h-[40px] rounded-xl p-1"
                   />
                   <div className="ml-1">
-                    <div>Treblle</div>
+                    <div className="">Treblle</div>
                     <div>Software Development</div>
                   </div>
                 </div>
