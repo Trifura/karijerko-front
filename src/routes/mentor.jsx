@@ -3,6 +3,8 @@ import Chat from "../Components/chat/Chat.jsx";
 import Navbar from "../Components/Navbar.jsx";
 import {useState} from "react";
 
+import Logo_short from "../assets/Logo_short.svg";
+
 export default function Mentor() {
     const [messages, setMessages] = useState([
         {
@@ -11,6 +13,9 @@ export default function Mentor() {
         }
         ]
     )
+
+    const [isChatOpen, setIsChatOpen] = useState(false)
+
     const addMessage = (message) => {
         setMessages([...messages, {type: 'user', message}])
 
@@ -26,12 +31,23 @@ export default function Mentor() {
                     <div className="hidden lg:block w-[500px] screen-height fixed top-24">
                         <Chat messages={messages} addMessage={addMessage}/>
                     </div>
-                    <div className="w-[500px]"></div>
+                    <div className="w-[500px] hidden lg:block"></div>
                     <div className="w-full lg:w-1/2 overflow-y-auto">
                         <Outlet />
                     </div>
                 </div>
             </div>
+            {
+                isChatOpen ? (
+                    <div className="fixed lg:hidden top-0 left-0 h-screen w-screen z-50 bg-white">
+                        <Chat messages={messages} addMessage={addMessage} setIsChatOpen={setIsChatOpen}/>
+                    </div>
+                ) : <div className="fixed lg:hidden bottom-5 right-5 w-16 h-16 bg-white border-2 border-neutral-200 rounded-full flex justify-center items-center">
+                        <button onClick={() => setIsChatOpen(true)}>
+                            <img src={Logo_short} alt="Chat" className="w-full h-full p-2"/>
+                        </button>
+                    </div>
+            }
         </>
     )
 }

@@ -10,7 +10,7 @@ export default function Firma() {
     const {company} = useLoaderData()
 
     return (
-        <div className="border-4 border-neutral-200 rounded-3xl">
+        <div className="lg:border-4 border-neutral-200 rounded-3xl">
             <div className="px-4 pt-4 pb-2 lg:px-5 lg:py-4">
                 <Link to="/mentor">
                     <img src={Arrow_back} alt="Go back"/>

@@ -1,3 +1,4 @@
+import ChatAvatar from "../../assets/ChatAvatar.avif";
 export default function UserMessage({message}) {
     return (
         <div className="flex gap-1.5 w-full justify-end">
@@ -5,7 +6,7 @@ export default function UserMessage({message}) {
                 {message}
             </div>
             <div className="flex-none">
-                <img src="https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=626&ext=jpg&ga=GA1.1.1943470099.1714064712&semt=ais"
+                <img src={ChatAvatar}
                      alt="User"
                      className="w-10 h-10 rounded-full border border-neutral-200"
                 />
