@@ -46,12 +46,16 @@ export default function Firma() {
                             Stranica
                             <img src={Open_in_new} alt="" className="w-5 h-5"/>
                     </a>
-                    <a
-                        href={`tel:${company.phone}`}
-                        className="py-1 px-3.5 flex gap-1 border-2 border-gray-900 items-center text-sm font-semibold rounded-md">
-                            <img src={Local_phone} alt="" className="w-5 h-5"/>
-                            {company.phone}
-                    </a>
+                    {
+                        company.phone && (
+                            <a
+                                href={`tel:${company.phone}`}
+                                className="py-1 px-3.5 flex gap-1 border-2 border-gray-900 items-center text-sm font-semibold rounded-md">
+                                <img src={Local_phone} alt="" className="w-5 h-5"/>
+                                {company.phone}
+                            </a>
+                        )
+                    }
                 </div>
             </div>
             <hr/>
