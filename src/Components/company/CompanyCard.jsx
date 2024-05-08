@@ -19,7 +19,9 @@ export default function CompanyCard({company}) {
                     <span>{company.headquarters}</span>
                 </div>
                 <div>
-                    <p className="text-xs">Treblle helps engineering and product teams build, ship and understand their REST APIs in one single place.</p>
+                    <p className="text-xs">
+                        {company.tagline}
+                    </p>
                 </div>
             </div>
         </div>
