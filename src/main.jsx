@@ -18,6 +18,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Root />,
         errorElement: <ErrorPage />,
+        loader: fetchCompanies,
     },
     {
         path: "/mentor",
