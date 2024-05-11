@@ -10,7 +10,7 @@ export default function Firma() {
     const {company} = useLoaderData()
 
     return (
-        <div className="lg:border-4 border-neutral-200 rounded-3xl">
+        <div className="lg:border-4 border-Swan rounded-3xl">
             <div className="px-4 pt-4 pb-2 lg:px-5 lg:py-4">
                 <Link to="/mentor">
                     <img src={Arrow_back} alt="Go back"/>
@@ -22,7 +22,7 @@ export default function Firma() {
                         <img
                             src={company.profilePicture}
                             alt={`${company.name} Logo`}
-                            className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg border-2 border-neutral-200"
+                            className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg border-2 border-Swan"
                         />
                         <img src={Notifications} alt="Nofitications" className="w-8 h-8 lg:w-9 lg:h-9 cursor-pointer"/>
                     </div>
@@ -42,7 +42,7 @@ export default function Firma() {
                     <a
                         href={company.website}
                         target="_blank"
-                        className="text-white bg-[#58CC02] py-1.5 px-3.5 flex gap-1 items-center text-sm font-semibold rounded-md">
+                        className="text-white bg-Primary py-1.5 px-3.5 flex gap-1 items-center text-sm font-semibold rounded-md">
                             Stranica
                             <img src={Open_in_new} alt="" className="w-5 h-5"/>
                     </a>

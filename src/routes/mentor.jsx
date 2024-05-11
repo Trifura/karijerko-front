@@ -46,7 +46,7 @@ export default function Mentor() {
                         <Chat messages={messages} addMessage={addMessage} setIsChatOpen={setIsChatOpen} />
                     </div>
                 ) : (
-                    <div className="fixed lg:hidden bottom-5 right-5 w-16 h-16 bg-white border-2 border-neutral-200 rounded-full flex justify-center items-center">
+                    <div className="fixed lg:hidden bottom-5 right-5 w-16 h-16 bg-white border-2 border-Swan rounded-full flex justify-center items-center">
                         <button onClick={() => setIsChatOpen(true)}>
                             <img src={LogoShort} alt="Chat" className="w-full h-full p-2" />
                         </button>

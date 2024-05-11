@@ -12,13 +12,13 @@ import "../index.css";
 function LandingPage() {
   return (
     <div className="">
-      <div className="bg-[#58CC02] px-3 py-2 shadow-md">
+      <div className="bg-Primary px-3 py-2 shadow-md">
         <Link to={"/"}>
           <img src={LogoFull} alt="" />
         </Link>
       </div>
 
-      <div className="md:flex bg-[#58CC02] px-3 py-2 h-full justify-center items-center">
+      <div className="md:flex bg-Primary px-3 py-2 h-full justify-center items-center">
         <div className="flex-grow"></div>
         <div className="">
           <div className="flex sm:flex-row flex-col">

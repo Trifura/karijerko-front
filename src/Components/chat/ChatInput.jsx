@@ -3,7 +3,7 @@ import Send from "../../assets/icons/Send.svg";
 export default function ChatInput({ newMessage, setNewMessage, sendMessage }) {
     return (
         <div className="pt-3 px-5">
-            <div className="w-full border-2 border-neutral-200 rounded-xl px-5 py-3 flex gap-2">
+            <div className="w-full border-2 border-Swan rounded-xl px-5 py-3 flex gap-2">
                 <input
                     value={newMessage}
                     type="text"

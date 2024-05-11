@@ -17,7 +17,7 @@ export default function Chat({ messages, addMessage, setIsChatOpen }) {
 
     return (
         <>
-            <div className="hidden lg:flex border-4 border-neutral-200 rounded-3xl w-full h-full py-4 flex-col">
+            <div className="hidden lg:flex border-4 border-Swan rounded-3xl w-full h-full py-4 flex-col">
                 <ChatMessages messages={messages} />
                 <ChatInput newMessage={newMessage} setNewMessage={setNewMessage} sendMessage={sendMessage} />
             </div>
