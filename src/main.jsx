@@ -12,6 +12,8 @@ import Firme from "./routes/firme/firme.jsx";
 import Firma from "./routes/firma/firma.jsx";
 import {fetchCompanies} from "./routes/firme/firme.js";
 import {fetchCompany} from "./routes/firma/firma.js";
+import {fetchLogin} from "./routes/login/login.js";
+import Login from "./routes/login/login.jsx"
 
 const router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
                 loader: fetchCompany,
             }
         ]
+    },
+
+
+
+    {
+        path: "/prijava",
+        element: <Login />,
+        loader: fetchLogin,
     }
 ]);
 
