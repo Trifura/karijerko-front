@@ -33,7 +33,7 @@ function Login() {
             </div>
 
             <div className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md">
-              Pirjavi se
+              Prijavi se
             </div>
 
             <div className="mt-7 flex justify-center items-center">
@@ -47,7 +47,7 @@ function Login() {
         </div>
 
         <div className="flex justify-center items-center">
-          Novi u Karijerku?
+          Novi u Karijerku? &nbsp;
           <Link to="/registracija" className="text-Primary font-semibold">
             Napravi račnun
           </Link>
