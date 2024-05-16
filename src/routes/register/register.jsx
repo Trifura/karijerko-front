@@ -1,9 +1,8 @@
-import React from "react";
 import Navbar from "../../Components/Navbar";
 import "../../index.css";
 import Line from "../../assets/Line.svg";
 
-import GoogleLog from "../../assets/Login-Google.svg";
+import GoogleLoginButton from "../../Components/authentication/GoogleLoginButton.jsx";
 
 function Login() {
   return (
@@ -49,7 +48,7 @@ function Login() {
             </div>
 
             <div className="mt-7 flex justify-center items-center">
-              <img src={GoogleLog} alt="Line" />
+              <GoogleLoginButton onSuccess={(data) => console.log(data)} />
             </div>
           </div>
         </div>

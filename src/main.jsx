@@ -15,8 +15,8 @@ import {fetchCompany} from "./routes/firma/firma.js";
 import {fetchLogin} from "./routes/login/login.js";
 import Login from "./routes/login/login.jsx"
 
-import {fetchRegister} from "./routes/register/register.js";
 import Register from "./routes/register/register.jsx"
+import {GoogleOAuthProvider} from "@react-oauth/google";
 
 const router = createBrowserRouter([
     {
@@ -48,20 +48,22 @@ const router = createBrowserRouter([
         path: "/prijava",
         element: <Login />,
         loader: fetchLogin,
-        
+
     },
 
     {
         path: "/registracija",
         element: <Register />,
         loader: fetchLogin,
-        
+
     }
 ]);
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-      <RouterProvider router={router} />
-  </React.StrictMode>,
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}>
+        <React.StrictMode>
+            <RouterProvider router={router} />
+        </React.StrictMode>
+    </GoogleOAuthProvider>
 )
