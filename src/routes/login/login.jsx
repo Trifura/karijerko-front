@@ -4,6 +4,7 @@ import "../../index.css";
 import { Link } from "react-router-dom";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import {useDispatch} from "react-redux";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ function Login() {
   const handleSubmit = () => {
     console.log("Email:", email);
     console.log("Password:", password);
+
   };
 
   const validateEmail = (email) => {

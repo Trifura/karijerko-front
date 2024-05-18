@@ -18,6 +18,9 @@ import Login from "./routes/login/login.jsx"
 import Register from "./routes/register/register.jsx"
 import {GoogleOAuthProvider} from "@react-oauth/google";
 
+import { Provider } from "react-redux";
+import store from "./core/store/index.js";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -61,9 +64,11 @@ const router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}>
-        <React.StrictMode>
-            <RouterProvider router={router} />
-        </React.StrictMode>
-    </GoogleOAuthProvider>
+    <React.StrictMode>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}>
+            <Provider store={store}>
+                <RouterProvider router={router} />
+            </Provider>
+        </GoogleOAuthProvider>
+    </React.StrictMode>
 )
