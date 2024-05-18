@@ -28,7 +28,7 @@ export default function Mentor() {
 
     return (
         <>
-            <Navbar />
+            <Navbar showLink={true}/>
             <div className="flex justify-center h-full mt-20 lg:mt-24">
                 <div className="w-full lg:max-w-5xl lg:flex lg:gap-4">
                     <div className="hidden lg:block w-[500px] screen-height fixed top-24">

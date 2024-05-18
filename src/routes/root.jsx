@@ -10,7 +10,7 @@ function Root() {
 
     return (
         <div className="relative">
-            <Navbar />
+            <Navbar showLink={true}/>
             <div className="pt-32 px-10 lg:pt-56 bg-Primary flex justify-center flex-col gap-24 lg:gap-8 lg:flex-row pb-5">
                 <h1 className="text-4xl lg:text-6xl font-bold text-white lg:w-1/3">
                     Tvoj virtualni mentor za karijerno usmjeravanje

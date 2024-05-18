@@ -1,11 +1,40 @@
+import React, { useState } from "react";
 import Navbar from "../../Components/Navbar";
 import "../../index.css";
-import Line from "../../assets/Line.svg";
 import { Link } from "react-router-dom";
-
 import GoogleLoginButton from "../../Components/authentication/GoogleLoginButton.jsx";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [emailValid, setEmailValid] = useState(true);
+
+  const handleEmailChange = (e) => {
+    const enteredEmail = e.target.value;
+    setEmail(enteredEmail);
+    setEmailValid(validateEmail(enteredEmail));
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleTogglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const handleSubmit = () => {
+    console.log("Email:", email);
+    console.log("Password:", password);
+  };
+
+  const validateEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+
   return (
     <div>
       <Navbar showLink={false} />
@@ -19,24 +48,47 @@ function Login() {
               <input
                 type="text"
                 placeholder="Unesite e-mail..."
-                className="p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px]"
+                value={email}
+                onChange={handleEmailChange}
+                className={`p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px] ${
+                  emailValid ? "border-Swan" : "border-red-500"
+                }`}
               />
             </div>
+            {!emailValid && (
+              <p className="text-red-500 text-xs ml-2">
+                Unesite validnu e-mail adresu
+              </p>
+            )}
             <div className="p-2">Lozinka</div>
-            <div className="flex justify-center w-full">
-              <input
-                type="password"
-                placeholder="Unesite lozinku..."
-                className="p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px]"
-              />
+            <div className="flex justify-center w-full relative">
+              <div className="flex">
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  placeholder="Unesite lozinku..."
+                  value={password}
+                  onChange={handlePasswordChange}
+                  className="p-2 border-t-2 border-l-2 border-b-2 border-Swan mb-2 rounded-l-md bg-[#FBFBFB] outline-none w-[270px] h-[40px]"
+                />
+                <div className="p-2 flex flex-col cursor-pointer border-t-2 border-r-2 border-b-2 border-Swan rounded-r-md bg-[#FBFBFB] w-[30px] h-[40px]">
+                  {passwordVisible ? (
+                    <HiEyeOff onClick={handleTogglePasswordVisibility} />
+                  ) : (
+                    <HiEye onClick={handleTogglePasswordVisibility} />
+                  )}
+                </div>
+              </div>
             </div>
 
-            <div className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md">
+            <div
+              className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md"
+              onClick={handleSubmit}
+            >
               Prijavi se
             </div>
 
             <div className="mt-7 flex justify-center items-center">
-              <img src={Line} alt="Line" />
+              <hr className="w-64 border-gray-300" />
             </div>
 
             <div className="mt-7 flex justify-center items-center">
@@ -48,7 +100,7 @@ function Login() {
         <div className="flex justify-center items-center">
           Novi u Karijerku? &nbsp;
           <Link to="/registracija" className="text-Primary font-semibold">
-            Napravi račnun
+            Napravi račun
           </Link>
         </div>
       </div>
