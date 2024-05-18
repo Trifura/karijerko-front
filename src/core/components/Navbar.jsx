@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import LogoFull from "../assets/Logo_full.svg";
-import LogoShort from "../assets/Logo_short.svg";
+import LogoFull from "../../assets/Logo_full.svg";
+import LogoShort from "../../assets/Logo_short.svg";
 
 export default function Navbar({ showLink }) {
   return (

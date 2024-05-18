@@ -5,7 +5,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import ErrorPage from "./error-page.jsx";
+import Error from "./routes/error.jsx";
 import Root from "./routes/root.jsx";
 import Mentor from "./routes/mentor.jsx";
 import Firme from "./routes/firme/firme.jsx";
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Root />,
-        errorElement: <ErrorPage />,
+        errorElement: <Error />,
         loader: fetchCompanies,
     },
     {

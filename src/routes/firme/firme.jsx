@@ -1,4 +1,4 @@
-import CompanyCard from "../../Components/company/CompanyCard.jsx";
+import CompanyCard from "../../company/components/CompanyCard.jsx";
 import {Link, useLoaderData} from "react-router-dom";
 
 export default function Firme() {

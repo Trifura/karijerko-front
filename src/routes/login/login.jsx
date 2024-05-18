@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Navbar from "../../Components/Navbar";
+import { useState } from "react";
+import Navbar from "../../core/components/Navbar.jsx";
 import "../../index.css";
 import { Link } from "react-router-dom";
-import GoogleLoginButton from "../../Components/authentication/GoogleLoginButton.jsx";
+import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
 function Login() {

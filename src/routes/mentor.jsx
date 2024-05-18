@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Chat from "../Components/chat/Chat";
-import Navbar from "../Components/Navbar";
+import Chat from "../chat/components/Chat.jsx";
+import Navbar from "../core/components/Navbar.jsx";
 import { useState } from "react";
 import LogoShort from "../assets/Logo_short.svg";
 

@@ -1,9 +1,9 @@
-import Navbar from "../Components/Navbar.jsx";
+import Navbar from "../core/components/Navbar.jsx";
 import LogoShort from "../assets/Logo_short.svg";
-import SimpleCompanyCard from "../Components/company/SimpleCompanyCard.jsx";
+import SimpleCompanyCard from "../company/components/SimpleCompanyCard.jsx";
 import {Link, useLoaderData} from "react-router-dom";
 import ArrowRight from "../assets/icons/Arrow_right.svg";
-import MentorMessage from "../Components/chat/MentorMessage.jsx";
+import MentorMessage from "../chat/components/MentorMessage.jsx";
 import Send from "../assets/icons/Send.svg";
 function Root() {
     const {companies} = useLoaderData()
