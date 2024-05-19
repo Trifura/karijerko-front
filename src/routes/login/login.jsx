@@ -4,9 +4,12 @@ import "../../index.css";
 import { Link } from "react-router-dom";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import {authenticateGoogle, login} from "../../auth/store/actions.js";
 import {useDispatch} from "react-redux";
 
 function Login() {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -27,8 +30,7 @@ function Login() {
   };
 
   const handleSubmit = () => {
-    console.log("Email:", email);
-    console.log("Password:", password);
+    dispatch(login({email, password}));
 
   };
 
@@ -36,6 +38,13 @@ function Login() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
   };
+
+  const handleGoogleAuth = (response) => {
+    const accessToken = response.credential;
+    const role = 'user'
+
+    dispatch(authenticateGoogle({accessToken, role}));
+  }
 
   return (
     <div>
@@ -94,14 +103,14 @@ function Login() {
             </div>
 
             <div className="mt-7 flex justify-center items-center">
-              <GoogleLoginButton onSuccess={(data) => console.log(data)} />
+              <GoogleLoginButton onSuccess={handleGoogleAuth} />
             </div>
           </div>
         </div>
 
         <div className="flex justify-center items-center">
           Novi u Karijerku? &nbsp;
-          <Link to="/registracija" className="text-Primary font-semibold">
+          <Link to="/register" className="text-Primary font-semibold">
             Napravi račun
           </Link>
         </div>

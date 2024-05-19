@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {fetchUser, register, login } from "./actions.js";
+import {fetchUser, register, login, authenticateGoogle} from "./actions.js";
+
 const initialState = {
-    user: null,
+    // It can be either a user or company
+    account: null,
     isAuthenticated: false,
     isLoading: false,
     error: null,
@@ -23,7 +25,7 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(login.fulfilled, (state, action) => {
-                state.user = action.payload;
+                state.account = action.payload;
                 state.isAuthenticated = true;
                 state.isLoading = false;
             })
@@ -35,9 +37,8 @@ const authSlice = createSlice({
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(register.fulfilled, (state, action) => {
-                state.user = action.payload;
-                state.isAuthenticated = true;
+            .addCase(register.fulfilled, (state) => {
+                state.isAuthenticated = false;
                 state.isLoading = false;
             })
             .addCase(register.rejected, (state, action) => {
@@ -49,11 +50,24 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
-                state.user = action.payload;
+                state.account = action.payload;
                 state.isAuthenticated = true;
                 state.isLoading = false;
             })
             .addCase(fetchUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+            .addCase(authenticateGoogle.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(authenticateGoogle.fulfilled, (state, action) => {
+                state.account = action.payload;
+                state.isAuthenticated = true;
+                state.isLoading = false;
+            })
+            .addCase(authenticateGoogle.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             })

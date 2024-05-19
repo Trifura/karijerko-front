@@ -11,7 +11,7 @@ export default function Navbar({ showLink }) {
       </Link>
       {showLink && (
         <Link
-          to={"/prijava"}
+          to={"/login"}
           className="ml-auto text-white text-base lg:text-md p-2 font-semibold bg-Primary rounded-md border-2 border-Swan"
         >
           Prijavi se
