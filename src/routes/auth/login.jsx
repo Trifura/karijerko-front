@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Navbar from "../../core/components/Navbar.jsx";
 import "../../index.css";
-import { Link } from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import {authenticateGoogle, login} from "../../auth/store/actions.js";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector(state => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,9 +31,12 @@ function Login() {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleSubmit = () => {
-    dispatch(login({email, password}));
+  const handleSubmit = async () => {
+    const result = await dispatch(login({email, password}));
 
+    if (login.fulfilled.match(result)) {
+      navigate('/profile');
+    }
   };
 
   const validateEmail = (email) => {
@@ -39,11 +44,19 @@ function Login() {
     return emailPattern.test(email);
   };
 
-  const handleGoogleAuth = (response) => {
+  const handleGoogleAuth = async (response) => {
     const accessToken = response.credential;
     const role = 'user'
 
-    dispatch(authenticateGoogle({accessToken, role}));
+    const result = await dispatch(authenticateGoogle({accessToken, role}));
+
+    if (authenticateGoogle.fulfilled.match(result)) {
+      navigate('/profile');
+    }
+  }
+
+  if (isAuthenticated) {
+    return <Navigate to="/profile" replace />
   }
 
   return (

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {fetchUser, register, login, authenticateGoogle} from "./actions.js";
+import {act} from "react-dom/test-utils";
 
 const initialState = {
     // It can be either a user or company
@@ -50,6 +51,7 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
+                console.log(action);
                 state.account = action.payload;
                 state.isAuthenticated = true;
                 state.isLoading = false;

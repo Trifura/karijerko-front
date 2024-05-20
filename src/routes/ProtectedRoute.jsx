@@ -1,8 +1,13 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import LoadingPage from "../core/components/LoadingPage.jsx";
 
 export default function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useSelector(state => state.auth);
+  const {isAuthenticated, isLoading} = useSelector(state => state.auth);
+
+  if (isLoading) {
+    return <LoadingPage />
+  }
 
   if (!isAuthenticated) {
     return <Navigate to={"/login"} replace />

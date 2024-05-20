@@ -12,6 +12,15 @@ export default {
         Swan: '#E5E5E5',
         Bee: '#FFC800',
       },
+      keyframes: {
+        'loading-bar': {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+      },
+      animation: {
+        'loading-bar': 'loading-bar 2s infinite',
+      },
     },
   },
   plugins: [],
