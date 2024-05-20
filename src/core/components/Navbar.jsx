@@ -5,7 +5,7 @@ import LogoShort from "../../assets/Logo_short.svg";
 export default function Navbar({ showLink }) {
   return (
     <div className="flex px-5 py-4 shadow-md fixed w-full top-0 z-40 bg-white">
-      <Link to={"/mentor"} className="w-fit flex flex-col">
+      <Link to={"/"} className="w-fit flex flex-col">
         <img src={LogoFull} alt="" className="h-10 hidden lg:block" />
         <img src={LogoShort} alt="" className="h-10 lg:hidden" />
       </Link>

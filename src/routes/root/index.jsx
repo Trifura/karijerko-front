@@ -1,10 +1,10 @@
-import Navbar from "../core/components/Navbar.jsx";
-import LogoShort from "../assets/Logo_short.svg";
-import SimpleCompanyCard from "../company/components/SimpleCompanyCard.jsx";
+import Navbar from "../../core/components/Navbar.jsx";
+import LogoShort from "../../assets/Logo_short.svg";
+import SimpleCompanyCard from "../../company/components/SimpleCompanyCard.jsx";
 import {Link, useLoaderData} from "react-router-dom";
-import ArrowRight from "../assets/icons/Arrow_right.svg";
-import MentorMessage from "../chat/components/MentorMessage.jsx";
-import Send from "../assets/icons/Send.svg";
+import ArrowRight from "../../assets/icons/Arrow_right.svg";
+import MentorMessage from "../../chat/components/MentorMessage.jsx";
+import Send from "../../assets/icons/Send.svg";
 function Root() {
     const {companies} = useLoaderData()
 
@@ -27,7 +27,7 @@ function Root() {
                             Bok, ja sam Karijerko. Predstavi mi se i uz moju pomoć pronađi najbolju kompaniju za sebe te unaprijedi svoje vještine!
                         </div>
                     </div>
-                    <Link to="/mentor" className="text-base lg:text-lg px-4 py-2 font-semibold bg-white rounded-md border-2 border-Swan">
+                    <Link to="/feed" className="text-base lg:text-lg px-4 py-2 font-semibold bg-white rounded-md border-2 border-Swan">
                         Započni razgovor
                     </Link>
                 </div>
@@ -42,13 +42,13 @@ function Root() {
                 <div>
                     <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 pt-10 justify-center">
                         {companies.map((company) => (
-                            <Link to={`/mentor/firma/${company.id}`} key={company.id}>
+                            <Link to={`/company/${company.id}`} key={company.id}>
                                 <SimpleCompanyCard key={company.id} company={company} />
                             </Link>
                         ))}
                     </div>
                 </div>
-                <Link to="/mentor" className="text-xl font-semibold flex items-center">
+                <Link to="/companies" className="text-xl font-semibold flex items-center">
                     Pogledaj sve firme
                     <img src={ArrowRight} alt=""/>
                 </Link>
@@ -63,7 +63,7 @@ function Root() {
                 <div className="bg-white mb-10 lg:mb-40 px-5 pt-4 pb-2 border-4 border-Swan rounded-3xl lg:w-1/2 lg:h-[600px] flex flex-col justify-between gap-20">
                     <MentorMessage message="Bok! Ja sam Karijerko, tvoj virtualni asistent za karijeru. Tu sam da ti pomognem razvijati vještine, postaviti i ostvariti profesionalne ciljeve te naći put do posla koji ti najviše odgovara. Ako imaš bilo kakva pitanja ili trebaš savjet vezan za svoju karijeru, slobodno se obrati! 😊" />
 
-                    <Link to="/mentor"
+                    <Link to="/feed"
                           className="ml-auto border-[3px] border-black py-3 px-5 rounded-xl flex gap-10"
                     >
                         <span className="font-bold">Pošalji poruku</span>

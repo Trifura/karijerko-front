@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import Chat from "../chat/components/Chat.jsx";
-import Navbar from "../core/components/Navbar.jsx";
+import Chat from "../../chat/components/Chat.jsx";
+import Navbar from "../../core/components/Navbar.jsx";
 import { useState } from "react";
-import LogoShort from "../assets/Logo_short.svg";
+import LogoShort from "../../assets/Logo_short.svg";
 
 export default function Mentor() {
     const [messages, setMessages] = useState([

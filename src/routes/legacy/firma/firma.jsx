@@ -1,9 +1,9 @@
-import Arrow_back from "../../assets/icons/Arrow_back.svg";
-import Notifications from "../../assets/icons/Notifications.svg";
-import Open_in_new from "../../assets/icons/Open_in_new.svg";
-import Local_phone from "../../assets/icons/Local_phone.svg";
-import GMaps from "../../assets/maps.png";
-import Pin_fill from "../../assets/icons/Pin_fill.svg";
+import Arrow_back from "../../../assets/icons/Arrow_back.svg";
+import Notifications from "../../../assets/icons/Notifications.svg";
+import Open_in_new from "../../../assets/icons/Open_in_new.svg";
+import Local_phone from "../../../assets/icons/Local_phone.svg";
+import GMaps from "../../../assets/maps.png";
+import Pin_fill from "../../../assets/icons/Pin_fill.svg";
 import {Link, useLoaderData} from "react-router-dom";
 
 export default function Firma() {
@@ -12,7 +12,7 @@ export default function Firma() {
     return (
         <div className="lg:border-4 border-Swan rounded-3xl">
             <div className="px-4 pt-4 pb-2 lg:px-5 lg:py-4">
-                <Link to="/mentor">
+                <Link to="/feed">
                     <img src={Arrow_back} alt="Go back"/>
                 </Link>
             </div>

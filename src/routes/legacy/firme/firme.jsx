@@ -1,4 +1,4 @@
-import CompanyCard from "../../company/components/CompanyCard.jsx";
+import CompanyCard from "../../../company/components/CompanyCard.jsx";
 import {Link, useLoaderData} from "react-router-dom";
 
 export default function Firme() {
@@ -7,7 +7,7 @@ export default function Firme() {
     return (
         <div className="flex flex-col gap-4 p-5 lg:p-0">
             {companies.map(company =>
-                <Link to={`/mentor/firma/${company.id}`} key={company.id}>
+                <Link to={`/company/${company.id}`} key={company.id}>
                     <CompanyCard key={company.id} company={company} />
                 </Link>
             )}
