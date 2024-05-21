@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {fetchUser, register, login, authenticateGoogle} from "./actions.js";
-import {act} from "react-dom/test-utils";
 
 const initialState = {
     // It can be either a user or company
