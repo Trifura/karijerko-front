@@ -2,7 +2,7 @@ steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     env:
-      - '_VITE_API_BASE_URL=$_VITE_API_BASE_URL'
+      - '_VITE_API_BASE_URL=https://api.karijerko.com'
       - '_VITE_GOOGLE_OAUTH_CLIENT_ID=$_VITE_GOOGLE_OAUTH_CLIENT_ID'
     args: [
       'build',
