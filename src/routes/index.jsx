@@ -5,7 +5,6 @@ import AboutUs from "./root/about-us.jsx";
 import ConfirmEmail from "./auth/confirm-email.jsx";
 import ForgotPassword from "./auth/forgot-password.jsx";
 import ResetPassword from "./auth/reset-password.jsx";
-import PrivacyPolicy from "./root/privacy-policy.jsx";
 import Companies from "./root/companies.jsx";
 import Root from "./root/index.jsx";
 import Error from "./error.jsx";
@@ -35,10 +34,6 @@ const router = createBrowserRouter([
     {
         path: "/about-us",
         element: <AboutUs />,
-    },
-    {
-        path: "/privacy-policy",
-        element: <PrivacyPolicy />,
     },
     {
         path: "/companies",
