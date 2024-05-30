@@ -21,7 +21,8 @@ import ProtectedRoute from "./ProtectedRoute.jsx";
 import Dashboard from "./company/dashboard.jsx";
 
 // Loaders
-import {fetchCompanies} from "./legacy/firme/firme.js";
+import { fetchCompanies } from "./user/feed.js";
+import {fetchCompany} from "./user/company-view.js";
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
     {
         path: "/company/:companySlug",
         element: <CompanyView />,
+        loader: fetchCompany,
     },
 
     // AUTH
@@ -86,6 +88,7 @@ const router = createBrowserRouter([
     {
         path: "/feed",
         element: <ProtectedRoute> <Feed /> </ProtectedRoute>,
+        loader: fetchCompanies,
     },
     {
         path: "/portfolio",

@@ -35,7 +35,7 @@ function Login() {
     const result = await dispatch(login({ email, password }));
 
     if (login.fulfilled.match(result)) {
-      navigate("/profile");
+      navigate('/feed');
     }
   };
 
@@ -51,7 +51,7 @@ function Login() {
     const result = await dispatch(authenticateGoogle({ accessToken, role }));
 
     if (authenticateGoogle.fulfilled.match(result)) {
-      navigate("/profile");
+      navigate('/feed');
     }
   };
 

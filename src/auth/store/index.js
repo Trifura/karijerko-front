@@ -50,7 +50,6 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
-                console.log(action);
                 state.account = action.payload;
                 state.isAuthenticated = true;
                 state.isLoading = false;

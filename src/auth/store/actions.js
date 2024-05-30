@@ -38,7 +38,6 @@ export const authenticateGoogle = createAsyncThunk('auth/authenticateGoogle', as
 export const fetchUser = createAsyncThunk('auth/fetchUser', async (_, thunkAPI) => {
     try {
         const account = await authService.fetchUser();
-        console.log(account);
         return account
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
