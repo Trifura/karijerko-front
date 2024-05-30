@@ -5,7 +5,6 @@ import Local_phone from "../../assets/icons/Local_phone.svg";
 import GMaps from "../../assets/maps.png";
 import Pin_fill from "../../assets/icons/Pin_fill.svg";
 import {Link, useLoaderData} from "react-router-dom";
-import Chat from "../../chat/components/Chat.jsx";
 import ChatComponent from "../../chat/components/ChatComponent.jsx";
 
 export default function CompanyView() {

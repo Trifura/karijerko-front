@@ -4,7 +4,7 @@ import ChatMessages from "./ChatMessages.jsx";
 import ChatInput from "./ChatInput.jsx";
 
 
-export default function Chat({ messages, addMessage, setIsChatOpen }) {
+export default function Chat({ messages, addMessage, setIsChatOpen, isTyping }) {
     const [newMessage, setNewMessage] = useState('');
 
     const sendMessage = (event) => {
@@ -23,7 +23,7 @@ export default function Chat({ messages, addMessage, setIsChatOpen }) {
                         <img src={CloseRound} alt="Close" className="w-8 h-8"/>
                     </button>
                 </div>
-                <ChatMessages messages={messages}/>
+                <ChatMessages messages={messages} isTyping={isTyping} />
                 <ChatInput newMessage={newMessage} setNewMessage={setNewMessage} sendMessage={sendMessage}/>
             </div>
 
@@ -33,7 +33,7 @@ export default function Chat({ messages, addMessage, setIsChatOpen }) {
                         <img src={CloseRound} alt="Close" className="w-8 h-8" />
                     </button>
                 </div>
-                <ChatMessages messages={messages} />
+                <ChatMessages messages={messages} isTyping={isTyping} />
                 <ChatInput newMessage={newMessage} setNewMessage={setNewMessage} sendMessage={sendMessage} />
             </div>
         </>
