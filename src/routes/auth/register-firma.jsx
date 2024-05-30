@@ -58,7 +58,7 @@ function RegisterFirma() {
             <input
               type="text"
               placeholder="Unesite ime firme..."
-              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[300px] min-h-[40px] 
+              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px] 
                 `}
             />
 

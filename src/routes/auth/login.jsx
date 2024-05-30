@@ -73,7 +73,7 @@ function Login() {
               placeholder="Unesite e-mail..."
               value={email}
               onChange={handleEmailChange}
-              className={`p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none w-auto min-h-[40px]`}
+              className={`p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]`}
             />
             {!emailValid && (
               <p className="text-red-500 text-xs ml-2">
@@ -81,7 +81,6 @@ function Login() {
               </p>
             )}
             <div className="p-2">Lozinka</div>
-            <div className="flex justify-center w-full relative">
               <div className="relative w-full">
                 <input
                   type={passwordVisible ? "text" : "password"}
@@ -98,7 +97,6 @@ function Login() {
                   )}
                 </div>
               </div>
-            </div>
 
             <div
               className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md"

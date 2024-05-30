@@ -50,42 +50,36 @@ function Register() {
     <div>
       <Navbar showLink={false} />
 
-      <div className="pt-16 sm:pt-0 flex flex-col justify-center items-center h-screen">
+      <div className="pt-16 sm:pt-12 flex flex-col justify-center items-center h-screen">
         <div className="mb-5 text-[25px] font-bold">Registracija</div>
-        <div className="flex justify-center w-auto h-auto p-3 border-4 border-Swan rounded-xl max-w-[400px]">
+        <div className="flex justify-center w-auto h-auto p-3 border-4 border-Swan rounded-xl max-w-[500px]">
           <div className="flex flex-col mt-4 p-2">
             <div className="p-2">Ime</div>
-            <div className="flex justify-center w-full">
               <input
                 type="text"
                 placeholder="Unesite ime..."
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] 
+                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px] 
                 `}
               />
-            </div>
 
             <div className="p-2">Prezime</div>
-            <div className="flex justify-center w-full">
               <input
                 type="text"
                 placeholder="Unesite prezime..."
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] 
+                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none 
                 `}
               />
-            </div>
 
             <div className="p-2">E-mail adresa</div>
-            <div className="flex justify-center w-full">
               <input
                 type="email"
                 placeholder="Unesite e-mail..."
                 value={email}
                 onChange={handleEmailChange}
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] ${
+                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none ${
                   emailValid ? "border-Swan" : "border-red-500"
                 }`}
               />
-            </div>
             {!emailValid && (
               <p className="text-red-500 text-xs ml-2">
                 Unesite validnu e-mail adresu
