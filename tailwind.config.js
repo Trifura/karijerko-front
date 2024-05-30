@@ -11,6 +11,8 @@ export default {
         PrimaryLight: '#89E219',
         Swan: '#E5E5E5',
         Bee: '#FFC800',
+        Hare: '#AFAFAF',
+        HareL: '#AFAFBF',
       },
       keyframes: {
         'loading-bar': {

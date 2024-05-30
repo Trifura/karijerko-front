@@ -10,6 +10,7 @@ import Root from "./root/index.jsx";
 import Error from "./error.jsx";
 import Login from "./auth/login.jsx";
 import Register from "./auth/register.jsx";
+import RegisterFirma from "./auth/register-firma.jsx";
 import CompanyView from "./user/company-view.jsx";
 import Account from "./account/index.jsx";
 import Profile from "./account/profile.jsx";
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register />,
+    },
+    {
+        path: "/register-firma",
+        element: <RegisterFirma />,
     },
     {
         path: "/confirm-email",

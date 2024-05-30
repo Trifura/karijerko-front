@@ -4,7 +4,7 @@ import Navbar from "../../core/components/Navbar.jsx";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import {Link, Navigate, useNavigate} from "react-router-dom";
 
-function Register() {
+function RegisterFirma() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -54,24 +54,28 @@ function Register() {
         <div className="mb-5 text-[25px] font-bold">Registracija</div>
         <div className="flex justify-center w-[370px] h-auto pb-2 border-4 border-Swan rounded-xl">
           <div className="flex flex-col mt-4 p-2">
-          <div className="p-2">Ime</div>
+            
+          <div className="p-2">Ime firme</div>
             <div className="flex justify-center w-full">
               <input
                 type="text"
-                placeholder="Unesite ime..."
+                placeholder="Unesite ime firme..."
                 className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px] 
                 `}
               />
             </div>
 
 
-            <div className="p-2">Prezime</div>
+          <div className="p-2">E-mail adresa</div>
             <div className="flex justify-center w-full">
               <input
-                type="text"
-                placeholder="Unesite prezime..."
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px] 
-                `}
+                type="email"
+                placeholder="Unesite e-mail..."
+                value={email}
+                onChange={handleEmailChange}
+                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px] ${
+                  emailValid ? "border-Swan" : "border-red-500"
+                }`}
               />
             </div>
 
@@ -164,8 +168,8 @@ function Register() {
 
         <div className="flex justify-center items-center">
           Registriraj se kao &nbsp;
-          <Link to="/register-firma" className="text-Primary font-semibold">
-            firma
+          <Link to="/register" className="text-Primary font-semibold">
+            korisnik
           </Link>
         </div>
 
@@ -176,9 +180,10 @@ function Register() {
           </Link>
         </div>
 
+
       </div>
     </div>
   );
 }
 
-export default Register;
+export default RegisterFirma;
