@@ -2,7 +2,7 @@ import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import Navbar from "../../core/components/Navbar.jsx";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function RegisterFirma() {
   const [email, setEmail] = useState("");
@@ -50,63 +50,44 @@ function RegisterFirma() {
     <div>
       <Navbar showLink={false} />
 
-      <div className="flex flex-col justify-center items-center h-screen">
+      <div className="pt-16 sm:pt-0 flex flex-col justify-center items-center h-screen">
         <div className="mb-5 text-[25px] font-bold">Registracija</div>
-        <div className="flex justify-center w-[370px] h-auto pb-2 border-4 border-Swan rounded-xl">
+        <div className="flex justify-center w-auto h-auto p-3 border-4 border-Swan rounded-xl max-w-[400px]">
           <div className="flex flex-col mt-4 p-2">
-            
-          <div className="p-2">Ime firme</div>
-            <div className="flex justify-center w-full">
-              <input
-                type="text"
-                placeholder="Unesite ime firme..."
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px] 
+            <div className="p-2">Ime firme</div>
+            <input
+              type="text"
+              placeholder="Unesite ime firme..."
+              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[300px] min-h-[40px] 
                 `}
-              />
-            </div>
-
-
-          <div className="p-2">E-mail adresa</div>
-            <div className="flex justify-center w-full">
-              <input
-                type="email"
-                placeholder="Unesite e-mail..."
-                value={email}
-                onChange={handleEmailChange}
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px] ${
-                  emailValid ? "border-Swan" : "border-red-500"
-                }`}
-              />
-            </div>
+            />
 
             <div className="p-2">E-mail adresa</div>
-            <div className="flex justify-center w-full">
-              <input
-                type="email"
-                placeholder="Unesite e-mail..."
-                value={email}
-                onChange={handleEmailChange}
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-[300px] h-[40px] ${
-                  emailValid ? "border-Swan" : "border-red-500"
-                }`}
-              />
-            </div>
+            <input
+              type="email"
+              placeholder="Unesite e-mail..."
+              value={email}
+              onChange={handleEmailChange}
+              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-h-[40px] ${
+                emailValid ? "border-Swan" : "border-red-500"
+              }`}
+            />
             {!emailValid && (
               <p className="text-red-500 text-xs ml-2">
                 Unesite validnu e-mail adresu
               </p>
             )}
             <div className="p-2">Lozinka</div>
-            <div className="flex justify-center w-full relative">
-              <div className="flex">
+            <div className="w-full relative">
+              <div className="relative">
                 <input
                   type={passwordVisible ? "text" : "password"}
                   placeholder="Unesite lozinku..."
                   value={password}
                   onChange={handlePasswordChange}
-                  className="p-2 border-t-2 border-l-2 border-b-2 border-Swan mb-2 rounded-l-md bg-[#FBFBFB] outline-none w-[270px] h-[40px]"
+                  className="p-2 border-2 border-Swan mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10"
                 />
-                <div className="p-2 flex flex-col cursor-pointer border-t-2 border-r-2 border-b-2 border-Swan rounded-r-md bg-[#FBFBFB] w-[30px] h-[40px]">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                   {passwordVisible ? (
                     <HiEyeOff onClick={handleTogglePasswordVisibility} />
                   ) : (
@@ -115,23 +96,20 @@ function RegisterFirma() {
                 </div>
               </div>
             </div>
+
             <div className="p-2">Potvrda Lozinke</div>
             <div className="flex justify-center w-full relative">
-              <div className="flex">
+              <div className="relative w-full">
                 <input
                   type={passwordVisibleConfirmation ? "text" : "password"}
                   placeholder="Potvrdite lozinku..."
                   value={passwordConfirmation}
                   onChange={handlePasswordConfirmationChange}
-                  className={`p-2 border-t-2 border-l-2 border-b-2 mb-2 rounded-l-md bg-[#FBFBFB] outline-none w-[270px] h-[40px] ${
+                  className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10 ${
                     passwordConfirmationValid ? "border-Swan" : "border-red-500"
                   }`}
                 />
-                <div
-                  className={`p-2 flex flex-col cursor-pointer border-t-2 border-r-2 border-b-2 rounded-r-md bg-[#FBFBFB] w-[30px] h-[40px] ${
-                    passwordConfirmationValid ? "border-Swan" : "border-red-500"
-                  }`}
-                >
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                   {passwordVisibleConfirmation ? (
                     <HiEyeOff
                       onClick={handleTogglePasswordVisibilityConfirmation}
@@ -144,6 +122,7 @@ function RegisterFirma() {
                 </div>
               </div>
             </div>
+
             {!passwordConfirmationValid && (
               <p className="text-red-500 text-xs ml-2">
                 Lozinke se ne podudaraju
@@ -173,14 +152,12 @@ function RegisterFirma() {
           </Link>
         </div>
 
-        <div className="p-2 text-[15px] flex justify-center items-center text-HareL">
+        <div className="p-4 text-[10px] flex justify-center items-center">
           Već imaš račun? &nbsp;
-          <Link to="/login" className="text-Hare font-semibold">
+          <Link to="/login" className="font-semibold">
             Prijavi se
           </Link>
         </div>
-
-
       </div>
     </div>
   );
