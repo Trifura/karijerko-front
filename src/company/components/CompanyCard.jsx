@@ -1,6 +1,6 @@
 export default function CompanyCard({company}) {
     return (
-        <div className="p-4 border border-Swan rounded-xl flex gap-2 cursor-pointer">
+        <div className="p-4 border border-Swan rounded-xl flex gap-2 cursor-pointer max-w-[680px]">
             <div className="w-14 h-14 flex-none">
                 <img src={company.profilePicture}
                      alt="Treblle logo"
