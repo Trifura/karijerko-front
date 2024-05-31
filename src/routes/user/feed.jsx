@@ -1,14 +1,14 @@
 import { Link, useLoaderData } from "react-router-dom";
 import Navbar from "../../core/components/Navbar.jsx";
 import CompanyCard from "../../company/components/CompanyCard.jsx";
-import SideProfile from "../account/side-profile.jsx";
+import SideProfile from "../../core/components/side-profile.jsx";
 
 export default function Feed() {
   const { companies } = useLoaderData();
 
   return (
     <>
-      <Navbar showLink={false} className="pb-20" />
+      <Navbar showLink={true} showProfileIcon={true} className="pb-20" />
       <div className="flex">
         {/* Sidebar */}
         <SideProfile/>
