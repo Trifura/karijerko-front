@@ -13,6 +13,7 @@ export default {
         Bee: '#FFC800',
         Hare: '#AFAFAF',
         HareL: '#AFAFBF',
+        Ironside: '#676767'
       },
       keyframes: {
         'loading-bar': {

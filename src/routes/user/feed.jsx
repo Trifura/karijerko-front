@@ -8,7 +8,7 @@ export default function Feed() {
 
   return (
     <>
-      <Navbar showLink={true} showProfileIcon={true} className="pb-20" />
+      <Navbar showLink={true} className="pb-20" />
       <div className="flex">
         {/* Sidebar */}
         <SideProfile/>
