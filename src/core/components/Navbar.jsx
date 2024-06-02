@@ -17,7 +17,7 @@ export default function Navbar({ showLink = true }) {
 
     const accountButton = (
         <div className="w-10 h-10 lg:w-11 lg:h-11 border-2 border-gray-400 rounded-full cursor-pointer">
-            <img src={account.profilePicture} className="rounded-full w-full h-full" alt=""/>
+            <img src={account?.profilePicture} className="rounded-full w-full h-full" alt=""/>
         </div>
     );
 
