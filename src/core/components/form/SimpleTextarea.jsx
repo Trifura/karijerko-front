@@ -7,7 +7,7 @@ export default function SimpleTextarea({ label, value, onChange, placeholder = '
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className={`p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none w-full h-60`}
+                className={`py-2.5 px-4 border-2 border-Swan mb-4 rounded-md outline-none w-full h-60`}
             />
         </div>
 

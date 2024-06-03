@@ -8,7 +8,7 @@ export default function SimpleInput({ label, value, onChange, type = 'text', pla
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className={`p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none w-full`}
+                className={`py-2 px-3 border-2 border-Swan mb-4 rounded-md outline-none w-full`}
             />
         </div>
 

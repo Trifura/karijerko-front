@@ -12,6 +12,7 @@ import LanguagesEdit from "../../profile/components/LanguagesEdit.jsx";
 import LanguagesCreate from "../../profile/components/LanguagesCreate.jsx";
 import EducationEdit from "../../profile/components/EducatonEdit.jsx";
 import EducationCreate from "../../profile/components/EducationCreate.jsx";
+import ProjectEdit from "../../profile/components/ProjectEdit.jsx";
 
 export default function Profile() {
     const {account} = useSelector(state => state.auth)
@@ -39,6 +40,46 @@ export default function Profile() {
         description: ''
     }
 
+    const project = {
+        title: 'Github profil',
+        description: 'Ovo je moj Github profil sa puno raznih projekata.',
+        skills: [
+            {
+                value: 'swift',
+                label: 'Swift'
+            },
+            {
+                value: 'kotlin',
+                label: 'Kotlin'
+            },
+            {
+                value: 'typescript',
+                label: 'TypeScript'
+            },
+        ],
+        contents: [
+            {
+                type: 'image',
+                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png',
+                description: 'Ovo je moj Github profil sa puno raznih projekata.'
+            },
+            {
+                type: 'video',
+                url: 'https://www.youtube.com/watch?v=4K33w-0-p2c',
+                description: 'Ovo je demo video mog projekta'
+            },
+            {
+                type: 'web',
+                url: 'https://www.google.com',
+            },
+            {
+                type: 'file',
+                url: 'https://clickdimensions.com/links/TestPDFfile.pdf',
+                description: 'Ovo je dokumentacija mog projekta'
+            }
+        ]
+    }
+
 
     return (
         <>
@@ -49,6 +90,7 @@ export default function Profile() {
             <LanguagesCreate isOpen={false} />
             <EducationEdit value={selectedEducation} isOpen={false} />
             <EducationCreate isOpen={false} />
+            <ProjectEdit value={project} isOpen={true} />
 
             <div className="lg:hidden mt-20">
                 <div className="flex gap-4 items-center p-8">
@@ -99,21 +141,16 @@ export default function Profile() {
                                 <img src={EditIcon} alt="Edit"/>
                             </button>
                         </div>
-                        <div className="flex items-start">
-                            <p>
-                                I am a Full stack developer with real project experience in Frontend (VueJs, Reactjs)
-                                and
-                                {/* eslint-disable-next-line react/no-unescaped-entities */}
-                                Backend (ExpressJs, Graphql). In my 3 years of experience I've learned a lot about
-                                NodeJs
-                                and how the web works. I started to work at a really young age because I found a passion
-                                for
-                                programming.
-                            </p>
-                            <button className="flex-none">
-                                <img src={EditIcon} alt="Edit"/>
-                            </button>
-                        </div>
+                        <p>
+                            I am a Full stack developer with real project experience in Frontend (VueJs, Reactjs)
+                            and
+                            {/* eslint-disable-next-line react/no-unescaped-entities */}
+                            Backend (ExpressJs, Graphql). In my 3 years of experience I've learned a lot about
+                            NodeJs
+                            and how the web works. I started to work at a really young age because I found a passion
+                            for
+                            programming.
+                        </p>
                     </div>
                 </div>
                 <hr className="border-Swan"/>
@@ -125,27 +162,21 @@ export default function Profile() {
                         </button>
                     </div>
                     <div className="flex flex-wrap justify-between gap-1">
-                        <div className="w-[150px]">
-                            <div className="border border-Swan rounded-2xl p-4 ">
+                        <div className="w-[150px] relative">
+                            <div className="border border-Swan rounded-2xl p-4 relative overflow-hidden">
                                 <img
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png"
                                     alt="Portfolio"/>
-                            </div>
-                            <p className="text-center font-semibold">Github profil</p>
-                        </div>
-                        <div className="w-[150px]">
-                            <div className="border border-Swan rounded-2xl p-4 ">
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png"
-                                    alt="Portfolio"/>
-                            </div>
-                            <p className="text-center font-semibold">Github profil</p>
-                        </div>
-                        <div className="w-[150px]">
-                            <div className="border border-Swan rounded-2xl p-4 ">
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png"
-                                    alt="Portfolio"/>
+                                <div className="absolute inset-0 bg-black opacity-20 rounded-2xl"></div>
+                                <div
+                                    className="absolute inset-0 flex items-center justify-center space-x-4">
+                                    <button>
+                                        <img src={EditIcon} alt="Edit"/>
+                                    </button>
+                                    <button>
+                                        <img src={DeleteIcon} alt="Delete"/>
+                                    </button>
+                                </div>
                             </div>
                             <p className="text-center font-semibold">Github profil</p>
                         </div>
@@ -155,7 +186,7 @@ export default function Profile() {
                 <div className="p-8 flex flex-col gap-6">
                     <h2 className="text-2xl font-semibold">Vještine</h2>
                     <div className="flex flex-wrap gap-2">
-                        <div className="px-4 py-1.5 rounded-full bg-Swan text-sm font-semibold">
+                    <div className="px-4 py-1.5 rounded-full bg-Swan text-sm font-semibold">
                             MongoDB
                         </div>
                         <div className="px-4 py-1.5 rounded-full bg-Swan text-sm font-semibold">
@@ -365,36 +396,24 @@ export default function Profile() {
                                 </button>
                             </div>
                             <div className="flex flex-wrap gap-6">
-                                <div className="w-[170px]">
-                                    <div className="border border-Swan rounded-2xl p-4 ">
+                                <div className="w-[170px] group">
+                                    <div className="border border-Swan relative rounded-2xl p-4 ">
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png"
                                             alt="Portfolio"/>
+                                        <div
+                                            className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-300"></div>
+                                        <div
+                                            className="absolute inset-0 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <button>
+                                                <img src={EditIcon} alt="Edit"/>
+                                            </button>
+                                            <button>
+                                                <img src={DeleteIcon} alt="Delete"/>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <p className="text-center font-semibold">Github profil</p>
-                                </div>
-                                <div className="w-[170px]">
-                                    <div className="border border-Swan rounded-2xl p-4 ">
-                                        <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png"
-                                            alt="Portfolio"/>
-                                    </div>
-                                    <p className="text-center font-semibold">Github profil</p>
-                                </div>
-                                <div className="w-[170px]">
-                                    <div className="border border-Swan rounded-2xl p-4 ">
-                                        <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png"
-                                            alt="Portfolio"/>
-                                    </div>
-                                    <p className="text-center font-semibold">Github profil</p>
-                                </div>
-                                <div className="w-[170px]">
-                                    <div className="border border-Swan rounded-2xl p-4 ">
-                                        <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png"
-                                            alt="Portfolio"/>
-                                    </div>
+
                                     <p className="text-center font-semibold">Github profil</p>
                                 </div>
                             </div>
