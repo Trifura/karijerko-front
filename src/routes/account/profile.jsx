@@ -56,10 +56,13 @@ export default function Profile() {
                         </div>
                         <div className="flex items-start">
                             <p>
-                                I am a Full stack developer with real project experience in Frontend (VueJs, Reactjs) and
+                                I am a Full stack developer with real project experience in Frontend (VueJs, Reactjs)
+                                and
                                 {/* eslint-disable-next-line react/no-unescaped-entities */}
-                                Backend (ExpressJs, Graphql). In my 3 years of experience I've learned a lot about NodeJs
-                                and how the web works. I started to work at a really young age because I found a passion for
+                                Backend (ExpressJs, Graphql). In my 3 years of experience I've learned a lot about
+                                NodeJs
+                                and how the web works. I started to work at a really young age because I found a passion
+                                for
                                 programming.
                             </p>
                             <button className="flex-none">
@@ -111,7 +114,7 @@ export default function Profile() {
                             MongoDB
                         </div>
                         <div className="px-4 py-1.5 rounded-full bg-Swan text-sm font-semibold">
-                        JavaScript
+                            JavaScript
                         </div>
                         <div className="px-4 py-1.5 rounded-full bg-Swan text-sm font-semibold">
                             Docker
@@ -127,6 +130,64 @@ export default function Profile() {
                         </div>
                         <div className="px-4 py-1.5 rounded-full bg-Swan text-sm font-semibold">
                             MongoDB
+                        </div>
+                    </div>
+                </div>
+                <div className="p-8 flex flex-col gap-2">
+                    <div className="w-full flex justify-between">
+                        <h2 className="text-xl font-semibold">Jezici</h2>
+                        <button>
+                            <img src={EditIcon} alt="Edit"/>
+                        </button>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <div className="font-semibold text-base rounded-xl">
+                            Engleski
+                        </div>
+                        <div className="font-semibold text-base rounded-xl">
+                            Njemački
+                        </div>
+                    </div>
+                </div>
+                <hr className="border-Swan"/>
+                <div className="p-8 flex flex-col gap-8">
+                    <div className="w-full flex justify-between">
+                        <h2 className="text-xl font-semibold">Edukacija</h2>
+                        <button>
+                            <img src={AddIcon} alt="Add"/>
+                        </button>
+                    </div>
+                    <div className="flex flex-col gap-5">
+                        <div>
+                            <div className="flex gap-5 items-start">
+                                <h3 className="text-xl font-semibold">Elektrotehnička i prometna škola
+                                    Osijek</h3>
+                                <div className="flex gap-2">
+                                    <button className="w-8 flex-none">
+                                        <img src={EditIcon} alt="Edit"/>
+                                    </button>
+                                    <button className="w-8 flex-none">
+                                        <img src={DeleteIcon} alt="Delete"/>
+                                    </button>
+                                </div>
+                            </div>
+                            <p className="text-Ironside font-medium">Tehničar za računalstvo</p>
+                            <p className="text-Ironside font-medium">2018 - 2022</p>
+                        </div>
+                        <div>
+                            <div className="flex gap-5 items-start">
+                                <h3 className="text-xl font-semibold">Tehničko veleučilište u Zagrebu</h3>
+                                <div className="flex gap-2">
+                                    <button className="w-8 flex-none">
+                                        <img src={EditIcon} alt="Edit"/>
+                                    </button>
+                                    <button className="w-8 flex-none">
+                                        <img src={DeleteIcon} alt="Delete"/>
+                                    </button>
+                                </div>
+                            </div>
+                            <p className="text-Ironside font-medium">Informatika</p>
+                            <p className="text-Ironside font-medium">2022 - 2025</p>
                         </div>
                     </div>
                 </div>
