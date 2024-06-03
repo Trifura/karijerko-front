@@ -4,12 +4,52 @@ import {useSelector} from "react-redux";
 import EditIcon from "../../assets/icons/Edit.svg";
 import AddIcon from "../../assets/icons/Add.svg";
 import DeleteIcon from "../../assets/icons/Delete.svg";
+import Select from "react-select";
+import {useState} from "react";
+import ProfileEdit from "../../profile/components/ProfileEdit.jsx";
+import ProfileCreate from "../../profile/components/ProfileCreate.jsx";
+import LanguagesEdit from "../../profile/components/LanguagesEdit.jsx";
+import LanguagesCreate from "../../profile/components/LanguagesCreate.jsx";
+import EducationEdit from "../../profile/components/EducatonEdit.jsx";
+import EducationCreate from "../../profile/components/EducationCreate.jsx";
 
 export default function Profile() {
     const {account} = useSelector(state => state.auth)
+
+    const [selectedOption, setSelectedOption] = useState('');
+    const options = [
+        {value: 'front-end-developer', label: 'Front-end developer'},
+        {value: 'back-end-developer', label: 'Back-end developer'},
+    ];
+
+    const profile = {
+        name: 'Front-end developer',
+        description: 'I am a Full stack developer with real project experience in Frontend (VueJs, Reactjs) and Backend (ExpressJs, Graphql). In my 3 years of experience I\'ve learned a lot about NodeJs and how the web works. I started to work at a really young age because I found a passion for programming.'
+    }
+
+    const languages = [
+        { id: 1, name: 'Engleski', proficiency: 'Advanced' },
+    ]
+
+    const selectedEducation = {
+        name: 'Elektrotehnička i prometna škola Osijek',
+        degree: 'Tehničar za računalstvo',
+        dateFrom: '2018',
+        dateTo: '2022',
+        description: ''
+    }
+
+
     return (
         <>
             <Navbar/>
+            <ProfileEdit value={profile} isOpen={false} />
+            <ProfileCreate isOpen={false} />
+            <LanguagesEdit value={languages} isOpen={false} />
+            <LanguagesCreate isOpen={false} />
+            <EducationEdit value={selectedEducation} isOpen={false} />
+            <EducationCreate isOpen={false} />
+
             <div className="lg:hidden mt-20">
                 <div className="flex gap-4 items-center p-8">
                     <img src={account.profilePicture} className="w-20 h-20 rounded-full" alt=""/>
@@ -36,7 +76,7 @@ export default function Profile() {
                 </div>
                 <hr className="border-Swan"/>
                 <div className="p-8 flex flex-col gap-6">
-                    <div>
+                    <div className="flex flex-col gap-2">
                         <div className="flex justify-between">
                             <h2 className="text-xl font-semibold">Profili</h2>
                             <button>
@@ -44,7 +84,12 @@ export default function Profile() {
                             </button>
                         </div>
                         <div>
-                            <h2 className="text-lg font-medium">DROPDOWN GOES HERE</h2>
+                            <Select
+                                value={selectedOption}
+                                onChange={setSelectedOption}
+                                options={options}
+                                isSearchable={false}
+                            />
                         </div>
                     </div>
                     <div className="flex flex-col gap-6">
@@ -152,7 +197,7 @@ export default function Profile() {
                 <hr className="border-Swan"/>
                 <div className="p-8 flex flex-col gap-8">
                     <div className="w-full flex justify-between">
-                        <h2 className="text-xl font-semibold">Edukacija</h2>
+                        <h2 className="text-xl font-semibold">Obrazovanje</h2>
                         <button>
                             <img src={AddIcon} alt="Add"/>
                         </button>
@@ -255,7 +300,7 @@ export default function Profile() {
                         <hr className="border-Swan"/>
                         <div className="p-8 flex flex-col gap-8">
                             <div className="w-full flex justify-between">
-                                <h2 className="text-xl font-semibold">Edukacija</h2>
+                                <h2 className="text-xl font-semibold">Obrazovanje</h2>
                                 <button>
                                     <img src={AddIcon} alt="Add"/>
                                 </button>
