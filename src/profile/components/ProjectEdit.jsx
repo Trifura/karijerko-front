@@ -12,6 +12,7 @@ import ImageContent from "./project/ImageContent.jsx";
 import VideoContent from "./project/VideoContent.jsx";
 import WebContent from "./project/WebContent.jsx";
 import FileContent from "./project/FileContent.jsx";
+import FileUpload from "../../core/components/form/FileUpload.jsx";
 
 const skillOptions = [
     {
@@ -129,10 +130,14 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
               </div>
               <div className="mt-4 border border-Primary border-dashed rounded-lg pt-10 pb-6 flex flex-col gap-5">
                   <div className="flex justify-center items-center gap-3">
-                      <button className="border-2 border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
-                          <img src={ImageIcon} alt="Upload image" className="w-5 h-5"/>
-                      </button>
-                      <button className="border-2 border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
+                      <FileUpload>
+                          <div
+                              className="border-2 cursor-pointer border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
+                              <img src={ImageIcon} alt="Upload image" className="w-5 h-5"/>
+                          </div>
+                      </FileUpload>
+                      <button
+                          className="border-2 border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
                           <img src={VideocamIcon} alt="Upload vide" className="w-5 h-5"/>
                       </button>
                       <button className="border-2 border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
