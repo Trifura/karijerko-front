@@ -12,6 +12,7 @@ function SideProfile() {
   return (
     <>
       <div className="mt-20 p-4 border-[3px] border-Swan rounded-xl min-w-[200px] max-w-[400px] sticky top-20">
+        <div className="flex">
           <div className="flex flex-row p-1">
             <img
               className="p-1 w-[50px] border-2 border-Swan rounded-full"
