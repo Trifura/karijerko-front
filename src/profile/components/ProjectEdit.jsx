@@ -83,14 +83,14 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
               <label htmlFor="project-skills" className="font-semibold">Vještine</label>
               <Select id="project-skills" value={skills} isMulti={true} closeMenuOnSelect={false} placeholder="Odaberite vještine..." options={skillOptions} onChange={setSkills}  />
 
-              <div className="flex flex-col gap-10">
+              <div className="flex flex-col gap-5 mt-10">
                   {
                       contents.map((content, index) => {
                           switch (content.type) {
                               case 'image':
-                                  return <ImageContent key={index} content={content}  />
+                                  return <ImageContent key={index} content={content} className="mb-5 lg:mb-14" />
                               case 'video':
-                                  return <VideoContent key={index} content={content}  />
+                                  return <VideoContent key={index} content={content} className="mb-5 lg:mb-14"  />
                               case 'web':
                                   return <WebContent key={index} content={content}  />
                               case 'file':

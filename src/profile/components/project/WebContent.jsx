@@ -19,7 +19,7 @@ export default function ImageContent({ content, isEditable = false }) {
     return (
         <div className="relative flex gap-2 items-center flex-col lg:flex-row">
             {isEditable && <ContentOptions/>}
-            <div className="w-full flex items-center gap-4 bg-Smoke rounded-xl p-4">
+            <div className="w-full flex items-center gap-4 bg-Smoke rounded-xl py-4 px-5 lg:px-10">
                 <img src={ArticleIcon} alt="Icon" className="w-16 h-16"/>
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-0.5">

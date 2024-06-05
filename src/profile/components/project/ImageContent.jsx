@@ -1,16 +1,16 @@
 import ContentOptions from "./ContentOptions.jsx";
 import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
 
-export default function ImageContent({ content, isEditable = false, setDescription }) {
+export default function ImageContent({ content, isEditable = false, setDescription, className }) {
     const handleDescriptionChange = (value) => {
         setDescription(content, value);
     }
 
     return (
-        <div className="relative flex gap-2 items-center flex-col lg:flex-row">
+        <div className={`relative flex gap-2 items-center flex-col lg:flex-row ${className}`}>
             {isEditable && <ContentOptions/>}
-            <div className="w-full flex flex-col gap-2 p-4">
-                <img src={content.url} alt="Image" className="max-w-full max-h-64 object-contain"/>
+            <div className="w-full flex flex-col gap-2">
+                <img src={content.url} alt="Image" className="max-w-full object-contain"/>
                 {
                     isEditable ? (
                             <div>

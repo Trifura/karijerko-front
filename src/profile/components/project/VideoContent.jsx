@@ -1,13 +1,13 @@
 import ContentOptions from "./ContentOptions.jsx";
 import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
 
-export default function VideoContent({ content, isEditable = false, setDescription }) {
+export default function VideoContent({ content, isEditable = false, setDescription, className }) {
     const handleDescriptionChange = (value) => {
         setDescription(content, value);
     }
 
     return (
-        <div className="relative flex gap-2 items-center flex-col lg:flex-row">
+        <div className={`relative flex gap-2 items-center flex-col lg:flex-row ${className}`}>
             {isEditable && <ContentOptions/>}
             <div className="w-full flex flex-col gap-2">
                 <div className="aspect-video">

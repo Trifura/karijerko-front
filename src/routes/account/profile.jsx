@@ -60,7 +60,7 @@ export default function Profile() {
         contents: [
             {
                 type: 'image',
-                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png',
+                url: 'https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg',
                 description: 'Ovo je moj Github profil sa puno raznih projekata.'
             },
             {

@@ -12,7 +12,7 @@ export default function FileContent({ content, isEditable = false, setDescriptio
             {isEditable && <ContentOptions/>}
             <div className="w-full flex gap-2 border border-Swan rounded-xl p-4">
                 <a href={content.url} target="_blank">
-                    <img src={BookIllustration} alt="Image" className="max-h-32 lg:max-h-64 object-contain w-fit"/>
+                    <img src={BookIllustration} alt="Image" className="max-h-32 object-contain w-fit"/>
                 </a>
                 <div className="w-full">
                     <a href={content.url} target="_blank" className="font-semibold">
