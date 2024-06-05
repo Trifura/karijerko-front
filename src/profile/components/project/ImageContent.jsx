@@ -14,7 +14,7 @@ export default function ImageContent({ content, isEditable = false, setDescripti
                 {
                     isEditable ? (
                             <div>
-                                <SimpleInput placeholder="Unesite opis slike..." className="text-center" onChange={handleDescriptionChange}/>
+                                <SimpleInput value={content.description} placeholder="Unesite opis slike..." className="text-center" onChange={handleDescriptionChange}/>
                             </div>
                         ) :
                         (

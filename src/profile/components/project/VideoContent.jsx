@@ -23,7 +23,7 @@ export default function VideoContent({ content, isEditable = false, setDescripti
                 {
                     isEditable ? (
                             <div>
-                                <SimpleInput placeholder="Unesite opis videozapisa..." className="text-center" onChange={handleDescriptionChange}/>
+                                <SimpleInput value={content.description} placeholder="Unesite opis videozapisa..." className="text-center" onChange={handleDescriptionChange}/>
                             </div>
                         ) :
                         (
