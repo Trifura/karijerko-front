@@ -76,7 +76,7 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
 
   return (
       <DialogWrapper title="Uredi projekt" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel} fullscreen={true}>
-          <div className="flex flex-col gap-2 lg:px-32 xl:px-64" style={{maxHeight: "74vh"}}>
+          <div className="flex flex-col gap-2 lg:px-32 xl:px-64">
               <SimpleInput label="Naziv projekta" placeholder="Unesite naziv projekta..." value={title} onChange={setTitle}/>
               <SimpleTextarea label="Opis projekta" placeholder="Unesite opis projekta..." value={description} onChange={setDescription} className="h-32"/>
 
