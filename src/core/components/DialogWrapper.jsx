@@ -1,13 +1,23 @@
 import ReactDOM from "react-dom";
 import CloseRound from "../../assets/icons/Close_round.svg";
-import {useEffect} from "react";
+import { useEffect } from "react";
 
-const DialogWrapper = ({ isOpen, onCancel, onConfirm, title, children, confirmText = 'Spremi', cancelText ='Odustani' }) => {
+const DialogWrapper = ({
+                           isOpen,
+                           onCancel,
+                           onConfirm,
+                           title,
+                           children,
+                           confirmText = 'Spremi',
+                           cancelText = 'Odustani',
+                           fullscreen = false
+                       }) => {
     useEffect(() => {
         if (isOpen) {
             document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
         }
-
         return () => {
             document.body.classList.remove('no-scroll');
         };
@@ -16,15 +26,18 @@ const DialogWrapper = ({ isOpen, onCancel, onConfirm, title, children, confirmTe
     if (!isOpen) return null;
 
     return ReactDOM.createPortal(
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className={`fixed inset-0 flex items-center justify-center z-50 ${fullscreen ? 'fullscreen' : ''}`}>
             <div className="fixed inset-0 bg-black opacity-50"></div>
-            <div className="bg-white rounded-lg shadow-lg max-w-xl w-full z-10">
+            <div
+                className={`bg-white ${fullscreen ? 'w-screen h-screen' : 'rounded-lg shadow-lg max-w-xl w-full'} z-10`}>
                 <div className="p-5 border-b flex justify-between">
                     <h2 className="text-2xl font-semibold">{title}</h2>
-                    <img src={CloseRound} alt="close" className="cursor-pointer" onClick={onCancel} />
+                    <img src={CloseRound} alt="close" className="cursor-pointer" onClick={onCancel}/>
                 </div>
-                <div className="p-8">
-                    {children}
+                <div className="overflow-auto">
+                    <div className="p-8">
+                        {children}
+                    </div>
                 </div>
                 <div className="p-8 flex justify-end space-x-2">
                     <button
