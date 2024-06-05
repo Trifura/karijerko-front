@@ -8,7 +8,10 @@ import ImageIcon from "../../assets/icons/Image.svg"
 import VideocamIcon from "../../assets/icons/Videocam.svg"
 import LinkIcon from "../../assets/icons/Link.svg"
 import FileIcon from "../../assets/icons/File.svg"
-import {Link} from "react-router-dom";
+import ImageContent from "./project/ImageContent.jsx";
+import VideoContent from "./project/VideoContent.jsx";
+import WebContent from "./project/WebContent.jsx";
+import FileContent from "./project/FileContent.jsx";
 
 const skillOptions = [
     {
@@ -72,16 +75,33 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
     const [contents, setContents] = useState(value.contents);
 
   return (
-      <DialogWrapper title="Uredi projekt" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel}>
-          <div className="flex flex-col gap-2">
+      <DialogWrapper title="Uredi projekt" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel} fullscreen={true}>
+          <div className="flex flex-col gap-2 lg:px-32 xl:px-64" style={{maxHeight: "74vh"}}>
               <SimpleInput label="Naziv projekta" placeholder="Unesite naziv projekta..." value={title} onChange={setTitle}/>
               <SimpleTextarea label="Opis projekta" placeholder="Unesite opis projekta..." value={description} onChange={setDescription} className="h-32"/>
 
               <label htmlFor="project-skills" className="font-semibold">Vještine</label>
               <Select id="project-skills" value={skills} isMulti={true} closeMenuOnSelect={false} placeholder="Odaberite vještine..." options={skillOptions} onChange={setSkills}  />
 
-              <div
-                  className="mt-4 border border-Primary border-dashed rounded-lg pt-10 pb-6 flex flex-col gap-5">
+              <div className="flex flex-col gap-10">
+                  {
+                      contents.map((content, index) => {
+                          switch (content.type) {
+                              case 'image':
+                                  return <ImageContent key={index} content={content}  />
+                              case 'video':
+                                  return <VideoContent key={index} content={content}  />
+                              case 'web':
+                                  return <WebContent key={index} content={content}  />
+                              case 'file':
+                                  return <FileContent key={index} content={content}  />
+                              default:
+                                  return null;
+                          }
+                      })
+                  }
+              </div>
+              <div className="mt-4 border border-Primary border-dashed rounded-lg pt-10 pb-6 flex flex-col gap-5">
                   <div className="flex justify-center items-center gap-3">
                       <button className="border-2 border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
                           <img src={ImageIcon} alt="Upload image" className="w-5 h-5"/>

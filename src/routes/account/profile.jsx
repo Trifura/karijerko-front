@@ -65,17 +65,20 @@ export default function Profile() {
             },
             {
                 type: 'video',
-                url: 'https://www.youtube.com/watch?v=4K33w-0-p2c',
+                url: 'https://www.youtube.com/embed/4K33w-0-p2c',
                 description: 'Ovo je demo video mog projekta'
             },
             {
                 type: 'web',
                 url: 'https://www.google.com',
+                title: 'Google',
+                description: 'Ovo je link na moj projekt'
             },
             {
                 type: 'file',
                 url: 'https://clickdimensions.com/links/TestPDFfile.pdf',
-                description: 'Ovo je dokumentacija mog projekta'
+                description: 'Ovo je dokumentacija mog projekta',
+                title: "Dokumentacija.pdf"
             }
         ]
     }
