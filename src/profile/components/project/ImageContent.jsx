@@ -3,7 +3,7 @@ import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
 
 export default function ImageContent({ content, isEditable = false, setDescription, className }) {
     const handleDescriptionChange = (value) => {
-        setDescription(content, value);
+        setDescription(value);
     }
 
     return (

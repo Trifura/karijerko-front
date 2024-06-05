@@ -74,6 +74,15 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
     const [skills, setSkills] = useState(value.skills);
     const [contents, setContents] = useState(value.contents);
 
+
+    const handleContentDescriptionChange = (index, newDescription) => {
+        const updatedContents = contents.map((content, i) =>
+            i === index ? { ...content, description: newDescription } : content
+        );
+
+        setContents(updatedContents);
+    };
+
   return (
       <DialogWrapper title="Uredi projekt" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel} fullscreen={true}>
           <div className="flex flex-col gap-2 lg:px-32 xl:px-64">
@@ -88,13 +97,30 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
                       contents.map((content, index) => {
                           switch (content.type) {
                               case 'image':
-                                  return <ImageContent key={index} content={content} className="mb-5 lg:mb-14" />
+                                  return <ImageContent
+                                      key={index}
+                                      content={content}
+                                      setDescription={(description) => {handleContentDescriptionChange(index, description)}}
+                                      isEditable={true}
+                                      className="mb-5 lg:mb-14"
+                                  />
                               case 'video':
-                                  return <VideoContent key={index} content={content} className="mb-5 lg:mb-14"  />
+                                  return <VideoContent
+                                      key={index}
+                                      content={content}
+                                      className="mb-5 lg:mb-14"
+                                      isEditable={true}
+                                      setDescription={(description) => {handleContentDescriptionChange(index, description)}}
+                                  />
                               case 'web':
-                                  return <WebContent key={index} content={content}  />
+                                  return <WebContent key={index} content={content} isEditable={true} />
                               case 'file':
-                                  return <FileContent key={index} content={content}  />
+                                  return <FileContent
+                                      key={index}
+                                      content={content}
+                                      isEditable={true}
+                                      setDescription={(description) => {handleContentDescriptionChange(index, description)}}
+                                  />
                               default:
                                   return null;
                           }

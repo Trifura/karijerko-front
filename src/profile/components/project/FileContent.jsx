@@ -4,7 +4,7 @@ import BookIllustration from "../../../assets/book_illustration.png";
 import SimpleTextarea from "../../../core/components/form/SimpleTextarea.jsx";
 export default function FileContent({ content, isEditable = false, setDescription }) {
     const handleDescriptionChange = (value) => {
-        setDescription(content, value);
+        setDescription(value);
     }
 
     return (
@@ -20,7 +20,7 @@ export default function FileContent({ content, isEditable = false, setDescriptio
                     </a>
                     {
                         isEditable ? (
-                            <SimpleTextarea placeholder="Unesite opis dokumenta..." onChange={handleDescriptionChange}/>
+                            <SimpleTextarea value={content.description} placeholder="Unesite opis dokumenta..." onChange={handleDescriptionChange}/>
                             ) :
                             (
                                 <p className="text-Ironside font-medium">
