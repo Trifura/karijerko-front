@@ -38,7 +38,7 @@ const DialogWrapper = ({
                         {children}
                     </div>
                 </div>
-                <div className={`px-8 py-4 flex justify-end space-x-2 ${fullscreen ? 'fixed bottom-0 w-full space-x-6 bg-white border-t border-t-Swan' : ''}`}>
+                <div className={`px-8 py-4 flex justify-end space-x-2 ${fullscreen ? 'fixed bottom-0 w-full space-x-6 bg-white border-t z-50 border-t-Swan' : ''}`}>
                     <button
                         onClick={onCancel}
                         className="text-base px-6 py-2 font-semibold rounded-md border-2 border-Swan"
