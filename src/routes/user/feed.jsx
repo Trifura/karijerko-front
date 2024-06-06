@@ -1,27 +1,44 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Navbar from "../../core/components/Navbar.jsx";
 import CompanyCard from "../../company/components/CompanyCard.jsx";
 import SideProfile from "../../core/components/side-profile.jsx";
 import Search from "../../assets/icons/Search.svg";
-import { fetchCompanies } from "./feed.js"; 
+import { fetchCompanies } from "./feed.js"; // Import the fetch function
 
 export default function Feed() {
   const { companies: initialCompanies } = useLoaderData();
   const [companies, setCompanies] = useState(initialCompanies);
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedTerm(searchTerm);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
 
   useEffect(() => {
     async function fetchAndSetCompanies() {
-      const { companies: fetchedCompanies } = await fetchCompanies(searchTerm);
+      const { companies: fetchedCompanies } = await fetchCompanies(debouncedTerm);
       setCompanies(fetchedCompanies);
     }
     fetchAndSetCompanies();
-  }, [searchTerm]);
+  }, [debouncedTerm]);
 
-  function handleSearch(event) {
+  const handleSearch = useCallback((event) => {
     setSearchTerm(event.target.value);
-  }
+  }, []);
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      setDebouncedTerm(searchTerm);
+    }
+  };
 
   return (
     <>
@@ -50,6 +67,7 @@ export default function Feed() {
                     placeholder="Pretraži firme" 
                     required 
                     onChange={handleSearch}
+                    onKeyDown={handleKeyPress}
                   />
                 </div>
               </form>
@@ -61,6 +79,7 @@ export default function Feed() {
                   </Link>
                 ))}
               </div>
+              <div className="h-[1000px]"></div>
             </div>
             <div className="hidden xl:block fixed xl:ml-[1050px] 2xl:ml-[1200px]">
               <SideProfile />
