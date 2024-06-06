@@ -29,9 +29,9 @@ const DialogWrapper = ({
     if (!isOpen) return null;
 
     return ReactDOM.createPortal(
-        <div className={`fixed inset-0 flex items-center justify-center z-50 ${fullscreen ? 'fullscreen' : ''}`}>
+        <div className={`fixed inset-0 flex items-center fade-in justify-center z-50 ${fullscreen ? 'fullscreen' : ''}`}>
             <div className="fixed inset-0 bg-black opacity-50"></div>
-            <div className={`bg-white overflow-auto ${fullscreen ? 'w-full h-full' : 'rounded-lg shadow-lg max-w-xl w-full'} z-10`}>
+            <div className={`bg-white overflow-auto z-10 scale-in ${fullscreen ? 'w-full h-full' : 'rounded-lg shadow-lg max-w-xl w-full'}`}>
                 <div className="p-5 border-b flex justify-between">
                     <h2 className="text-2xl font-semibold">{title}</h2>
                     <img src={CloseRound} alt="close" className="cursor-pointer" onClick={onCancel}/>
