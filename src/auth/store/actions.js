@@ -37,8 +37,16 @@ export const authenticateGoogle = createAsyncThunk('auth/authenticateGoogle', as
 
 export const fetchUser = createAsyncThunk('auth/fetchUser', async (_, thunkAPI) => {
     try {
-        const account = await authService.fetchUser();
-        return account
+        return await authService.fetchUser()
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+});
+
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+    try {
+        await authService.logout();
+        return null;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
     }
