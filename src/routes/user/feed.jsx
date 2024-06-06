@@ -1,18 +1,26 @@
 import { Link, useLoaderData } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navbar from "../../core/components/Navbar.jsx";
 import CompanyCard from "../../company/components/CompanyCard.jsx";
 import SideProfile from "../../core/components/side-profile.jsx";
 import Search from "../../assets/icons/Search.svg";
+import { fetchCompanies } from "./feed.js"; 
 
 export default function Feed() {
-  const { companies } = useLoaderData();
+  const { companies: initialCompanies } = useLoaderData();
+  const [companies, setCompanies] = useState(initialCompanies);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    async function fetchAndSetCompanies() {
+      const { companies: fetchedCompanies } = await fetchCompanies(searchTerm);
+      setCompanies(fetchedCompanies);
+    }
+    fetchAndSetCompanies();
+  }, [searchTerm]);
 
   function handleSearch(event) {
-    const query = event.target.value;
-    // Implement your search logic here
-    console.log('Searching for:', query);
-    // Trigger the search automatically
-    // For example, you could use a debounce function to limit the number of search requests
+    setSearchTerm(event.target.value);
   }
 
   return (
@@ -42,7 +50,6 @@ export default function Feed() {
                     placeholder="Pretraži firme" 
                     required 
                     onChange={handleSearch}
-                    style={{ WebkitAppearance: 'none', MozAppearance: 'textfield' }}
                   />
                 </div>
               </form>

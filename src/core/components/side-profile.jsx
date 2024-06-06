@@ -8,8 +8,6 @@ import "../../index.css";
 
 const profileData = {
   name: "Ime i Prezime",
-  role: "Razvoj software",
-  portfolioSubtitles: ["react bubam", "node.js development", "UI/UX design"],
   tags: ["Back-end developer", "Full-stack developer", "Software Engineer"],
 };
 
