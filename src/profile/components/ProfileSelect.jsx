@@ -1,4 +1,4 @@
-import EditIcon from "../assets/icons/Edit.svg";
+import EditIcon from "../../assets/icons/Edit.svg";
 import Select from "react-select";
 
 export default function ProfileSelect({ value, options, onSelect }) {

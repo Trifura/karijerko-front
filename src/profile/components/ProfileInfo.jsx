@@ -1,4 +1,4 @@
-import EditIcon from "../assets/icons/Edit.svg";
+import EditIcon from "../../assets/icons/Edit.svg";
 
 export default function ProfileInfo() {
     return (

@@ -1,16 +1,16 @@
-import DialogWrapper from "../../core/components/DialogWrapper.jsx";
+import DialogWrapper from "../../../core/components/DialogWrapper.jsx";
 import {useState} from "react";
-import SimpleInput from "../../core/components/form/SimpleInput.jsx";
+import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
 
-export default function EducationCreate({ isOpen, onCancel, onConfirm }) {
-    const [instituon, setInstitution] = useState('');
-    const [dateFrom, setDateFrom] = useState('');
-    const [dateTo, setDateTo] = useState('');
-    const [degree, setDegree] = useState('');
-    const [fieldOfStudy, setFieldOfStudy] = useState('');
+export default function EducationEdit({ isOpen, onCancel, onConfirm, value }) {
+    const [instituon, setInstitution] = useState(value.name);
+    const [dateFrom, setDateFrom] = useState(value.dateFrom);
+    const [dateTo, setDateTo] = useState(value.dateTo);
+    const [degree, setDegree] = useState(value.degree);
+    const [fieldOfStudy, setFieldOfStudy] = useState(value.fieldOfStudy);
 
     return (
-        <DialogWrapper title="Dodaj obrazovanje" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel} confirmText="Dodaj">
+        <DialogWrapper title="Uredi obrazovanje" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel}>
             <div className="flex flex-col gap-3">
                 <SimpleInput label="Ime ustanove" placeholder="Npr. Tehničko veleučilište u Zagrebu" value={instituon} onChange={setInstitution} />
                 <div>

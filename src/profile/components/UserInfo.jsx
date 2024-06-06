@@ -1,10 +1,12 @@
-export default function ProfileHeader({account}) {
+export default function UserInfo({ user }) {
     return (
         <div className="flex gap-4 items-center p-8">
-            <img src={account.profilePicture} className="w-20 h-20 rounded-full" alt=""/>
+            <img src={user.profilePicture} className="w-20 h-20 rounded-full" alt=""/>
             <div className="flex flex-col gap-1.5">
                 <div className="flex gap-2 items-center">
-                    <h1 className="text-2xl lg:text-4xl font-semibold">{account.firstName} {account.lastName}</h1>
+                    <h1 className="text-2xl lg:text-4xl font-semibold">
+                        { user.firstName } { user.lastName }
+                    </h1>
 
                     <div className="lg:hidden">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -30,7 +32,7 @@ export default function ProfileHeader({account}) {
                               d="M12.2656 19.8716C13.5438 19.2283 19 16.1789 19 11C19 7.13401 15.866 4 12 4C8.13401 4 5 7.13401 5 11C5 16.1789 10.4562 19.2283 11.7344 19.8716C11.904 19.957 12.096 19.957 12.2656 19.8716ZM11.9999 14C13.6568 14 14.9999 12.6569 14.9999 11C14.9999 9.34316 13.6568 8.00002 11.9999 8.00002C10.3431 8.00002 8.99994 9.34316 8.99994 11C8.99994 12.6569 10.3431 14 11.9999 14Z"
                               fill="#676767"/>
                     </svg>
-                    <p className="text-base text-Ironside font-medium">Zagreb, Croatia</p>
+                    <p className="text-base text-Ironside font-medium">{ user.location }</p>
                 </div>
             </div>
         </div>

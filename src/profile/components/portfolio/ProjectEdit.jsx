@@ -1,18 +1,18 @@
-import DialogWrapper from "../../core/components/DialogWrapper.jsx";
-import SimpleInput from "../../core/components/form/SimpleInput.jsx";
+import DialogWrapper from "../../../core/components/DialogWrapper.jsx";
+import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
 import {useState} from "react";
-import SimpleTextarea from "../../core/components/form/SimpleTextarea.jsx";
+import SimpleTextarea from "../../../core/components/form/SimpleTextarea.jsx";
 import Select from "react-select";
 
-import ImageContent from "./project/ImageContent.jsx";
-import VideoContent from "./project/VideoContent.jsx";
-import WebContent from "./project/WebContent.jsx";
-import FileContent from "./project/FileContent.jsx";
-import {getYoutubeId} from "../utils/VideoHelper.js";
-import ImageInput from "./project/inputs/ImageInput.jsx";
-import VideoInput from "./project/inputs/VideoInput.jsx";
-import FileInput from "./project/inputs/FileInput.jsx";
-import WebInput from "./project/inputs/WebInput.jsx";
+import ImageContent from "../project/ImageContent.jsx";
+import VideoContent from "../project/VideoContent.jsx";
+import WebContent from "../project/WebContent.jsx";
+import FileContent from "../project/FileContent.jsx";
+import {getYoutubeId} from "../../utils/VideoHelper.js";
+import ImageInput from "../project/inputs/ImageInput.jsx";
+import VideoInput from "../project/inputs/VideoInput.jsx";
+import FileInput from "../project/inputs/FileInput.jsx";
+import WebInput from "../project/inputs/WebInput.jsx";
 
 const skillOptions = [
     {

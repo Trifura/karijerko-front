@@ -1,4 +1,4 @@
-import DialogWrapper from "../../core/components/DialogWrapper.jsx";
+import DialogWrapper from "../../../core/components/DialogWrapper.jsx";
 import {useState} from "react";
 import Select from "react-select";
 
