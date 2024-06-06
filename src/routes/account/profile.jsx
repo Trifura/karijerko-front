@@ -17,6 +17,8 @@ import ProjectEdit from "../../profile/components/ProjectEdit.jsx";
 export default function Profile() {
     const {account} = useSelector(state => state.auth)
 
+    const [projectEdit, setProjectEdit] = useState(false)
+
     const [selectedOption, setSelectedOption] = useState('');
     const options = [
         {value: 'front-end-developer', label: 'Front-end developer'},
@@ -83,6 +85,17 @@ export default function Profile() {
         ]
     }
 
+    const onProjectSave = (project) => {
+        console.log('Project saved');
+        console.log(project);
+
+        setProjectEdit(false)
+    }
+
+    const editProject = () => {
+        setProjectEdit(true)
+    }
+
 
     return (
         <>
@@ -93,7 +106,7 @@ export default function Profile() {
             <LanguagesCreate isOpen={false} />
             <EducationEdit value={selectedEducation} isOpen={false} />
             <EducationCreate isOpen={false} />
-            <ProjectEdit value={project} isOpen={true} />
+            <ProjectEdit value={project} isOpen={projectEdit} onCancel={() => setProjectEdit(false)} onConfirm={onProjectSave} />
 
             <div className="lg:hidden mt-20">
                 <div className="flex gap-4 items-center p-8">
@@ -408,7 +421,7 @@ export default function Profile() {
                                             className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-300"></div>
                                         <div
                                             className="absolute inset-0 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                            <button>
+                                            <button onClick={editProject}>
                                                 <img src={EditIcon} alt="Edit"/>
                                             </button>
                                             <button>

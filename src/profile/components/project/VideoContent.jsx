@@ -3,7 +3,7 @@ import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
 
 export default function VideoContent({ content, isEditable = false, setDescription, className, onRemove }) {
     const handleDescriptionChange = (value) => {
-        setDescription(content, value);
+        setDescription(value);
     }
 
     return (
