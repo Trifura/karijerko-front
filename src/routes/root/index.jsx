@@ -1,12 +1,21 @@
 import Navbar from "../../core/components/Navbar.jsx";
 import LogoShort from "../../assets/Logo_short.svg";
 import SimpleCompanyCard from "../../company/components/SimpleCompanyCard.jsx";
-import {Link, useLoaderData} from "react-router-dom";
+import {Link, Navigate, useLoaderData} from "react-router-dom";
 import ArrowRight from "../../assets/icons/Arrow_right.svg";
 import MentorMessage from "../../chat/components/MentorMessage.jsx";
 import Send from "../../assets/icons/Send.svg";
+import {useSelector} from "react-redux";
+
 function Root() {
     const {companies} = useLoaderData()
+
+    const {isAuthenticated} = useSelector((state) => state.auth)
+
+    // TODO: handle this better because it gitters
+    if (isAuthenticated) {
+        return <Navigate to={"/feed"} />
+    }
 
     return (
         <div className="relative">
