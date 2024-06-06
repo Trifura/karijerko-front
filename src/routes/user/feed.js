@@ -1,6 +1,8 @@
 import api from "../../core/utils/api.js";
 
-export async function fetchCompanies(){
-    const response = await api.get('/company')
-    return { companies: response.data.data || [] }
+export async function fetchCompanies(searchTerm = '') {
+    const response = await api.get('/company', {
+        params: { search: searchTerm }
+    });
+    return { companies: response.data.data || [] };
 }
