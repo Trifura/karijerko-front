@@ -18,9 +18,9 @@ export default function Feed() {
   return (
     <>
       <Navbar showLink={true} className="pb-20" />
-      <div className="lg:ml-[220px] md:mdl-[0px] flex justify-center">
+      <div className="flex justify-center">
         <div className="flex w-full max-w-6xl mt-20">
-          <div className="flex-grow flex flex-col items-center mx-auto">
+          <div className="flex-grow flex flex-col items-center mx-auto relative">
             <div className="w-full max-w-2xl">
               <form className="w-full mb-6" onSubmit={(e) => e.preventDefault()}>
                 <label
@@ -47,7 +47,7 @@ export default function Feed() {
                 </div>
               </form>
 
-              <div className="flex flex-col items-center w-full space-y-4">
+              <div className="flex flex-col items-center w-full gap-3">
                 {companies.map((company) => (
                   <Link to={`/company/${company.slug}`} key={company.id} className="w-full">
                     <CompanyCard company={company} />
@@ -55,10 +55,9 @@ export default function Feed() {
                 ))}
               </div>
             </div>
-          </div>
-
-          <div className="hidden md:block flex-shrink-0 ml-10">
-            <SideProfile />
+            <div className="hidden xl:block fixed xl:ml-[1050px] 2xl:ml-[1200px]">
+              <SideProfile />
+            </div>
           </div>
         </div>
       </div>
