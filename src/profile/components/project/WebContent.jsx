@@ -2,7 +2,7 @@ import ContentOptions from "./ContentOptions.jsx";
 import ArticleIcon from "../../../assets/icons/Article.svg";
 import {useEffect, useState} from "react";
 
-export default function ImageContent({ content, isEditable = false }) {
+export default function ImageContent({ content, isEditable = false, onRemove }) {
 
     const [domain, setDomain] = useState("");
 
@@ -18,7 +18,7 @@ export default function ImageContent({ content, isEditable = false }) {
     }, [content.url]);
     return (
         <div className="relative flex gap-2 items-center flex-col lg:flex-row">
-            {isEditable && <ContentOptions/>}
+            {isEditable && <ContentOptions onRemove={onRemove}/>}
             <div className="w-full flex items-center gap-4 border border-Swan rounded-xl py-4 px-5 lg:px-10">
                 <img src={ArticleIcon} alt="Icon" className="w-16 h-16"/>
                 <div className="flex flex-col gap-4">

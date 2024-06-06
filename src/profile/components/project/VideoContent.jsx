@@ -1,14 +1,14 @@
 import ContentOptions from "./ContentOptions.jsx";
 import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
 
-export default function VideoContent({ content, isEditable = false, setDescription, className }) {
+export default function VideoContent({ content, isEditable = false, setDescription, className, onRemove }) {
     const handleDescriptionChange = (value) => {
         setDescription(content, value);
     }
 
     return (
         <div className={`relative flex gap-2 items-center flex-col lg:flex-row ${className}`}>
-            {isEditable && <ContentOptions/>}
+            {isEditable && <ContentOptions onRemove={onRemove}/>}
             <div className="w-full flex flex-col gap-2">
                 <div className="aspect-video">
                     <iframe

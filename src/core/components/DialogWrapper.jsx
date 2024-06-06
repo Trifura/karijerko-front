@@ -10,9 +10,12 @@ const DialogWrapper = ({
                            children,
                            confirmText = 'Spremi',
                            cancelText = 'Odustani',
-                           fullscreen = false
+                           fullscreen = false,
+                           disableScroll = true
                        }) => {
     useEffect(() => {
+        if (!disableScroll) return;
+
         if (isOpen) {
             document.body.classList.add('no-scroll');
         } else {
@@ -21,7 +24,7 @@ const DialogWrapper = ({
         return () => {
             document.body.classList.remove('no-scroll');
         };
-    }, [isOpen]);
+    }, [disableScroll, isOpen]);
 
     if (!isOpen) return null;
 

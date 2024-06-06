@@ -4,15 +4,15 @@ import {useState} from "react";
 import SimpleTextarea from "../../core/components/form/SimpleTextarea.jsx";
 import Select from "react-select";
 
-import ImageIcon from "../../assets/icons/Image.svg"
-import VideocamIcon from "../../assets/icons/Videocam.svg"
-import LinkIcon from "../../assets/icons/Link.svg"
-import FileIcon from "../../assets/icons/File.svg"
 import ImageContent from "./project/ImageContent.jsx";
 import VideoContent from "./project/VideoContent.jsx";
 import WebContent from "./project/WebContent.jsx";
 import FileContent from "./project/FileContent.jsx";
-import FileUpload from "../../core/components/form/FileUpload.jsx";
+import {getYoutubeId} from "../utils/VideoHelper.js";
+import ImageInput from "./project/inputs/ImageInput.jsx";
+import VideoInput from "./project/inputs/VideoInput.jsx";
+import FileInput from "./project/inputs/FileInput.jsx";
+import WebInput from "./project/inputs/WebInput.jsx";
 
 const skillOptions = [
     {
@@ -84,6 +84,61 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
         setContents(updatedContents);
     };
 
+    const addImageContent = (image) => {
+        if (!image) throw new Error('Image is required');
+
+        const imageContent = {
+            type: 'image',
+            description: '',
+            url: URL.createObjectURL(image),
+            file: image,
+        };
+
+        setContents([...contents, imageContent]);
+    }
+
+    const addNewFileContent = (file) => {
+        if (!file) throw new Error('File is required');
+
+        const fileContent = {
+            type: 'file',
+            description: '',
+            title: file.name,
+            url: URL.createObjectURL(file),
+            file,
+        };
+
+        setContents([...contents, fileContent]);
+    }
+
+    const addNewVideoContent = (videoLink) => {
+        const videoContent = {
+            type: 'video',
+            description: '',
+            url: `https://www.youtube.com/embed/${getYoutubeId(videoLink)}`
+        };
+
+        setContents([...contents, videoContent]);
+    }
+
+    const addNewWebContent = (webLink) => {
+        if (!webLink) throw new Error('Web link is required');
+
+        const webContent = {
+            type: 'web',
+            url: webLink,
+            title: 'Placeholder title',
+            description: 'Placeholder description vamo tamo'
+        };
+
+        setContents([...contents, webContent]);
+    }
+
+    const removeContent = (index) => {
+        const updatedContents = contents.filter((content, i) => i !== index);
+        setContents(updatedContents);
+    }
+
   return (
       <DialogWrapper title="Uredi projekt" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel} fullscreen={true}>
           <div className="flex flex-col gap-2 lg:px-32 xl:px-64">
@@ -104,6 +159,7 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
                                       setDescription={(description) => {handleContentDescriptionChange(index, description)}}
                                       isEditable={true}
                                       className="mb-5 lg:mb-14"
+                                      onRemove={() => removeContent(index)}
                                   />
                               case 'video':
                                   return <VideoContent
@@ -112,15 +168,22 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
                                       className="mb-5 lg:mb-14"
                                       isEditable={true}
                                       setDescription={(description) => {handleContentDescriptionChange(index, description)}}
+                                      onRemove={() => removeContent(index)}
                                   />
                               case 'web':
-                                  return <WebContent key={index} content={content} isEditable={true} />
+                                  return <WebContent
+                                      key={index}
+                                      content={content}
+                                      isEditable={true}
+                                      onRemove={() => removeContent(index)}
+                                  />
                               case 'file':
                                   return <FileContent
                                       key={index}
                                       content={content}
                                       isEditable={true}
                                       setDescription={(description) => {handleContentDescriptionChange(index, description)}}
+                                      onRemove={() => removeContent(index)}
                                   />
                               default:
                                   return null;
@@ -130,27 +193,13 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
               </div>
               <div className="mt-4 border border-Primary border-dashed rounded-lg pt-10 pb-6 flex flex-col gap-5">
                   <div className="flex justify-center items-center gap-3">
-                      <FileUpload>
-                          <div
-                              className="border-2 cursor-pointer border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
-                              <img src={ImageIcon} alt="Upload image" className="w-5 h-5"/>
-                          </div>
-                      </FileUpload>
-                      <button
-                          className="border-2 border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
-                          <img src={VideocamIcon} alt="Upload vide" className="w-5 h-5"/>
-                      </button>
-                      <button className="border-2 border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
-                          <img src={LinkIcon} alt="Attach web link" className="w-5 h-5"/>
-                      </button>
-                      <button className="border-2 border-Hare hover:border-Primary rounded-full w-10 h-10 flex justify-center items-center">
-                          <img src={FileIcon} alt="Upload document" className="w-5 h-5"/>
-                      </button>
+                      <ImageInput onInput={addImageContent} />
+                      <VideoInput onInput={addNewVideoContent} />
+                      <WebInput onInput={addNewWebContent} />
+                      <FileInput onInput={addNewFileContent} />
                   </div>
                   <p className="font-medium text-center">Dodaj sadržaj</p>
               </div>
-
-
           </div>
       </DialogWrapper>
   );

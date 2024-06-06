@@ -2,14 +2,14 @@
 
 import BookIllustration from "../../../assets/book_illustration.png";
 import SimpleTextarea from "../../../core/components/form/SimpleTextarea.jsx";
-export default function FileContent({ content, isEditable = false, setDescription }) {
+export default function FileContent({ content, isEditable = false, setDescription, onRemove }) {
     const handleDescriptionChange = (value) => {
         setDescription(value);
     }
 
     return (
         <div className="relative flex gap-2 items-center flex-col lg:flex-row">
-            {isEditable && <ContentOptions/>}
+            {isEditable && <ContentOptions onRemove={onRemove} />}
             <div className="w-full flex gap-2 border border-Swan rounded-xl p-4">
                 <a href={content.url} target="_blank">
                     <img src={BookIllustration} alt="Image" className="max-h-32 object-contain w-fit"/>
