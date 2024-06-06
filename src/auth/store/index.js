@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {fetchUser, register, login, authenticateGoogle} from "./actions.js";
+import {fetchUser, register, login, authenticateGoogle, logout} from "./actions.js";
 
 const initialState = {
     // It can be either a user or company
@@ -78,5 +78,4 @@ const authSlice = createSlice({
     },
 });
 
-export const { logout } = authSlice.actions;
 export default authSlice.reducer;
