@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import LogoFull from "../../assets/Logo_full.svg";
 import LogoShort from "../../assets/Logo_short.svg";
+import Profile from "../../assets/icons/Profile.svg";
+import SignOut from "../../assets/icons/sign_out.svg";
+import Verified from "../../assets/icons/Verified.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../auth/store/actions.js";
 import { useState } from "react";
@@ -15,13 +18,13 @@ export default function Navbar({ showLink = true }) {
   };
 
   const handleLogut = async () => {
-    const result = await dispatch(logout());
-
-    if (logout.fulfilled.match(result)) {
-      navigate('/');
-    }
+    await dispatch(logout());
   };
 
+  const profileData = {
+    name: "Ime i Prezime",
+    mail: "benjo1ssssss23@gmail.com",
+  };
 
   const loginButton = (
     <Link
@@ -39,21 +42,43 @@ export default function Navbar({ showLink = true }) {
         onClick={toggleDropdown}
       >
         <img
-          src="https://media.licdn.com/dms/image/D4D03AQHqe3q7qQA3XQ/profile-displayphoto-shrink_200_200/0/1714681109181?e=1723075200&v=beta&t=xMKS3vHfD_GGg8JSAS1oHcgxeufPCvvL1qvvJSwqysE"
+          src={account.profilePicture}
           className="rounded-full w-full h-full"
           alt=""
         />
       </div>
       {dropdownOpen && (
         <div className="absolute right-0 mt-2 w-32 py-2 bg-white border border-gray-200 rounded-md shadow-lg">
+          <div className="px-4 border-b-2 py-2 text-[10px]">
+            <div className="flex flex-row items-center">
+              <div className="truncate" title={profileData.name}>
+                {profileData.name}
+              </div>
+
+              <img className="w-3" src={Verified} alt="" />
+            </div>
+            <div className="truncate" title={profileData.mail}>
+              {profileData.mail}
+            </div>
+          </div>
+
           <Link
             to="/profile"
             className="text-right block px-4 py-2 text-gray-800 hover:font-medium"
           >
-            Moj Profil
+            <div className="flex flex-row">
+              <img className="w-4 mr-1" src={Profile} alt="" />
+              <div>Moj Profil</div>
+            </div>
           </Link>
-          <div onClick={handleLogut} className="text-right block px-4 py-2 text-gray-800 cursor-pointer hover:font-medium">
-            Odjavi se
+          <div
+            onClick={handleLogut}
+            className="text-right block px-4 py-2 text-gray-800 cursor-pointer hover:font-medium"
+          >
+            <div className="flex flex-row">
+              <img className="w-4 mr-1" src={SignOut} alt="" />
+              <div>Odjavi se</div>
+            </div>
           </div>
         </div>
       )}

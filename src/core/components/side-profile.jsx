@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import LogoShort from "../../assets/Logo_short.svg";
 import Verified from "../../assets/icons/Verified.svg";
 import CircleCheck from "../../assets/icons/Check_circle.svg";
@@ -12,6 +13,7 @@ const profileData = {
 };
 
 function SideProfile() {
+  const { account } = useSelector((state) => state.auth);
   const [checkedStates, setCheckedStates] = useState(
     new Array(profileData.tags.length).fill(true)
   );
@@ -31,7 +33,7 @@ function SideProfile() {
             <div className="flex flex-row">
               <img
                 className="p-1 w-[50px] h-[50px] border-2 border-Swan rounded-full"
-                src="https://media.licdn.com/dms/image/D4D03AQHqe3q7qQA3XQ/profile-displayphoto-shrink_200_200/0/1714681109181?e=1723075200&v=beta&t=xMKS3vHfD_GGg8JSAS1oHcgxeufPCvvL1qvvJSwqysE"
+                src={account.profilePicture}
                 alt=""
               />
             </div>
@@ -43,11 +45,10 @@ function SideProfile() {
                   <img src={Verified} alt="" />
                 </div>
               </div>
-<div className="w-[14px] h-[14px] flex flex-row items-center">
-<img src={Pin} alt="" />
-<div className="text-md">Lokacija</div>
-</div>
-              
+              <div className="w-[14px] h-[14px] flex flex-row items-center">
+                <img src={Pin} alt="" />
+                <div className="text-md">Lokacija</div>
+              </div>
             </div>
           </div>
 
