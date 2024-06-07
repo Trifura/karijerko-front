@@ -36,6 +36,9 @@ function Login() {
     if (login.fulfilled.match(result)) {
       navigate('/feed');
     }
+    else{
+      console.error(result.payload);
+    }
   };
 
   

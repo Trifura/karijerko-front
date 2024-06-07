@@ -2,7 +2,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 // Pages
 import AboutUs from "./root/about-us.jsx";
-import ConfirmEmail from "./auth/confirm-email.jsx";
+import VerifyEmail from "./auth/verify-email.jsx";
 import ForgotPassword from "./auth/forgot-password.jsx";
 import ResetPassword from "./auth/reset-password.jsx";
 import Companies from "./root/companies.jsx";
@@ -62,8 +62,8 @@ const router = createBrowserRouter([
         element: <RegisterFirma />,
     },
     {
-        path: "/confirm-email",
-        element: <ConfirmEmail />,
+        path: "/verify-email",
+        element: <VerifyEmail />,
     },
     {
         path: "/forgot-password",

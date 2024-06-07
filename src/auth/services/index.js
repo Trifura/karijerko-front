@@ -31,10 +31,16 @@ const logout = () => {
     removeToken()
 };
 
+const verifyEmail = async (token) => {
+    const { data } = await api.post(`auth/verify-email`, { token });
+    return data.success;
+};
+
 export default {
     login,
     register,
     authenticateGoogle,
     logout,
-    fetchUser
+    fetchUser,
+    verifyEmail
 };

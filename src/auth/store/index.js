@@ -1,8 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
-import {fetchUser, register, login, authenticateGoogle, logout} from "./actions.js";
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchUser, register, login, authenticateGoogle, logout, verifyEmail } from "./actions.js";
 
 const initialState = {
-    // It can be either a user or company
     account: null,
     isAuthenticated: false,
     isLoading: false,
@@ -75,6 +74,17 @@ const authSlice = createSlice({
                 state.account = null;
                 state.isAuthenticated = false;
             })
+            .addCase(verifyEmail.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(verifyEmail.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(verifyEmail.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            });
     },
 });
 

@@ -6,6 +6,7 @@ import { authenticateGoogle, register } from "../../auth/store/actions.js";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
+import EmailConfirmation from "../../core/components/EmailConfirmation.jsx";
 
 function Register() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function Register() {
   const [emailValid, setEmailValid] = useState(true);
   const [passwordConfirmationValid, setPasswordConfirmationValid] = useState(true);
   const [error, setError] = useState(null);
+  const [showEmailConfirmation, setShowEmailConfirmation] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -61,7 +63,7 @@ function Register() {
       const result = await dispatch(register({ firstName, lastName, email, password }));
 
       if (register.fulfilled.match(result)) {
-        navigate("/profile");
+        setShowEmailConfirmation(true);
       } else {
         setError(result.error.message);
         console.error(result.error.message);
@@ -83,6 +85,10 @@ function Register() {
     } else {
       setError(result.error.message);
     }
+  };
+
+  const handleCloseEmailConfirmation = () => {
+    setShowEmailConfirmation(false);
   };
 
   if (isAuthenticated) {
@@ -215,6 +221,8 @@ function Register() {
             Prijavi se
           </Link>
         </div>
+
+        {showEmailConfirmation && <EmailConfirmation onClose={handleCloseEmailConfirmation} />}
       </div>
     </div>
   );

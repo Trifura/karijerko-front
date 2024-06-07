@@ -23,6 +23,15 @@ export const register = createAsyncThunk('auth/register/user', async (userData, 
     }
 });
 
+export const verifyEmail = createAsyncThunk('auth/verifyEmail', async (token, thunkAPI) => {
+    try {
+        const response = await authService.verifyEmail(token);
+        return response;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+});
+
 export const authenticateGoogle = createAsyncThunk('auth/authenticateGoogle', async ({ accessToken, role }, thunkAPI) => {
     try {
         const { account, token } = await authService.authenticateGoogle(accessToken, role);

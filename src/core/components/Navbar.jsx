@@ -22,7 +22,7 @@ export default function Navbar({ showLink = true }) {
     await dispatch(logout());
   };
 
-  // Close the dropdown if clicked outside of it
+ 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
