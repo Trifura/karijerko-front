@@ -11,7 +11,8 @@ const DialogWrapper = ({
                            confirmText = 'Spremi',
                            cancelText = 'Odustani',
                            fullscreen = false,
-                           disableScroll = true
+                           disableScroll = true,
+                           isLoading = false,
                        }) => {
     useEffect(() => {
         if (!disableScroll) return;
@@ -29,7 +30,7 @@ const DialogWrapper = ({
     if (!isOpen) return null;
 
     return ReactDOM.createPortal(
-        <div className={`fixed inset-0 flex items-center fade-in justify-center z-50 ${fullscreen ? 'fullscreen' : ''}`}>
+        <div className={`fixed inset-0 flex items-center fade-in justify-center z-40 ${fullscreen ? 'fullscreen' : ''}`}>
             <div className="fixed inset-0 bg-black opacity-50"></div>
             <div className={`bg-white overflow-auto z-10 scale-in ${fullscreen ? 'w-full h-full' : 'rounded-lg shadow-lg max-w-xl w-full'}`}>
                 <div className="p-5 border-b flex justify-between">
@@ -50,8 +51,12 @@ const DialogWrapper = ({
                     </button>
                     <button
                         onClick={onConfirm}
-                        className="text-white text-base lg:text-md px-6 py-2 font-semibold bg-Primary rounded-md "
+                        className="text-white text-base lg:text-md px-6 py-2 font-semibold bg-Primary rounded-md flex gap-3 items-center"
                     >
+                        {
+                            isLoading &&
+                            <div className="border-PrimaryLight h-6 w-6 animate-spin rounded-full border-4 border-t-white"/>
+                        }
                         {confirmText}
                     </button>
                 </div>

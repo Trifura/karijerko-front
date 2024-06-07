@@ -1,24 +1,27 @@
 import EditIcon from "../../assets/icons/Edit.svg";
+import ProfileEdit from "./ProfileEdit.jsx";
+import {useProfileDialogs} from "../hooks/useProfileDialogs.js";
 
-export default function ProfileInfo() {
+export default function ProfileInfo({ profile, setProfile }) {
+    const { isEditOpen, openEdit, closeEdit } = useProfileDialogs();
+
+    const saveProfile = (newProfile) => {
+        setProfile(newProfile);
+        closeEdit();
+    }
+
     return (
-        <div className="flex flex-col gap-6 lg:p-8 w-full">
-            <div className="flex w-full justify-between">
-                <h2 className="text-2xl font-semibold">Front-end developer</h2>
-                <button>
-                    <img src={EditIcon} alt="Edit"/>
-                </button>
+        <>
+            <ProfileEdit value={profile} isOpen={isEditOpen} onCancel={closeEdit} onConfirm={saveProfile} />
+            <div className="flex flex-col gap-6 lg:p-8 w-full">
+                <div className="flex w-full justify-between">
+                    <h2 className="text-2xl font-semibold">{profile.name}</h2>
+                    <button onClick={openEdit}>
+                        <img src={EditIcon} alt="Edit"/>
+                    </button>
+                </div>
+                <p>{profile.description}</p>
             </div>
-            <p>
-                I am a Full stack developer with real project experience in Frontend (VueJs, Reactjs)
-                and
-                {/* eslint-disable-next-line react/no-unescaped-entities */}
-                Backend (ExpressJs, Graphql). In my 3 years of experience I've learned a lot about
-                NodeJs
-                and how the web works. I started to work at a really young age because I found a passion
-                for
-                programming.
-            </p>
-        </div>
+        </>
     )
 }
