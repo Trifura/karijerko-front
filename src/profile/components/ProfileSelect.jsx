@@ -32,9 +32,9 @@ export default function ProfileSelect({ value, options, onSelect }) {
                             <div
                                 key={index}
                                 className={`px-4 py-2 font-bold text-base rounded-xl cursor-pointer ${option.value === value ? 'bg-Primary text-white' : ''}`}
-                                onClick={() => onSelect(option.value)}
+                                onClick={() => onSelect(option.id)}
                             >
-                                {option.label}
+                                {option.name}
                             </div>
                         ))
                     }
