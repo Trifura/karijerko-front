@@ -61,7 +61,7 @@ export default function Navbar({ showLink = true }) {
         <div className="absolute right-0 mt-2 w-[305px] py-2 bg-white border border-gray-200 rounded-md shadow-lg">
           <div className="px-4 border-b-2 py-2">
             <div className="text-[18px] flex flex-row items-center">
-              <div className="text-[18px] truncate">
+              <div className="text-[18px] truncate font-semibold">
                 {account.firstName} {account.lastName}
               </div>
               <img className="w-4 ml-2" src={Verified} alt="" />
@@ -71,7 +71,7 @@ export default function Navbar({ showLink = true }) {
 
           <Link
             to="/profile"
-            className="text-right block px-4 py-2 text-gray-800 hover:font-medium"
+            className="text-right block px-4 py-2 mt-2 text-gray-800 hover:font-medium"
           >
             <div className="flex flex-row">
               <img className="w-4 mr-2" src={Profile} alt="" />
