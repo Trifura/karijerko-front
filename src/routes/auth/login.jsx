@@ -95,7 +95,7 @@ function Login() {
               </div>
 
             <div
-              className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md"
+              className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md cursor-pointer"
               onClick={handleSubmit}
             >
               Prijavi se

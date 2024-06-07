@@ -4,7 +4,7 @@ import Navbar from "../../core/components/Navbar.jsx";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import { authenticateGoogle, register } from "../../auth/store/actions.js";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 
 function Register() {
@@ -18,11 +18,10 @@ function Register() {
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [passwordVisibleConfirmation, setPasswordVisibleConfirmation] =
-    useState(false);
+  const [passwordVisibleConfirmation, setPasswordVisibleConfirmation] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
-  const [passwordConfirmationValid, setPasswordConfirmationValid] =
-    useState(true);
+  const [passwordConfirmationValid, setPasswordConfirmationValid] = useState(true);
+  const [error, setError] = useState(null);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -59,16 +58,16 @@ function Register() {
     }
 
     try {
-      const result = await dispatch(
-        register({ firstName, lastName, email, password })
-      );
+      const result = await dispatch(register({ firstName, lastName, email, password }));
 
       if (register.fulfilled.match(result)) {
         navigate("/profile");
       } else {
+        setError(result.error.message);
         console.error(result.error.message);
       }
     } catch (error) {
+      setError(error.message);
       console.error(error);
     }
   };
@@ -81,6 +80,8 @@ function Register() {
 
     if (authenticateGoogle.fulfilled.match(result)) {
       navigate('/feed');
+    } else {
+      setError(result.error.message);
     }
   };
 
@@ -190,7 +191,7 @@ function Register() {
             >
               Registriraj se
             </div>
-
+            {error && <p className="text-red-500 text-xs ml-2">{error}</p>}
             <div className="mt-7 flex justify-center items-center">
               <hr className="w-64 border-gray-300" />
             </div>

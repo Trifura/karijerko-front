@@ -8,9 +8,9 @@ const login = async (credentials) => {
 };
 
 const register = async (userData) => {
-    const { data } = await api.post(`auth/register`, userData);
+    const { data } = await api.post(`auth/register/user`, userData);
     if (data.success) {
-        // TODO. navigate to verify email page
+        
     }
 
     return data.success;
