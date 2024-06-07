@@ -23,6 +23,16 @@ export const register = createAsyncThunk('auth/register/user', async (userData, 
     }
 });
 
+
+export const registerCompany = createAsyncThunk('auth/register/company', async (companyData, thunkAPI) => {
+    try {
+        const response = await authService.registerCompany(companyData);
+        return response;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+});
+
 export const verifyEmail = createAsyncThunk('auth/verifyEmail', async (token, thunkAPI) => {
     try {
         const response = await authService.verifyEmail(token);

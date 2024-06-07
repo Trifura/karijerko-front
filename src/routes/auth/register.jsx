@@ -222,7 +222,7 @@ function Register() {
           </Link>
         </div>
 
-        {showEmailConfirmation && <EmailConfirmation onClose={handleCloseEmailConfirmation} />}
+        {showEmailConfirmation && <EmailConfirmation onClose={handleCloseEmailConfirmation} isCompany={false} />}
       </div>
     </div>
   );

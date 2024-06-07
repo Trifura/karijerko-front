@@ -16,6 +16,15 @@ const register = async (userData) => {
     return data.success;
 };
 
+const registerCompany = async (companyData) => {
+    const { data } = await api.post(`auth/register/company`, companyData);
+    if (data.success) {
+        
+    }
+
+    return data.success;
+};
+
 const authenticateGoogle = async (accessToken, role) => {
     const { data } = await api.post(`auth/google`, { accessToken, role });
 
@@ -42,5 +51,6 @@ export default {
     authenticateGoogle,
     logout,
     fetchUser,
-    verifyEmail
+    verifyEmail,
+    registerCompany
 };

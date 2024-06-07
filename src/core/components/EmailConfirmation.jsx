@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo_short.svg';
-import Close from '../../assets/icons/Close_round.svg'
+import Close from '../../assets/icons/Close_round.svg';
 
-function EmailConfirmation({ onClose }) {
+function EmailConfirmation({ onClose, isCompany }) {
   const emailConfirmationRef = useRef(null);
 
   useEffect(() => {
@@ -26,9 +26,11 @@ function EmailConfirmation({ onClose }) {
           <img src={Close} alt="Close" className="w-6 h-6" />
         </button>
         <img src={Logo} className="mx-auto w-10 h-10" alt="Logo" />
-        <div className="mb-5 text-[25px] font-semibold">Potvrdite Vaš email</div>
+        <div className="mb-5 text-[25px] font-semibold">
+          {isCompany ? 'Potvrdite Vaš email za firmu' : 'Potvrdite Vaš email'}
+        </div>
         <p className="mb-5">
-          Hvala Vam što se prijavili na Karijerka! <br />
+          {isCompany ? 'Hvala Vam što ste prijavili Vašu firmu na Karijerka!' : 'Hvala Vam što ste se prijavili na Karijerka!'} <br />
           <div className='text-[15px]'>
             Molimo Vas da potvrdite Vaš email, koji smo Vam poslali
           </div>

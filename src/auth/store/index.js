@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUser, register, login, authenticateGoogle, logout, verifyEmail } from "./actions.js";
+import { fetchUser, register, login, authenticateGoogle, logout, verifyEmail, registerCompany } from "./actions.js";
 
 const initialState = {
     account: null,
@@ -44,6 +44,20 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
+
+            .addCase(registerCompany.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(registerCompany.fulfilled, (state) => {
+                state.isAuthenticated = false;
+                state.isLoading = false;
+            })
+            .addCase(registerCompany.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+
             .addCase(fetchUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;

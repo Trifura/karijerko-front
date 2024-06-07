@@ -2,19 +2,31 @@ import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import Navbar from "../../core/components/Navbar.jsx";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
+import { authenticateGoogle, registerCompany } from "../../auth/store/actions.js";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
+import EmailConfirmation from "../../core/components/EmailConfirmation.jsx";
 
 function RegisterFirma() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [passwordVisibleConfirmation, setPasswordVisibleConfirmation] =
-    useState(false);
+  const [passwordVisibleConfirmation, setPasswordVisibleConfirmation] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
-  const [passwordConfirmationValid, setPasswordConfirmationValid] =
-    useState(true);
+  const [passwordConfirmationValid, setPasswordConfirmationValid] = useState(true);
+  const [showEmailConfirmation, setShowEmailConfirmation] = useState(false);
+  const [error, setError] = useState(null);
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isLoading, error: registerError } = useSelector((state) => state.auth);
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -43,9 +55,48 @@ function RegisterFirma() {
     return emailPattern.test(email);
   };
 
-  const handleSubmit = () => {
-    // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!emailValid || !passwordConfirmationValid) {
+      return;
+    }
+
+    try {
+      const result = await dispatch(registerCompany({ name, email, password }));
+
+      if (registerCompany.fulfilled.match(result)) {
+        setShowEmailConfirmation(true);
+      } else {
+        setError(result.error.message);
+        console.error(result.error.message);
+      }
+    } catch (error) {
+      setError(error.message);
+      console.error(error);
+    }
   };
+
+  const handleGoogleAuth = async (response) => {
+    const accessToken = response.credential;
+    const role = "company";
+
+    const result = await dispatch(authenticateGoogle({ accessToken, role }));
+
+    if (authenticateGoogle.fulfilled.match(result)) {
+      navigate('/feed');
+    } else {
+      setError(result.error.message);
+    }
+  };
+
+  const handleCloseEmailConfirmation = () => {
+    setShowEmailConfirmation(false);
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to="/profile" replace />;
+  }
 
   return (
     <div>
@@ -63,8 +114,9 @@ function RegisterFirma() {
             <input
               type="text"
               placeholder="Unesite ime firme..."
-              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px] 
-                `}
+              value={name}
+              onChange={handleNameChange}
+              className="p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]"
             />
 
             <div className="p-2">E-mail adresa</div>
@@ -133,19 +185,26 @@ function RegisterFirma() {
                 Lozinke se ne podudaraju
               </p>
             )}
-            <div
+            <button
               className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md"
               onClick={handleSubmit}
+              disabled={isLoading}
             >
-              Registriraj se
-            </div>
+              {isLoading ? "Registriranje..." : "Registriraj se"}
+            </button>
+
+            {error && (
+              <p className="text-red-500 text-xs ml-2">
+                {error}
+              </p>
+            )}
 
             <div className="mt-7 flex justify-center items-center">
               <hr className="w-64 border-gray-300" />
             </div>
 
             <div className="mt-4 flex justify-center items-center">
-              <GoogleLoginButton onSuccess={(data) => console.log(data)} />
+            <GoogleLoginButton onSuccess={handleGoogleAuth} />
             </div>
           </div>
         </div>
@@ -163,6 +222,8 @@ function RegisterFirma() {
             Prijavi se
           </Link>
         </div>
+
+        {showEmailConfirmation && <EmailConfirmation onClose={handleCloseEmailConfirmation} isCompany={true} />}
       </div>
     </div>
   );
