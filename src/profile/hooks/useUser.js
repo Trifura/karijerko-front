@@ -21,8 +21,8 @@ export const useUser = () => {
             }
         ],
         profiles: [
-            { value: 'front-end-developer', label: 'Front-end developer' },
-            { value: 'back-end-developer', label: 'Back-end developer' },
+            { id: 1, name: 'Front-end developer', description: 'I am a front-end developer with 3 years of experience.' },
+            { id: 2, name: 'Back-end developer', description: 'I am a back-end developer with 2 years of experience.' },
         ]
     });
 

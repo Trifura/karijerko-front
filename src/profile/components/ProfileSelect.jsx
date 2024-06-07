@@ -9,7 +9,7 @@ export default function ProfileSelect({ value, options, onSelect }) {
     return (
         <>
         <ProfileCreate isOpen={isCreateOpen} onCancel={closeCreate} />
-            <div className="hidden p-8  lg:flex flex-col gap-2 lg:gap-4">
+            <div className="lg:p-8 flex flex-col gap-2 lg:gap-4">
                 <div className="w-full flex justify-between">
                     <h2 className="text-xl font-semibold">Profili</h2>
                     <button onClick={openCreate}>
@@ -22,6 +22,8 @@ export default function ProfileSelect({ value, options, onSelect }) {
                         onChange={onSelect}
                         options={options}
                         isSearchable={false}
+                        getOptionValue={(option) => `${option['id']}`}
+                        getOptionLabel={(option) => `${option['name']}`}
                     />
                 </div>
                 <div className="hidden lg:flex flex-col">

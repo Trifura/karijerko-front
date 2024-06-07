@@ -14,6 +14,7 @@ export default function Profile() {
     const { profile, setProfile } = useProfile();
     const { user, setUser } = useUser();
 
+    // on profile select fetch profile data from API
 
     return (
         <>
