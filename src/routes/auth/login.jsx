@@ -16,12 +16,10 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [emailValid, setEmailValid] = useState(true);
 
   const handleEmailChange = (e) => {
     const enteredEmail = e.target.value;
     setEmail(enteredEmail);
-    setEmailValid(validateEmail(enteredEmail));
   };
 
   const handlePasswordChange = (e) => {
@@ -40,10 +38,7 @@ function Login() {
     }
   };
 
-  const validateEmail = (email) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  };
+  
 
   const handleGoogleAuth = async (response) => {
     const accessToken = response.credential;
@@ -81,11 +76,6 @@ function Login() {
               onChange={handleEmailChange}
               className={`p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]`}
             />
-            {!emailValid && (
-              <p className="text-red-500 text-xs ml-2">
-                Unesite validnu e-mail adresu
-              </p>
-            )}
             <div className="p-2">Lozinka</div>
               <div className="relative w-full">
                 <input
