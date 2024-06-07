@@ -2,10 +2,18 @@ import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import Navbar from "../../core/components/Navbar.jsx";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
+import { authenticateGoogle, register } from "../../auth/store/actions.js";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import {Helmet} from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
 
 function Register() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -43,9 +51,42 @@ function Register() {
     return emailPattern.test(email);
   };
 
-  const handleSubmit = () => {
-    // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!firstName || !lastName || !emailValid || !passwordConfirmationValid) {
+      return;
+    }
+
+    try {
+      const result = await dispatch(
+        register({ firstName, lastName, email, password })
+      );
+
+      if (register.fulfilled.match(result)) {
+        navigate("/profile");
+      } else {
+        console.error(result.error.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const handleGoogleAuth = async (response) => {
+    const accessToken = response.credential;
+    const role = "user";
+
+    const result = await dispatch(authenticateGoogle({ accessToken, role }));
+
+    if (authenticateGoogle.fulfilled.match(result)) {
+      navigate('/feed');
+    }
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to="/profile" replace />;
+  }
 
   return (
     <div>
@@ -64,16 +105,18 @@ function Register() {
               <input
                 type="text"
                 placeholder="Unesite ime..."
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px] 
-                `}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]`}
               />
 
             <div className="p-2">Prezime</div>
               <input
                 type="text"
                 placeholder="Unesite prezime..."
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none 
-                `}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none`}
               />
 
             <div className="p-2">E-mail adresa</div>
@@ -142,7 +185,7 @@ function Register() {
               </p>
             )}
             <div
-              className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md"
+              className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md cursor-pointer"
               onClick={handleSubmit}
             >
               Registriraj se
@@ -153,7 +196,7 @@ function Register() {
             </div>
 
             <div className="mt-4 flex justify-center items-center">
-              <GoogleLoginButton onSuccess={(data) => console.log(data)} />
+              <GoogleLoginButton onSuccess={handleGoogleAuth} />
             </div>
           </div>
         </div>
