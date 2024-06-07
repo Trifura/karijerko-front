@@ -3,6 +3,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import Navbar from "../../core/components/Navbar.jsx";
 import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -48,6 +49,11 @@ function Register() {
 
   return (
     <div>
+      <Helmet>
+        <title>Karijerko - Registracija</title>
+        <meta name="description" content="Napravi račun i upoznaj Karijerka kako bi zajedno izgradili tvoj portfolio i osigurali ti firmu tvojih snova." />
+      </Helmet>
+
       <Navbar showLink={false} />
 
       <div className="pt-16 sm:pt-12 flex flex-col justify-center items-center h-screen">
@@ -154,7 +160,7 @@ function Register() {
 
         <div className="flex justify-center items-center">
           Registriraj se kao &nbsp;
-          <Link to="/register-firma" className="text-Primary font-semibold">
+          <Link to="/register-company" className="text-Primary font-semibold">
             firma
           </Link>
         </div>

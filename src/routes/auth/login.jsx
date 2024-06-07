@@ -6,6 +6,7 @@ import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { authenticateGoogle, login } from "../../auth/store/actions.js";
 import { useDispatch, useSelector } from "react-redux";
+import {Helmet} from "react-helmet";
 
 function Login() {
   const dispatch = useDispatch();
@@ -62,6 +63,11 @@ function Login() {
   return (
     <div>
       <Navbar showLink={false} />
+
+      <Helmet>
+        <meta name="description" content="Prijavi se u Karijerka i rasturi svoje karijerne ciljeve."/>
+        <title>Karijerko - Prijava</title>
+      </Helmet>
 
       <div className="flex flex-col justify-center items-center h-screen">
         <div className="mb-5 text-[25px] font-bold">Prijava</div>
