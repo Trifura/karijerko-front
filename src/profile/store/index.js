@@ -27,7 +27,7 @@ const profileSlice = createSlice({
                 state.error = action.payload;
             })
             .addCase(remove.fulfilled, (state, action) => {
-                state.profiles = state.profiles.filter(profile => profile.id !== action.payload);
+                state.profiles = state.profiles.filter(profile => profile.id !== action.payload.id);
                 state.error = null;
             })
             .addCase(remove.rejected, (state, action) => {

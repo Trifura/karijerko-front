@@ -13,6 +13,8 @@ const DialogWrapper = ({
                            fullscreen = false,
                            disableScroll = true,
                            isLoading = false,
+                           confirmColor = 'Primary',
+                           isSimple = false
                        }) => {
     useEffect(() => {
         if (!disableScroll) return;
@@ -33,12 +35,12 @@ const DialogWrapper = ({
         <div className={`fixed inset-0 flex items-center fade-in justify-center z-40 ${fullscreen ? 'fullscreen' : ''}`}>
             <div className="fixed inset-0 bg-black opacity-50"></div>
             <div className={`bg-white overflow-auto z-10 scale-in ${fullscreen ? 'w-full h-full' : 'rounded-lg shadow-lg max-w-xl w-full'}`}>
-                <div className="p-5 border-b flex justify-between">
+                <div className={`p-5 ${ !isSimple && 'border-b' } flex justify-between`}>
                     <h2 className="text-2xl font-semibold">{title}</h2>
                     <img src={CloseRound} alt="close" className="cursor-pointer" onClick={onCancel}/>
                 </div>
-                <div className="mb-16 lg:mb-32">
-                    <div className="p-8">
+                <div className={isSimple ? 'mb-8 lg:mb-16' : 'mb-16 lg:mb-32'}>
+                    <div className={isSimple ? 'py-4 px-5' : 'p-8'}>
                         {children}
                     </div>
                 </div>
@@ -51,7 +53,7 @@ const DialogWrapper = ({
                     </button>
                     <button
                         onClick={onConfirm}
-                        className="text-white text-base lg:text-md px-6 py-2 font-semibold bg-Primary rounded-md flex gap-3 items-center"
+                        className={`text-white text-base lg:text-md px-6 py-2 font-semibold bg-${confirmColor} rounded-md flex gap-3 items-center`}
                     >
                         {
                             isLoading &&
