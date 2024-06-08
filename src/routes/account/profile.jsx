@@ -12,7 +12,6 @@ import {useSelector} from "react-redux";
 import {useLanguages} from "../../profile/hooks/useLanguages.js";
 import {useEducations} from "../../profile/hooks/useEducations.js";
 import {useEffect, useState} from "react";
-import {getSkillsFromProjects} from "../../profile/utils/ProjectHelper.js";
 
 import profileService from '../../profile/services/profile.js'
 
@@ -35,8 +34,7 @@ export default function Profile() {
         if (!selectedProfileId) return;
 
         profileService.fetch(selectedProfileId).then(data => {
-            const skills = getSkillsFromProjects(data.projects)
-            setProfile({...data, skills})
+            setProfile(data)
         })
     }, [selectedProfileId]);
 
