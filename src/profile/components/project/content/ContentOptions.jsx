@@ -1,4 +1,4 @@
-import DeleteIcon from '../../../assets/icons/Delete.svg'
+import DeleteIcon from '../../../../assets/icons/Delete.svg'
 
 export default function ContentOptions({ onRemove }) {
     return (

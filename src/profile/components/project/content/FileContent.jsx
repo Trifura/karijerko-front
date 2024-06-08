@@ -1,7 +1,7 @@
  import ContentOptions from "./ContentOptions.jsx";
 
-import BookIllustration from "../../../assets/book_illustration.png";
-import SimpleTextarea from "../../../core/components/form/SimpleTextarea.jsx";
+import BookIllustration from "../../../../assets/book_illustration.png";
+import SimpleTextarea from "../../../../core/components/form/SimpleTextarea.jsx";
 export default function FileContent({ content, isEditable = false, setDescription, onRemove }) {
     const handleDescriptionChange = (value) => {
         setDescription(value);

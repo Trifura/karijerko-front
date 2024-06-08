@@ -1,5 +1,5 @@
 import ContentOptions from "./ContentOptions.jsx";
-import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
+import SimpleInput from "../../../../core/components/form/SimpleInput.jsx";
 
 export default function VideoContent({ content, isEditable = false, setDescription, className, onRemove }) {
     const handleDescriptionChange = (value) => {

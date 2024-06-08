@@ -1,5 +1,5 @@
 import ContentOptions from "./ContentOptions.jsx";
-import ArticleIcon from "../../../assets/icons/Article.svg";
+import ArticleIcon from "../../../../assets/icons/Article.svg";
 import {useEffect, useState} from "react";
 
 export default function ImageContent({ content, isEditable = false, onRemove }) {

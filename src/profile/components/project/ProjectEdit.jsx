@@ -1,79 +1,34 @@
 import DialogWrapper from "../../../core/components/DialogWrapper.jsx";
 import SimpleInput from "../../../core/components/form/SimpleInput.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import SimpleTextarea from "../../../core/components/form/SimpleTextarea.jsx";
-import Select from "react-select";
+import AsyncSelect from "react-select/async";
 
-import ImageContent from "../project/ImageContent.jsx";
-import VideoContent from "../project/VideoContent.jsx";
-import WebContent from "../project/WebContent.jsx";
-import FileContent from "../project/FileContent.jsx";
+import ImageContent from "./content/ImageContent.jsx";
+import VideoContent from "./content/VideoContent.jsx";
+import WebContent from "./content/WebContent.jsx";
+import FileContent from "./content/FileContent.jsx";
 import {getYoutubeId} from "../../utils/VideoHelper.js";
-import ImageInput from "../project/inputs/ImageInput.jsx";
-import VideoInput from "../project/inputs/VideoInput.jsx";
-import FileInput from "../project/inputs/FileInput.jsx";
-import WebInput from "../project/inputs/WebInput.jsx";
+import ImageInput from "./inputs/ImageInput.jsx";
+import VideoInput from "./inputs/VideoInput.jsx";
+import FileInput from "./inputs/FileInput.jsx";
+import WebInput from "./inputs/WebInput.jsx";
 
-const skillOptions = [
-    {
-        value: 'javascript',
-        label: 'JavaScript'
-    },
-    {
-        value: 'python',
-        label: 'Python'
-    },
-    {
-        value: 'java',
-        label: 'Java'
-    },
-    {
-        value: 'c++',
-        label: 'C++'
-    },
-    {
-        value: 'c#',
-        label: 'C#'
-    },
-    {
-        value: 'php',
-        label: 'PHP'
-    },
-    {
-        value: 'ruby',
-        label: 'Ruby'
-    },
-    {
-        value: 'swift',
-        label: 'Swift'
-    },
-    {
-        value: 'kotlin',
-        label: 'Kotlin'
-    },
-    {
-        value: 'typescript',
-        label: 'TypeScript'
-    },
-    {
-        value: 'html',
-        label: 'HTML'
-    },
-    {
-        value: 'css',
-        label: 'CSS'
-    },
-    {
-        value: 'sass',
-        label: 'Sass'
-    },
-]
+import skillService from "../../../core/services/skill.js";
+import debounce from "debounce";
 
 export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
     const [title, setTitle] = useState(value.title);
     const [description, setDescription] = useState(value.description);
     const [skills, setSkills] = useState(value.skills);
     const [contents, setContents] = useState(value.contents);
+
+    useEffect(() => {
+        setTitle(value.title);
+        setDescription(value.description);
+        setSkills(value.skills);
+        setContents(value.contents);
+    }, [isOpen]);
 
 
     const handleContentDescriptionChange = (index, newDescription) => {
@@ -140,13 +95,19 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
     }
 
     const saveProject = () => {
-        onConfirm({
+        const project = {
+            id: value.id,
             title,
             description,
             skills,
             contents
-        });
+        }
+        onConfirm(project);
     }
+
+    const debouncedFetchSkills = debounce((search, callback) => {
+        skillService.fetch(search).then((result) => callback(result))
+    }, 500);
 
   return (
       <DialogWrapper title="Uredi projekt" isOpen={isOpen} onConfirm={saveProject} onCancel={onCancel} fullscreen={true}>
@@ -155,7 +116,18 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
               <SimpleTextarea label="Opis projekta" placeholder="Unesite opis projekta..." value={description} onChange={setDescription} className="h-32"/>
 
               <label htmlFor="project-skills" className="font-semibold">Vještine</label>
-              <Select id="project-skills" value={skills} isMulti={true} closeMenuOnSelect={false} placeholder="Odaberite vještine..." options={skillOptions} onChange={setSkills}  />
+              <AsyncSelect
+                  id="project-skills"
+                  value={skills}
+                  isMulti={true}
+                  closeMenuOnSelect={false}
+                  placeholder="Odaberite vještine..."
+                  loadOptions={debouncedFetchSkills}
+                  getOptionValue={(option) => `${option['id']}`}
+                  getOptionLabel={(option) => `${option['name']}`}
+                  onChange={setSkills}
+                  defaultOptions={skills}
+              />
 
               <div className="flex flex-col gap-5 mt-10">
                   {

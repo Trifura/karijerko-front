@@ -2,18 +2,30 @@ import EditIcon from "../../../assets/icons/Edit.svg";
 import DeleteIcon from "../../../assets/icons/Delete.svg";
 import ProjectEdit from "./ProjectEdit.jsx";
 import {useState} from "react";
+import ConfirmDialog from "../../../core/components/ConfirmDialog.jsx";
 
 export default function ProjectCard({ project, onSave, onDelete }) {
     const [isEditing, setIsEditing] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-    const onProjectSave = (project) => {
-        onSave(project);
+    const onProjectSave = async (editedProject) => {
+        await onSave(editedProject);
         setIsEditing(false);
+    }
+
+    const removeProject = async () => {
+        await onDelete(project);
+        setIsDeleteOpen(false);
     }
 
     return (
         <>
             <ProjectEdit value={project} isOpen={isEditing} onCancel={() => setIsEditing(false)} onConfirm={onProjectSave} />
+            <ConfirmDialog
+                isOpen={isDeleteOpen}
+                text="Jeste li sigurni da želite obrisati ovaj projekt?"
+                onConfirm={removeProject} onCancel={() => setIsDeleteOpen(false)}
+            />
             <div className="w-[150px] lg:w-[170px] relative group">
                 <div className="border border-Swan rounded-2xl p-4 relative overflow-hidden ">
                     <img
@@ -26,12 +38,12 @@ export default function ProjectCard({ project, onSave, onDelete }) {
                         <button onClick={() => setIsEditing(true)}>
                             <img src={EditIcon} alt="Edit"/>
                         </button>
-                        <button onClick={onDelete}>
+                        <button onClick={() => setIsDeleteOpen(true)}>
                             <img src={DeleteIcon} alt="Delete"/>
                         </button>
                     </div>
                 </div>
-                <p className="text-center font-semibold">Github profil</p>
+                <p className="text-center font-semibold">{project.title}</p>
             </div>
         </>
     )

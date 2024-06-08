@@ -60,6 +60,9 @@ export default function Profile() {
 
     if (!profile) return null
 
+    const setProjects = (projects) => {
+        setProfile({...profile, projects})
+    }
 
     return (
         <>
@@ -73,7 +76,7 @@ export default function Profile() {
                                  profiles={profiles}/>
                 </div>
                 <hr className="border-Swan"/>
-                <ProfilePortfolio projects={profile.projects}/>
+                <ProfilePortfolio projects={profile.projects} setProjects={setProjects} />
                 <hr className="border-Swan"/>
                 <ProfileSkills skills={profile.skills}/>
                 <hr className="border-Swan"/>
@@ -95,7 +98,7 @@ export default function Profile() {
                     <div className="w-full">
                         <ProfileInfo profile={profile} setProfile={setProfile} setSelectedProfileId={setSelectedProfileId} profiles={profiles} />
                         <hr className="border-Swan" />
-                        <ProfilePortfolio projects={profile.projects} />
+                        <ProfilePortfolio projects={profile.projects} setProjects={setProjects} />
                         <hr className="border-Swan" />
                         <ProfileSkills skills={profile.skills} />
                     </div>
