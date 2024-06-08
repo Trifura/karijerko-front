@@ -15,6 +15,7 @@ export default {
         HareL: '#AFAFBF',
         Ironside: '#676767',
         Smoke: '#F5F5F5',
+        Cardinal: '#FF4B4B'
       },
       keyframes: {
         'loading-bar': {

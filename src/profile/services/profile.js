@@ -19,7 +19,9 @@ const edit = async (profile) => {
 }
 
 const remove = async (profileId) => {
-    return await api.delete(`/profile/${profileId}`)
+    const { data } = await api.delete(`/profile/${profileId}`)
+
+    return {id: profileId, ...data }
 }
 
 const fetchAll = async () => {

@@ -50,7 +50,7 @@ export default function Profile() {
                 <hr className="border-Swan"/>
                 <div className="p-8 flex flex-col gap-6">
                     <ProfileSelect value={profile} onSelect={setSelectedProfileId} options={profiles} />
-                    <ProfileInfo profile={profile} setProfile={setProfile} />
+                    <ProfileInfo profile={profile} setProfile={setProfile} setSelectedProfileId={setSelectedProfileId} profiles={profiles} />
                 </div>
                 <hr className="border-Swan" />
                 <ProfilePortfolio projects={profile.projects} />
@@ -73,7 +73,7 @@ export default function Profile() {
                         <ProfileEducation educations={educations} />
                     </div>
                     <div className="w-full">
-                        <ProfileInfo profile={profile} setProfile={setProfile} />
+                        <ProfileInfo profile={profile} setProfile={setProfile} setSelectedProfileId={setSelectedProfileId} profiles={profiles} />
                         <hr className="border-Swan" />
                         <ProfilePortfolio projects={profile.projects} />
                         <hr className="border-Swan" />
