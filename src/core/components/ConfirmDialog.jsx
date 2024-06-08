@@ -1,6 +1,6 @@
 import DialogWrapper from "./DialogWrapper.jsx";
 
-export default function ConfirmDialog({ isOpen, text, onConfirm, onCancel, confirmColor = 'Cardinal' }) {
+export default function ConfirmDialog({ isOpen, text, onConfirm, onCancel, confirmColor = 'red-500' }) {
     return (
         <DialogWrapper
             isOpen={isOpen}

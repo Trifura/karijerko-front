@@ -9,13 +9,14 @@ export default {
       colors: {
         Primary: '#58CC02',
         PrimaryLight: '#89E219',
+        PrimaryDark: '#3D9D00',
         Swan: '#E5E5E5',
         Bee: '#FFC800',
         Hare: '#AFAFAF',
         HareL: '#AFAFBF',
         Ironside: '#676767',
         Smoke: '#F5F5F5',
-        Cardinal: '#FF4B4B'
+        Coral: '#FF4B4B'
       },
       keyframes: {
         'loading-bar': {

@@ -2,15 +2,12 @@ import AddIcon from "../../assets/icons/Add.svg";
 import Select from "react-select";
 import ProfileCreate from "./ProfileCreate.jsx";
 import {useProfileDialogs} from "../hooks/useProfileDialogs.js";
-import {useDispatch} from "react-redux";
-import {create} from "../store/actions.js";
 
-export default function ProfileSelect({ value, options, onSelect }) {
+export default function ProfileSelect({ value, options, onSelect, createProfile }) {
     const { isCreateOpen, openCreate, closeCreate } = useProfileDialogs();
-    const dispatch = useDispatch()
 
     const onConfirmCreate = async (profile) => {
-        dispatch(create(profile))
+        await createProfile(profile)
         closeCreate()
     }
     return (

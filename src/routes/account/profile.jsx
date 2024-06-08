@@ -8,14 +8,18 @@ import ProfileInfo from "../../profile/components/ProfileInfo.jsx";
 import ProfilePortfolio from "../../profile/components/portfolio/ProfilePortfolio.jsx";
 import UserInfo from "../../profile/components/UserInfo.jsx";
 import { useProfile } from "../../profile/hooks/useProfile.js";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useLanguages} from "../../profile/hooks/useLanguages.js";
 import {useEducations} from "../../profile/hooks/useEducations.js";
 import {useEffect, useState} from "react";
 
 import profileService from '../../profile/services/profile.js'
+import EmptyProfile from "../../profile/components/EmptyProfile.jsx";
+import {create} from "../../profile/store/actions.js";
 
 export default function Profile() {
+    const dispatch = useDispatch()
+
     const { account: user } = useSelector(state => state.auth);
     const { profiles } = useSelector(state => state.profile);
 
@@ -26,8 +30,11 @@ export default function Profile() {
     const { educations, setEducations } = useEducations()
 
     useEffect(() => {
+        // on first render fetch profiles from user because they are already available
         const primaryProfile = user.profiles.find(profile => profile.isPrimary);
-        setSelectedProfileId(primaryProfile.id);
+
+
+        setSelectedProfileId(primaryProfile?.id);
     }, [])
 
     useEffect(() => {
@@ -38,35 +45,48 @@ export default function Profile() {
         })
     }, [selectedProfileId]);
 
-    // on profile select fetch profile data from API
 
-    if (!profile) return null;
+    const createProfile = async (createdProfile) => {
+        const {payload} = await dispatch(create(createdProfile))
+
+        setSelectedProfileId(payload.id)
+    }
+
+
+    if (!profiles.length) {
+        return <EmptyProfile user={user} createProfile={createProfile} />
+    }
+
+
+    if (!profile) return null
+
 
     return (
         <>
             <Navbar/>
             <div className="lg:hidden mt-20">
-                <UserInfo user={user} />
+                <UserInfo user={user}/>
                 <hr className="border-Swan"/>
                 <div className="p-8 flex flex-col gap-6">
-                    <ProfileSelect value={profile} onSelect={setSelectedProfileId} options={profiles} />
-                    <ProfileInfo profile={profile} setProfile={setProfile} setSelectedProfileId={setSelectedProfileId} profiles={profiles} />
+                    <ProfileSelect value={profile} onSelect={setSelectedProfileId} createProfile={createProfile} options={profiles}/>
+                    <ProfileInfo profile={profile} setProfile={setProfile} setSelectedProfileId={setSelectedProfileId}
+                                 profiles={profiles}/>
                 </div>
-                <hr className="border-Swan" />
-                <ProfilePortfolio projects={profile.projects} />
-                <hr className="border-Swan" />
-                <ProfileSkills skills={profile.skills} />
                 <hr className="border-Swan"/>
-                <ProfileLanguages languages={languages} />
+                <ProfilePortfolio projects={profile.projects}/>
                 <hr className="border-Swan"/>
-                <ProfileEducation educations={educations} />
+                <ProfileSkills skills={profile.skills}/>
+                <hr className="border-Swan"/>
+                <ProfileLanguages languages={languages}/>
+                <hr className="border-Swan"/>
+                <ProfileEducation educations={educations}/>
             </div>
             <div className="hidden lg:block border-2 border-Swan rounded-2xl mt-32 mb-10 max-w-5xl mx-auto">
-                <UserInfo user={user} />
-                <hr className="border-Swan" />
+                <UserInfo user={user}/>
+                <hr className="border-Swan"/>
                 <div className="flex h-full">
                     <div className="w-[370px] border-r border-r-Swan">
-                        <ProfileSelect value={profile} onSelect={setSelectedProfileId} options={profiles} />
+                        <ProfileSelect value={profile} onSelect={setSelectedProfileId} createProfile={createProfile} options={profiles} />
                         <hr className="border-Swan"/>
                         <ProfileLanguages languages={languages} />
                         <hr className="border-Swan" />

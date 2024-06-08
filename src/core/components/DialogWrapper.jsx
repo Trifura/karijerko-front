@@ -53,7 +53,7 @@ const DialogWrapper = ({
                     </button>
                     <button
                         onClick={onConfirm}
-                        className={`text-white text-base lg:text-md px-6 py-2 font-semibold bg-${confirmColor} rounded-md flex gap-3 items-center`}
+                        className={`text-white text-base lg:text-md px-6 py-2 font-semibold rounded-md flex gap-3 items-center bg-${confirmColor}`}
                     >
                         {
                             isLoading &&

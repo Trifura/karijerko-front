@@ -31,7 +31,11 @@ export default function ProfileInfo({ profile, setProfile, setSelectedProfileId,
     return (
         <>
             <ProfileEdit value={profile} isOpen={isEditOpen} onCancel={closeEdit} onConfirm={saveProfile} />
-            <ConfirmDialog isOpen={isDeleteOpen} text="Jeste li sigurni da želite obrisati ovaj profil?" onConfirm={removeProfile} onCancel={() => setIsDeleteOpen(false)} />
+            <ConfirmDialog
+                isOpen={isDeleteOpen}
+                text="Jeste li sigurni da želite obrisati ovaj profil?"
+                onConfirm={removeProfile} onCancel={() => setIsDeleteOpen(false)}
+            />
             <div className="flex flex-col gap-6 lg:p-8 w-full">
                 <div className="flex w-full justify-between">
                     <h2 className="text-2xl font-semibold">{profile.name}</h2>
