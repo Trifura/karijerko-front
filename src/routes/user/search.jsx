@@ -1,8 +1,7 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import Navbar from "../../core/components/Navbar.jsx";
 import CompanyCard from "../../company/components/CompanyCard.jsx";
-import SideProfile from "../../core/components/side-profile.jsx";
 import Search from "../../assets/icons/Search.svg";
 import { fetchCompanies } from "./feed.js";
 
@@ -11,10 +10,12 @@ export default function Feed() {
   const [companies, setCompanies] = useState(initialCompanies);
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedTerm(searchTerm);
+      navigate(`/search?name=${encodeURIComponent(searchTerm)}`);
     }, 500);
 
     return () => {
@@ -37,6 +38,7 @@ export default function Feed() {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       setDebouncedTerm(searchTerm);
+      navigate(`/search?name=${encodeURIComponent(searchTerm)}`);
     }
   };
 
@@ -80,9 +82,6 @@ export default function Feed() {
                 ))}
               </div>
               <div className="h-[1000px]"></div>
-            </div>
-            <div className="hidden xl:block fixed xl:ml-[1050px] 2xl:ml-[1200px]">
-              <SideProfile />
             </div>
           </div>
         </div>

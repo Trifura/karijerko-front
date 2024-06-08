@@ -6,23 +6,34 @@ import SignOut from "../../assets/icons/sign_out.svg";
 import Verified from "../../assets/icons/Verified.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../auth/store/actions.js";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import Search from "../../assets/icons/Search.svg";
 
 export default function Navbar({ showLink = true }) {
   const dispatch = useDispatch();
   const { isAuthenticated, account } = useSelector((state) => state.auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      setDebouncedTerm(searchTerm);
+    }
+  };
+
+  const handleSearch = useCallback((event) => {
+    setSearchTerm(event.target.value);
+  }, []);
+
   const handleLogout = async () => {
     await dispatch(logout());
   };
 
- 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -39,7 +50,7 @@ export default function Navbar({ showLink = true }) {
   const loginButton = (
     <Link
       to={"/login"}
-      className="text-white text-base lg:text-md p-2 font-semibold bg-Primary rounded-md border-2 border-Swan"
+      className="text-white text-base lg:text-md p-2 font-semibold bg-primary rounded-md border-2 border-gray-200"
     >
       Prijavi se
     </Link>
@@ -66,9 +77,9 @@ export default function Navbar({ showLink = true }) {
               </div>
               <img className="w-4 ml-2" src={Verified} alt="" />
             </div>
-            <div className="text-Hare truncate">{account.email}</div>
+            <div className="text-gray-600 truncate">{account.email}</div>
           </div>
-
+          
           <Link
             to="/profile"
             className="text-right block px-4 py-2 mt-2 text-gray-800 hover:font-medium"
@@ -93,13 +104,32 @@ export default function Navbar({ showLink = true }) {
   );
 
   const navbarButton = isAuthenticated ? accountButton : loginButton;
+
   return (
-    <div className="flex px-6 lg:px-16 py-4 shadow-md fixed w-full top-0 z-40 bg-white justify-between">
-      <Link to={"/"} className="w-fit flex flex-col">
+    <div className="flex px-6 lg:px-16 py-4 shadow-md fixed w-full top-0 z-40 bg-white justify-between items-center">
+      <Link to={"/"} className="flex items-center">
         <img src={LogoFull} alt="" className="h-10 hidden lg:block" />
         <img src={LogoShort} alt="" className="h-10 lg:hidden" />
       </Link>
-      {showLink && navbarButton}
+      <div className="flex items-center space-x-4 flex-grow ml-4">
+        <form className="relative flex-grow">
+          <input
+            type="text"
+            name="search"
+            value={searchTerm}
+            onChange={handleSearch}
+            onKeyPress={handleKeyPress}
+            placeholder="Search.."
+            className="w-32 lg:w-40 px-4 py-2 border-2 border-gray-300 rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300 ease-in-out focus:w-96"
+          />
+          <img
+            src={Search}
+            alt="Search"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
+          />
+        </form>
+        {showLink && navbarButton}
+      </div>
     </div>
   );
 }

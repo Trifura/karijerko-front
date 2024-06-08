@@ -15,6 +15,7 @@ import CompanyView from "./user/company-view.jsx";
 import Account from "./account/index.jsx";
 import Profile from "./account/profile.jsx";
 import Feed from "./user/feed.jsx";
+import Search from "./user/search.jsx";
 import Portfolio from "./user/portfolio.jsx";
 import Project from "./user/project.jsx";
 import Dashboard from "./company/dashboard.jsx";
@@ -25,8 +26,6 @@ import { fetchCompany } from "./user/company-view.js";
 
 // Protected Routes
 import ProtectedRoute from "./ProtectedRoute.jsx";
-import ProtectedRouteUser from "./ProtectedRouteUser.jsx";
-import ProtectedRouteCompany from "./ProtectedRouteCompany.jsx";
 
 const router = createBrowserRouter([
   // ROOT
@@ -50,6 +49,8 @@ const router = createBrowserRouter([
     element: <CompanyView />,
     loader: fetchCompany,
   },
+
+
 
   // AUTH
   {
@@ -77,6 +78,15 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
 
+  //GLOBAL SEARCH
+  {
+    path: "/search",
+    element: (
+      <Search />
+    ),
+    loader: fetchCompanies,
+  },
+
   // ACCOUNT
   {
     path: "/account",
@@ -99,26 +109,26 @@ const router = createBrowserRouter([
   {
     path: "/feed",
     element: (
-      <ProtectedRouteUser>
+      <ProtectedRoute>
         <Feed />
-      </ProtectedRouteUser>
+      </ProtectedRoute>
     ),
     loader: fetchCompanies,
   },
   {
     path: "/portfolio",
     element: (
-      <ProtectedRouteUser>
+      <ProtectedRoute>
         <Portfolio />
-      </ProtectedRouteUser>
+      </ProtectedRoute>
     ),
     children: [
       {
         path: "project/:projectId",
         element: (
-          <ProtectedRouteUser>
+          <ProtectedRoute>
             <Project />
-          </ProtectedRouteUser>
+          </ProtectedRoute>
         ),
       },
     ],
@@ -128,9 +138,11 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
-      <ProtectedRouteCompany>
+
+      <ProtectedRoute>
         <Dashboard />
-      </ProtectedRouteCompany>
+
+        </ProtectedRoute>
     ),
   },
 ]);
