@@ -110,8 +110,8 @@ export default function Navbar({ showLink = true, showSearch = false }) {
   return (
     <div className="flex px-6 lg:px-16 py-4 shadow-md fixed w-full top-0 z-40 bg-white justify-between items-center">
       <Link to={"/"} className="flex items-center">
-        <img src={LogoFull} alt="" className="h-10 hidden lg:block" />
-        <img src={LogoShort} alt="" className="h-10 lg:hidden" />
+        <img src={LogoFull} alt="" className="flex-none h-10 hidden lg:block" />
+        <img src={LogoShort} alt="" className="flex-none h-10 lg:hidden" />
       </Link>
       {showSearch ? (
         <div className="flex items-center space-x-4 flex-grow ml-5">
