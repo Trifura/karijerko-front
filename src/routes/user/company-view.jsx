@@ -7,29 +7,43 @@ import Pin_fill from "../../assets/icons/Pin_fill.svg";
 import { Link, useLoaderData } from "react-router-dom";
 import ChatComponent from "../../chat/components/ChatComponent.jsx";
 import { useState } from "react";
+import LoginMessage from "../../chat/components/LoginMessage";
+import AIStars from "../../assets/icons/AI_Stars.svg";
+import { useSelector } from "react-redux";
 
 export default function CompanyView() {
     const { company } = useLoaderData();
-    const [isAuth, setIsAuth] = useState(false); // Mock authentication state
-
-    // Mock authentication check function
-    const isAuthenticated = () => {
-        // Replace this with your actual authentication check logic
-        return false; // Change this to simulate different scenarios
-    };
+    const [showLoginMessage, setShowLoginMessage] = useState(false);
+    const [isChatOpen, setIsChatOpen] = useState(false);
+    const { isAuthenticated } = useSelector(state => state.auth);
 
     const handleHideButtonClick = () => {
-        if (!isAuthenticated()) {
+        if (!isAuthenticated) {
             // Perform action when user is not authenticated
             console.log("User is not authenticated. Performing some action...");
-            // TODO: Add your action here
+            setShowLoginMessage(true); // Show the login message popup
         } else {
             console.log("User is authenticated.");
         }
     };
 
+    const handleChatButtonClick = () => {
+        if (!isAuthenticated) {
+            // Show login message if not authenticated
+            setShowLoginMessage(true);
+        } else {
+            // Open chat if authenticated
+            setIsChatOpen(true);
+        }
+    };
+
+    const handleCloseLoginMessage = () => {
+        setShowLoginMessage(false);
+    };
+
     return (
         <>
+            {showLoginMessage && <LoginMessage onClose={handleCloseLoginMessage} />}
             <div className="lg:border-4 border-Swan rounded-3xl">
                 <div className="px-4 pt-4 pb-2 lg:px-5 lg:py-4">
                     <Link to="/feed">
@@ -100,16 +114,15 @@ export default function CompanyView() {
                         </a>
                     </div>
                 </div>
-                <div className="px-6 py-3">
-                    <button
-                        onClick={handleHideButtonClick}
-                        className="text-white bg-red-500 py-2 px-4 rounded-md"
-                    >
-                        Hide
+            </div>
+            {isChatOpen && <ChatComponent companyId={company.id} />}
+            {!isChatOpen && (
+                <div className="fixed bottom-5 right-5 w-16 h-16 bg-white border-2 border-Swan rounded-full flex justify-center items-center">
+                    <button onClick={handleChatButtonClick}>
+                        <img src={AIStars} alt="Chat" className="w-full h-full p-2" />
                     </button>
                 </div>
-            </div>
-            <ChatComponent companyId={company.id} />
+            )}
         </>
     );
 }
