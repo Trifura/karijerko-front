@@ -113,8 +113,8 @@ export default function Navbar({ showLink = true, showSearch = false }) {
         <img src={LogoFull} alt="" className="h-10 hidden lg:block" />
         <img src={LogoShort} alt="" className="h-10 lg:hidden" />
       </Link>
-      <div className="flex items-center space-x-4 flex-grow ml-5">
-        {showSearch && (
+      {showSearch ? (
+        <div className="flex items-center space-x-4 flex-grow ml-5">
           <form className="relative flex-grow">
             <input
               type="text"
@@ -131,9 +131,13 @@ export default function Navbar({ showLink = true, showSearch = false }) {
               className="absolute left-0 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
             />
           </form>
-        )}
-        {showLink && navbarButton}
-      </div>
+          {showLink && <div>{navbarButton}</div>}
+        </div>
+      ) : (
+        <div className="flex items-center space-x-4 ml-auto">
+          {showLink && <div>{navbarButton}</div>}
+        </div>
+      )}
     </div>
   );
 }
