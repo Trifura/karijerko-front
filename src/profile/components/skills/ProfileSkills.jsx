@@ -4,9 +4,9 @@ export default function ProfileSkills({ skills }) {
             <h2 className="text-2xl font-semibold">Vještine</h2>
             <div className="flex flex-wrap gap-2">
                 {
-                    skills.map((skill) => (
-                        <div key={skill.id} className="px-4 py-1.5 rounded-full bg-Swan text-sm font-semibold">
-                            {skill.name}
+                    skills.map((skill, index) => (
+                        <div key={index} className="px-4 py-1.5 rounded-full bg-Swan text-sm font-semibold">
+                            {skill}
                         </div>
                     ))
                 }
