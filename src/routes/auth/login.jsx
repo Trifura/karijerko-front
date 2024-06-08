@@ -34,14 +34,16 @@ function Login() {
     const result = await dispatch(login({ email, password }));
 
     if (login.fulfilled.match(result)) {
-      navigate('/feed');
-    }
-    else{
+      const role = result.payload.role;
+      if (role === 'company') {
+        navigate('/dashboard');
+      } else {
+        navigate('/feed');
+      }
+    } else {
       console.error(result.payload);
     }
   };
-
-  
 
   const handleGoogleAuth = async (response) => {
     const accessToken = response.credential;
@@ -50,7 +52,12 @@ function Login() {
     const result = await dispatch(authenticateGoogle({ accessToken, role }));
 
     if (authenticateGoogle.fulfilled.match(result)) {
-      navigate('/feed');
+      const role = result.payload.role;
+      if (role === 'company') {
+        navigate('/dashboard');
+      } else {
+        navigate('/feed');
+      }
     }
   };
 

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchUser, register, login, authenticateGoogle, logout, verifyEmail, registerCompany } from "./actions.js";
 
 const initialState = {
-    account: null,
+    account: {},
     isAuthenticated: false,
     isLoading: false,
     error: null,
