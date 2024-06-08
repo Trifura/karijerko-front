@@ -2,13 +2,20 @@ import AddIcon from "../../assets/icons/Add.svg";
 import Select from "react-select";
 import ProfileCreate from "./ProfileCreate.jsx";
 import {useProfileDialogs} from "../hooks/useProfileDialogs.js";
+import {useDispatch} from "react-redux";
+import {create} from "../store/actions.js";
 
 export default function ProfileSelect({ value, options, onSelect }) {
     const { isCreateOpen, openCreate, closeCreate } = useProfileDialogs();
+    const dispatch = useDispatch()
 
+    const onConfirmCreate = async (profile) => {
+        dispatch(create(profile))
+        closeCreate()
+    }
     return (
         <>
-        <ProfileCreate isOpen={isCreateOpen} onCancel={closeCreate} />
+        <ProfileCreate isOpen={isCreateOpen} onCancel={closeCreate} onConfirm={onConfirmCreate} />
             <div className="lg:p-8 flex flex-col gap-2 lg:gap-4">
                 <div className="w-full flex justify-between">
                     <h2 className="text-xl font-semibold">Profili</h2>
@@ -19,7 +26,7 @@ export default function ProfileSelect({ value, options, onSelect }) {
                 <div className="lg:hidden">
                     <Select
                         value={value}
-                        onChange={onSelect}
+                        onChange={(option) => onSelect(option.id)}
                         options={options}
                         isSearchable={false}
                         getOptionValue={(option) => `${option['id']}`}
@@ -31,7 +38,7 @@ export default function ProfileSelect({ value, options, onSelect }) {
                         options.map((option, index) => (
                             <div
                                 key={index}
-                                className={`px-4 py-2 font-bold text-base rounded-xl cursor-pointer ${option.value === value ? 'bg-Primary text-white' : ''}`}
+                                className={`px-4 py-2 font-bold text-base rounded-xl cursor-pointer ${option.id === value.id ? 'bg-Primary text-white' : ''}`}
                                 onClick={() => onSelect(option.id)}
                             >
                                 {option.name}

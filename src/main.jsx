@@ -7,10 +7,12 @@ import store from "./core/store/index.js";
 import Routes from "./routes/index.jsx";
 import {fetchUser} from "./auth/store/actions.js";
 import {getToken} from "./auth/utils/TokenHelper.js";
+import {fetchAll} from "./profile/store/actions.js";
 
 
 if (getToken()) {
     store.dispatch(fetchUser())
+    store.dispatch(fetchAll())
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(

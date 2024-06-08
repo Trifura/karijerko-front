@@ -9,7 +9,7 @@ export default function ProfileCreate({ isOpen, onCancel, onConfirm }) {
     const [description, setDescription] = useState('');
 
     return (
-        <DialogWrapper title="Kreiraj specijalizirani profil" confirmText="Dodaj" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel}>
+        <DialogWrapper title="Kreiraj specijalizirani profil" confirmText="Dodaj" isOpen={isOpen} onConfirm={() => onConfirm({name, description})} onCancel={onCancel}>
             <div>
                 <SimpleInput label="Ime profila" placeholder="Unesite ime profila..." value={name} onChange={setName} />
                 <SimpleTextarea label="Opis profila" placeholder="Unesite opis profila..." value={description} onChange={setDescription} />
