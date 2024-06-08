@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo_short.svg';
 import Close from '../../assets/icons/Close_round.svg';
 
-function LoginMessage({ onClose, isCompany }) {
+function LoginMessage({ onClose, message }) {
   const emailConfirmationRef = useRef(null);
 
   useEffect(() => {
@@ -26,12 +26,17 @@ function LoginMessage({ onClose, isCompany }) {
           <img src={Close} alt="Close" className="w-6 h-6" />
         </button>
         <img src={Logo} className="mx-auto w-10 h-10" alt="Logo" />
-        <p className="mb-5">
-          <div className='text-[15px] font-bold'>
-            Molimo Vas prijavite se da koristite našeg Karijerka
-          </div>
+        <p className="mb-5 text-[20px] font-semibold">
+          {message || (
+            <>
+              Molimo Vas prijavite se da koristite našeg Karijerka<br />
+              <div className='font-medium text-[15px]'>
+              Koji će Vam pomoći pri vašem karijernom usmjeravanju
+              </div>
+            </>
+          )}
         </p>
-        <Link to="/login" className="p-2 bg-Primary text-white font-semibold rounded-lg">
+        <Link to="/login" className="p-2  bg-Primary text-white font-semibold rounded-lg">
           Go to Login
         </Link>
       </div>
