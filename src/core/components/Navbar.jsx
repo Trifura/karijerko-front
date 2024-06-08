@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoFull from "../../assets/Logo_full.svg";
 import LogoShort from "../../assets/Logo_short.svg";
 import Profile from "../../assets/icons/Profile.svg";
@@ -9,8 +9,9 @@ import { logout } from "../../auth/store/actions.js";
 import { useState, useEffect, useRef, useCallback } from "react";
 import Search from "../../assets/icons/Search.svg";
 
-export default function Navbar({ showLink = true }) {
+export default function Navbar({ showLink = true, showSearch = false }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isAuthenticated, account } = useSelector((state) => state.auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,7 +23,8 @@ export default function Navbar({ showLink = true }) {
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      setDebouncedTerm(searchTerm);
+      event.preventDefault();
+      navigate(`/search?name=${encodeURIComponent(searchTerm)}`);
     }
   };
 
@@ -111,23 +113,25 @@ export default function Navbar({ showLink = true }) {
         <img src={LogoFull} alt="" className="h-10 hidden lg:block" />
         <img src={LogoShort} alt="" className="h-10 lg:hidden" />
       </Link>
-      <div className="flex items-center space-x-4 flex-grow ml-4">
-        <form className="relative flex-grow">
-          <input
-            type="text"
-            name="search"
-            value={searchTerm}
-            onChange={handleSearch}
-            onKeyPress={handleKeyPress}
-            placeholder="Search.."
-            className="w-32 lg:w-40 px-4 py-2 border-2 border-gray-300 rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300 ease-in-out focus:w-96"
-          />
-          <img
-            src={Search}
-            alt="Search"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
-          />
-        </form>
+      <div className="flex items-center space-x-4 flex-grow ml-5">
+        {showSearch && (
+          <form className="relative flex-grow">
+            <input
+              type="text"
+              name="search"
+              value={searchTerm}
+              onChange={handleSearch}
+              onKeyPress={handleKeyPress}
+              placeholder="Pretraži firme..."
+              className="w-32 lg:w-40 px-4 py-2 border-2 border-gray-300 rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-500 ease-in-out focus:w-full"
+            />
+            <img
+              src={Search}
+              alt="Search"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
+            />
+          </form>
+        )}
         {showLink && navbarButton}
       </div>
     </div>
