@@ -140,9 +140,9 @@ export default function Navbar({ showLink = true, showSearch = false }) {
 
   return (
     <div className="flex px-6 lg:px-16 py-4 shadow-md fixed w-full top-0 z-40 bg-white justify-between items-center">
-      <Link to={"/"} className="flex items-center">
-        <img src={LogoFull} alt="" className="flex-none h-10 hidden lg:block" />
-        <img src={LogoShort} alt="" className="flex-none h-10 lg:hidden" />
+      <Link to={"/"} className="flex items-center flex-none">
+        <img src={LogoFull} alt="" className="h-10 hidden lg:block" />
+        <img src={LogoShort} alt="" className="h-10 lg:hidden" />
       </Link>
       {showSearch ? (
         <div className="flex items-center space-x-4 flex-grow ml-5">
@@ -154,12 +154,12 @@ export default function Navbar({ showLink = true, showSearch = false }) {
               onChange={handleSearch}
               onKeyPress={handleKeyPress}
               placeholder="Pretraži firme..."
-              className="w-32 lg:w-40 text-4 px-6 py-2 border-2 border-gray-300 rounded-full bg-white text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-500 ease-in-out focus:w-full"
+              className="w-32 lg:w-48 text-4 pl-12 outline-none pr-6 py-2 border-2 border-gray-300 rounded-full focus:ring-2 focus:border-transparent bg-white text-base transition-all duration-500 ease-in-out focus:w-full"
             />
             <img
               src={Search}
               alt="Search"
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
+              className="absolute left-5 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
             />
           </form>
           {showLink && <div>{navbarButton}</div>}

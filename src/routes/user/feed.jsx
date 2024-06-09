@@ -46,9 +46,6 @@ export default function Feed() {
                     </Link>
                 ))}
               </div>
-              <div className="h-[1000px]">
-
-              </div>
             </div>
           </div>
           <div className="order-1 lg:order-2 w-full">
