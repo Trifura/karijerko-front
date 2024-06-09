@@ -63,12 +63,14 @@ export default function CompanyView() {
                         <h1 className="text-2xl lg:text-4xl font-bold">{company.name}</h1>
                         <h2 className="text-base lg:text-lg font-medium">{company.tagline}</h2>
                         <div className="flex gap-1 text-neutral-500 text-xs lg:text-sm font-medium">
-                            <span>{company.companySize.nameHr}</span>
+                            {
+                                company.companySize && <span>{company.companySize.nameHr}</span>
+                            }
                             •
                             <span>{company.headquarters}</span>
                         </div>
                         <div className="flex flex-col text-sm lg:text-base font-medium">
-                            <span>{company.industry.nameHr}</span>
+                            {company.industry &&  <span>{company.industry.nameHr}</span>}
                             <span>{company.specialties}</span>
                         </div>
                     </div>
