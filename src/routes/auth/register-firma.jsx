@@ -144,7 +144,7 @@ function RegisterFirma() {
                   onChange={handlePasswordChange}
                   className="p-2 border-2 border-Swan mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10"
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+                <div className="absolute mb-2 inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                   {passwordVisible ? (
                     <HiEyeOff onClick={handleTogglePasswordVisibility} />
                   ) : (
@@ -166,7 +166,7 @@ function RegisterFirma() {
                     passwordConfirmationValid ? "border-Swan" : "border-red-500"
                   }`}
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+                <div className="absolute mb-2 inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                   {passwordVisibleConfirmation ? (
                     <HiEyeOff
                       onClick={handleTogglePasswordVisibilityConfirmation}

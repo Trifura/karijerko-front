@@ -4,6 +4,7 @@ import { registerCompany } from '../../auth/store/actions'; // Adjust the import
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import the styles
 import Navbar from '../../core/components/Navbar';
+import Footer from '../../core/components/Footer';
 
 function Dashboard() {
   const [formData, setFormData] = useState({
@@ -70,7 +71,7 @@ function Dashboard() {
   return (
       <>
       <Navbar></Navbar>
-      <div className="mt-20 p-8">
+      <div className="mt-16 p-12">
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label htmlFor="profilePicture" className="font-medium">Profilna Slika</label>
@@ -115,6 +116,9 @@ function Dashboard() {
         <button type="submit" className="p-2 bg-blue-500 text-white rounded">Podnesi</button>
       </form>
     </div>
+    
+<Footer/>
+    
       </>
   );
 }

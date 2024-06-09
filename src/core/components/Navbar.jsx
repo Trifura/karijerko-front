@@ -69,7 +69,7 @@ export default function Navbar({ showLink = true, showSearch = false }) {
   const loginButton = (
     <Link
       to={"/login"}
-      className="text-white text-base lg:text-md p-2 font-semibold bg-primary rounded-md border-2 border-gray-200"
+      className="text-white text-base lg:text-md p-2 font-semibold bg-Primary rounded-md border-2 border-gray-200"
     >
       Prijavi se
     </Link>
