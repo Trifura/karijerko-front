@@ -18,16 +18,16 @@ import skillService from "../../../core/services/skill.js";
 import debounce from "debounce";
 
 export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
-    const [title, setTitle] = useState(value.title);
-    const [description, setDescription] = useState(value.description);
-    const [skills, setSkills] = useState(value.skills);
-    const [contents, setContents] = useState(value.contents);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [skills, setSkills] = useState([]);
+    const [contents, setContents] = useState([]);
 
     useEffect(() => {
-        setTitle(value.title);
-        setDescription(value.description);
-        setSkills(value.skills);
-        setContents(value.contents);
+        setTitle(value?.title || '');
+        setDescription(value?.description || '');
+        setSkills(value?.skills || []);
+        setContents(value?.contents || []);
     }, [isOpen]);
 
 
@@ -91,7 +91,7 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
 
     const saveProject = () => {
         const project = {
-            id: value.id,
+            id: value?.id,
             title,
             description,
             skills,

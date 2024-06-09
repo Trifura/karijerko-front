@@ -1,7 +1,7 @@
 export default function ProfileSkills({ skills }) {
     return (
         <div className="p-8 flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">Vještine</h2>
+            <h2 className="text-2xl font-semibold lg:font-medium">Vještine</h2>
             <div className="flex flex-wrap gap-2">
                 {
                     skills.map((skill, index) => (
@@ -9,6 +9,14 @@ export default function ProfileSkills({ skills }) {
                             {skill}
                         </div>
                     ))
+                }
+
+                {
+                    !skills.length && (
+                        <p className="text-Ironside font-medium text-center w-full">
+                            Vještine će vam se prikazati nakon što ih dodate u projektu
+                        </p>
+                    )
                 }
             </div>
         </div>

@@ -38,7 +38,7 @@ export default function ProfileInfo({ profile, setProfile, setSelectedProfileId,
             />
             <div className="flex flex-col gap-6 lg:p-8 w-full">
                 <div className="flex w-full justify-between">
-                    <h2 className="text-2xl font-semibold">{profile.name}</h2>
+                    <h2 className="text-2xl font-semibold lg:font-medium">{profile.name}</h2>
                     <div className="flex gap-4">
                         <button onClick={openEdit}>
                             <img src={EditIcon} alt="Edit"/>
