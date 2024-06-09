@@ -53,8 +53,8 @@ export default function ProfileInfo({ profile, setProfile, setSelectedProfileId,
                 onConfirm={removeProfile} onCancel={() => setIsDeleteOpen(false)}
             />
             <div className="flex flex-col gap-6 lg:p-8 w-full">
-                <div className="flex w-full justify-between">
-                    <div className="flex gap-5 items-center">
+                <div className="flex w-full gap-5 justify-between">
+                    <div className="flex gap-4 lg:gap-5 items-center">
                         <h2 className="text-2xl font-semibold lg:font-medium">{profile.name}</h2>
                         {
                             profile.isPrimary &&
@@ -73,7 +73,7 @@ export default function ProfileInfo({ profile, setProfile, setSelectedProfileId,
                             </button>
                         }
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 flex-none">
                         <button onClick={openEdit}>
                         <img src={EditIcon} alt="Edit"/>
                         </button>
