@@ -1,7 +1,7 @@
 import Navbar from "../../core/components/Navbar.jsx";
 import LogoShort from "../../assets/Logo_short.svg";
 import SimpleCompanyCard from "../../company/components/SimpleCompanyCard.jsx";
-import {Link, Navigate, useLoaderData} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import ArrowRight from "../../assets/icons/Arrow_right.svg";
 import MentorMessage from "../../chat/components/MentorMessage.jsx";
 import Send from "../../assets/icons/Send.svg";
@@ -10,7 +10,7 @@ import {Helmet} from "react-helmet";
 import Footer from "../../core/components/Footer.jsx";
 
 function Root() {
-    const {companies} = useLoaderData()
+    const companies = []
 
     const {isAuthenticated} = useSelector((state) => state.auth)
 

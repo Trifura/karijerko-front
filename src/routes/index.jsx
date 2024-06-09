@@ -37,7 +37,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <Error />,
-    loader: fetchCompanies,
   },
   {
     path: "/about-us",
