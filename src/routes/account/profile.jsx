@@ -34,12 +34,13 @@ export default function Profile() {
     const { educations, setEducations } = useEducations()
 
     useEffect(() => {
+        if (selectedProfileId) return
+        
         // on first render fetch profiles from user because they are already available
-        const primaryProfile = user.profiles.find(profile => profile.isPrimary);
-
+        const primaryProfile = profiles.find(profile => profile.isPrimary);
 
         setSelectedProfileId(primaryProfile?.id);
-    }, [])
+    }, [profiles])
 
     useEffect(() => {
         if (!selectedProfileId) return;

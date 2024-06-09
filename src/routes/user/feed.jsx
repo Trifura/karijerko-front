@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import Navbar from "../../core/components/Navbar.jsx";
 import CompanyCard from "../../company/components/CompanyCard.jsx";
 import SideProfile from "../../core/components/side-profile";
-import { fetchFeed } from "./feed.js";
+import {fetchCompanies, fetchFeed} from "./feed.js";
 import {useSelector} from "react-redux";
-import LoadingPage from "../../core/components/LoadingPage.jsx";
 
 export default function Feed() {
 
@@ -15,27 +14,23 @@ export default function Feed() {
 
   const [companies, setCompanies] = useState([]);
   const [selectedProfileId, setSelectedProfileId] = useState(null);
-  const [loadingProfiles, setLoadingProfiles] = useState(true);
-
 
   useEffect(() => {
     // Ensure profiles are loaded before setting the selected profile
     if (profiles && profiles.length > 0) {
       const primaryProfile = profiles.find(profile => profile.isPrimary);
       setSelectedProfileId(primaryProfile?.id);
-      setLoadingProfiles(false); // Profiles are now loaded
     }
   }, [profiles]);
 
   useEffect(() => {
-    if (!selectedProfileId) { return }
+    if (!selectedProfileId) {
+      fetchCompanies().then((data) => setCompanies(data.companies))
+      return
+    }
 
     fetchFeed(selectedProfileId).then((data) => setCompanies(data))
   }, [selectedProfileId]);
-
-  if (loadingProfiles) {
-    return <LoadingPage />
-  }
 
   return (
     <>

@@ -121,7 +121,7 @@ function Login() {
           </div>
         </div>
 
-        <div className="flex justify-center items-center">
+        <div className="mt-2 flex justify-center items-center">
           Novi u Karijerku? &nbsp;
           <Link to="/register" className="text-Primary font-semibold">
             Napravi račun

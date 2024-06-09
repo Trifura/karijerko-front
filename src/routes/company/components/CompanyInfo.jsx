@@ -1,6 +1,4 @@
 export default function CompanyInfo({ company }) {
-    console.log(company)
-    console.log(Object.keys(company));
     return (
         <div className="flex gap-4 items-center p-8">
             <img src={company.profilePicture} className="w-20 h-20 rounded-full" alt=""/>
