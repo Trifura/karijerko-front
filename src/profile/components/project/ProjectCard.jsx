@@ -43,7 +43,7 @@ export default function ProjectCard({ project, onSave, onDelete }) {
                         </button>
                     </div>
                 </div>
-                <p className="text-center font-semibold">{project.title}</p>
+                <p className="text-center font-semibold overflow-hidden text-ellipsis">{project.title}</p>
             </div>
         </>
     )

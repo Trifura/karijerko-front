@@ -120,7 +120,6 @@ const router = createBrowserRouter([
         <Feed />
       </ProtectedRouteUser>
     ),
-    loader: fetchCompanies,
   },
   {
     path: "/portfolio",
