@@ -13,7 +13,7 @@ export default function EmptyProfile({ user, createProfile }) {
 
     return (
         <>
-            <Navbar/>
+            <Navbar showSearch={true}/>
             <ProfileCreate isOpen={isCreateOpen} onCancel={closeCreate} onConfirm={onConfirmCreate} />
             <div className="border-2 border-Swan rounded-2xl mt-28 lg:mt-32 mb-10 pb-10 max-w-5xl mx-auto">
                 <UserInfo user={user}/>

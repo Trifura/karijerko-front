@@ -82,7 +82,7 @@ export default function Profile() {
 
     return (
         <>
-            <Navbar/>
+            <Navbar showSearch={true}/>
             <div className="lg:hidden mt-20">
                 <UserInfo user={user}/>
                 <hr className="border-Swan"/>
