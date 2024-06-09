@@ -10,9 +10,13 @@ export default function ProfileLanguages({ userLanguages, setUserLanguages }) {
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [isCreateOpen, setIsCreateOpen] = useState(false)
 
-    const saveLanguages = async (userLanguages) => {
+    const saveLanguages = async (newUserLanguages) => {
 
-        const updatedUserLanguages = await Promise.all(userLanguages.map(userLanguage =>  userLanguageService.edit(userLanguage)))
+        const deletedUserLanguages = userLanguages.filter(userLanguage => !newUserLanguages.some(newLanguage => newLanguage.id === userLanguage.id))
+
+        await Promise.all(deletedUserLanguages.map(userLanguage => userLanguageService.remove(userLanguage.id)))
+
+        const updatedUserLanguages = await Promise.all(newUserLanguages.map(userLanguage =>  userLanguageService.edit(userLanguage)))
 
         setUserLanguages(updatedUserLanguages)
         setIsEditOpen(false)
@@ -22,10 +26,17 @@ export default function ProfileLanguages({ userLanguages, setUserLanguages }) {
         return proficiencyOptions.find(option => option.value === proficiency)?.label
     }
 
+    const createLanguages = async (newUserLanguage) => {
+        const createdUserLanguage = await userLanguageService.create(newUserLanguage)
+
+        setUserLanguages([...userLanguages, createdUserLanguage])
+        setIsCreateOpen(false)
+    }
+
     return (
         <>
             <LanguagesEdit value={userLanguages} isOpen={isEditOpen} onConfirm={saveLanguages} onCancel={() => setIsEditOpen(false)} />
-            <LanguagesCreate isOpen={isCreateOpen} />
+            <LanguagesCreate isOpen={isCreateOpen} onConfirm={createLanguages} onCancel={() => setIsCreateOpen(false)} />
             <div className="p-8 flex flex-col gap-2">
                 <div className="w-full flex justify-between">
                     <h2 className="text-xl font-semibold">Jezici</h2>

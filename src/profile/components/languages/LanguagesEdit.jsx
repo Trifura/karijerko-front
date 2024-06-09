@@ -24,7 +24,7 @@ export default function LanguagesEdit({ value, isOpen, onCancel, onConfirm }) {
 
     return (
         <DialogWrapper title="Uredi jezike" isOpen={isOpen} onConfirm={() => onConfirm(userLanguages)} onCancel={onCancel}>
-            <div>
+            <div className="flex flex-col gap-2">
                 {userLanguages.length === 0 && <p className="text-center font-semibold">Nemate unesenih jezika</p>}
                 {userLanguages.map((userLanguage, index) => (
                     <div key={userLanguage.id} className="flex items-center space-x-4">
@@ -32,7 +32,7 @@ export default function LanguagesEdit({ value, isOpen, onCancel, onConfirm }) {
                             {userLanguage.language.name}
                         </span>
                         <Select
-                            className="w-1/3"
+                            className="w-full"
                             value={proficiencyOptions.find(option => option.value === userLanguage.proficiency)}
                             onChange={(selectedOption) => handleProficiencyChange(selectedOption, index)}
                             options={proficiencyOptions}
