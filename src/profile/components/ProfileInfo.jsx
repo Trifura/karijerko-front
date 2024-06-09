@@ -80,9 +80,14 @@ export default function ProfileInfo({ profile, setProfile, setSelectedProfileId,
                         <button onClick={openEdit}>
                             <img src={EditIcon} alt="Edit"/>
                         </button>
-                        <button onClick={openRemove}>
-                            <img src={DeleteIcon} alt="Delete"/>
-                        </button>
+                        {
+                            !profile.isPrimary && (
+                                <button onClick={openRemove}>
+                                    <img src={DeleteIcon} alt="Delete"/>
+                                </button>
+                            )
+                        }
+
                     </div>
                 </div>
                 <p>{profile.description}</p>
