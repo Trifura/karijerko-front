@@ -51,7 +51,6 @@ export default function Feed() {
                   </Link>
                 ))}
               </div>
-              <div className="h-[1000px]"></div>
             </div>
             <div className="hidden xl:block fixed xl:ml-[1050px] 2xl:ml-[1200px]">
               <SideProfile selectedProfileId={selectedProfileId} setSelectedProfileId={setSelectedProfileId} account={account} profiles={profiles} />
