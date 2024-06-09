@@ -9,13 +9,16 @@ import ProfilePortfolio from "../../profile/components/portfolio/ProfilePortfoli
 import UserInfo from "../../profile/components/UserInfo.jsx";
 import { useProfile } from "../../profile/hooks/useProfile.js";
 import {useDispatch, useSelector} from "react-redux";
-import {useLanguages} from "../../profile/hooks/useLanguages.js";
+import { useUserLanguages} from "../../profile/hooks/useUserLanguages.js";
 import {useEducations} from "../../profile/hooks/useEducations.js";
 import {useEffect, useState} from "react";
 
 import profileService from '../../profile/services/profile.js'
+import userLanguageService from "../../profile/services/userLanguage.js";
+
 import EmptyProfile from "../../profile/components/EmptyProfile.jsx";
 import {create} from "../../profile/store/actions.js";
+
 
 export default function Profile() {
     const dispatch = useDispatch()
@@ -26,7 +29,7 @@ export default function Profile() {
     const [selectedProfileId, setSelectedProfileId] = useState(null);
 
     const { profile, setProfile } = useProfile();
-    const { languages, setLanguages } = useLanguages()
+    const { userLanguages, setUserLanguages } = useUserLanguages()
     const { educations, setEducations } = useEducations()
 
     useEffect(() => {
@@ -45,6 +48,12 @@ export default function Profile() {
         })
     }, [selectedProfileId]);
 
+    useEffect(() => {
+        userLanguageService.fetchAll().then(data => {
+            setUserLanguages(data)
+        })
+    }, [])
+
 
     const createProfile = async (createdProfile) => {
         const {payload} = await dispatch(create(createdProfile))
@@ -52,17 +61,16 @@ export default function Profile() {
         setSelectedProfileId(payload.id)
     }
 
+    const setProjects = (projects) => {
+        setProfile({...profile, projects})
+    }
+
 
     if (!profiles.length) {
         return <EmptyProfile user={user} createProfile={createProfile} />
     }
 
-
-    if (!profile) return null
-
-    const setProjects = (projects) => {
-        setProfile({...profile, projects})
-    }
+    if (!profile) return null;
 
     return (
         <>
@@ -80,7 +88,7 @@ export default function Profile() {
                 <hr className="border-Swan"/>
                 <ProfileSkills skills={profile.skills}/>
                 <hr className="border-Swan"/>
-                <ProfileLanguages languages={languages}/>
+                <ProfileLanguages userLanguages={userLanguages} setUserLanguages={setUserLanguages} />
                 <hr className="border-Swan"/>
                 <ProfileEducation educations={educations}/>
             </div>
@@ -88,10 +96,10 @@ export default function Profile() {
                 <UserInfo user={user}/>
                 <hr className="border-Swan"/>
                 <div className="flex h-full">
-                    <div className="w-[370px] border-r border-r-Swan">
+                    <div className="w-[500px] border-r border-r-Swan">
                         <ProfileSelect value={profile} onSelect={setSelectedProfileId} createProfile={createProfile} options={profiles} />
                         <hr className="border-Swan"/>
-                        <ProfileLanguages languages={languages} />
+                        <ProfileLanguages userLanguages={userLanguages} setUserLanguages={setUserLanguages} />
                         <hr className="border-Swan" />
                         <ProfileEducation educations={educations} />
                     </div>

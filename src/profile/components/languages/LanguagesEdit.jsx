@@ -1,39 +1,39 @@
 import DialogWrapper from "../../../core/components/DialogWrapper.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Select from "react-select";
-
-const proficiencyOptions = [
-    { value: 'Beginner', label: 'Beginner' },
-    { value: 'Intermediate', label: 'Intermediate' },
-    { value: 'Advanced', label: 'Advanced' },
-    { value: 'Native', label: 'Native' }
-];
+import { proficiencyOptions } from "../../../core/constants/Language.js";
 
 export default function LanguagesEdit({ value, isOpen, onCancel, onConfirm }) {
-    const [languages, setLanguages] = useState(value);
+    const [userLanguages, setUserLanguages] = useState([]);
+
+    useEffect(() => {
+        if (isOpen) setUserLanguages(value);
+    }, [isOpen]);
 
     const handleDelete = (index) => {
-        const updatedLanguages = languages.filter((_, i) => i !== index);
-        setLanguages(updatedLanguages);
+        const updatedLanguages = userLanguages.filter((_, i) => i !== index);
+        setUserLanguages(updatedLanguages);
     };
 
     const handleProficiencyChange = (selectedOption, index) => {
-        const updatedLanguages = languages.map((language, i) =>
-            i === index ? { ...language, proficiency: selectedOption.value } : language
+        const updatedUserLanguages = userLanguages.map((userLanguage, i) =>
+            i === index ? { ...userLanguage, proficiency: selectedOption.value } : userLanguage
         );
-        setLanguages(updatedLanguages);
+        setUserLanguages(updatedUserLanguages);
     };
 
     return (
-        <DialogWrapper title="Uredi jezike" isOpen={isOpen} onConfirm={onConfirm} onCancel={onCancel}>
+        <DialogWrapper title="Uredi jezike" isOpen={isOpen} onConfirm={() => onConfirm(userLanguages)} onCancel={onCancel}>
             <div>
-                {languages.length === 0 && <p className="text-center font-semibold">Nemate unesenih jezika</p>}
-                {languages.map((language, index) => (
-                    <div key={language.id} className="flex items-center space-x-4">
-                        <span className="w-1/3 font-semibold bg-Swan border-Hare border-2 cursor-not-allowed rounded-lg py-1.5 px-4">{language.name}</span>
+                {userLanguages.length === 0 && <p className="text-center font-semibold">Nemate unesenih jezika</p>}
+                {userLanguages.map((userLanguage, index) => (
+                    <div key={userLanguage.id} className="flex items-center space-x-4">
+                        <span className="w-1/3 font-semibold bg-Swan border-Hare border-2 cursor-not-allowed rounded-lg py-1.5 px-4">
+                            {userLanguage.language.name}
+                        </span>
                         <Select
                             className="w-1/3"
-                            value={proficiencyOptions.find(option => option.value === language.proficiency)}
+                            value={proficiencyOptions.find(option => option.value === userLanguage.proficiency)}
                             onChange={(selectedOption) => handleProficiencyChange(selectedOption, index)}
                             options={proficiencyOptions}
                         />
