@@ -7,6 +7,7 @@ import MentorMessage from "../../chat/components/MentorMessage.jsx";
 import Send from "../../assets/icons/Send.svg";
 import {useSelector} from "react-redux";
 import {Helmet} from "react-helmet";
+import Footer from "../../core/components/Footer.jsx";
 
 function Root() {
     const {companies} = useLoaderData()
@@ -87,8 +88,12 @@ function Root() {
                 </div>
             </div>
 
-            <div className="h-40 -z-10 lg:h-80 bg-Primary rounded-t-[40px] lg:rounded-t-[160px] absolute bottom-0 left-0 w-full">
-            </div>
+            <div className="h-40 lg:h-80 bg-Primary rounded-t-[40px] lg:rounded-t-[160px] w-full">
+</div>
+<div className="mt-[-100px] shadow-2xl">
+  <Footer/>
+</div>
+
         </div>
     );
 }

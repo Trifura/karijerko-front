@@ -54,7 +54,7 @@ export default function Search() {
               <form className="w-full mb-6 text-4" onSubmit={(e) => e.preventDefault()}>
                 <label
                   htmlFor="company-search"
-                  className="mb-2 text-sm font-medium sr-only"
+                  className="mb-2 text-base font-medium sr-only"
                 >
                   Search
                 </label>
@@ -67,7 +67,7 @@ export default function Search() {
                   <input 
                     type="search" 
                     id="company-search" 
-                    className="block w-full p-4 pl-10 text-sm border border-gray-300 rounded-lg" 
+                    className="block w-full p-4 pl-10 text-base border border-gray-300 rounded-lg" 
                     placeholder="Pretraži firme" 
                     required 
                     value={searchTerm}

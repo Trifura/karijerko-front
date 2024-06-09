@@ -19,6 +19,7 @@ import Search from "./user/search.jsx";
 import Portfolio from "./user/portfolio.jsx";
 import Project from "./user/project.jsx";
 import Dashboard from "./company/dashboard.jsx";
+import Contact from "./root/contact.jsx"
 
 // Loaders
 import { fetchCompanies } from "./user/feed.js";
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/about-us",
     element: <AboutUs />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
   },
   {
     path: "/companies",

@@ -116,8 +116,10 @@ function Dashboard() {
         <button type="submit" className="p-2 bg-blue-500 text-white rounded">Podnesi</button>
       </form>
     </div>
-    
-<Footer/>
+    <div className='shadow'>
+    <Footer/>
+    </div>
+
     
       </>
   );
