@@ -27,6 +27,8 @@ import { fetchCompany } from "./user/company-view.js";
 
 // Protected Routes
 import ProtectedRoute from "./ProtectedRoute.jsx";
+import ProtectedRouteCompany from "./ProtectedRouteCompany.jsx";
+import ProtectedRouteUser from "./ProtectedRouteUser.jsx";
 
 const router = createBrowserRouter([
   // ROOT
@@ -104,9 +106,9 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: (
-      <ProtectedRoute>
+      <ProtectedRouteUser>
         <Profile />
-      </ProtectedRoute>
+      </ProtectedRouteUser>
     ),
   },
 
@@ -114,9 +116,9 @@ const router = createBrowserRouter([
   {
     path: "/feed",
     element: (
-      <ProtectedRoute>
+      <ProtectedRouteUser>
         <Feed />
-      </ProtectedRoute>
+      </ProtectedRouteUser>
     ),
     loader: fetchCompanies,
   },
@@ -144,10 +146,9 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
 
-      <ProtectedRoute>
+      <ProtectedRouteCompany>
         <Dashboard />
-
-        </ProtectedRoute>
+        </ProtectedRouteCompany>
     ),
   },
 ]);
