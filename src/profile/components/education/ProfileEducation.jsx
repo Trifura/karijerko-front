@@ -78,12 +78,12 @@ export default function ProfileEducation({ educations, setEducations }) {
                         <img src={AddIcon} alt="Add"/>
                     </button>
                 </div>
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col max-w-full gap-5">
                     {
                         educations.map((education) => (
                             <div key={education.id}>
                                 <div className="flex gap-5 justify-between items-start">
-                                    <h3 className="text-xl font-semibold">{education.institution}</h3>
+                                    <h3 className="text-xl font-semibold overflow-hidden text-ellipsis">{education.institution}</h3>
                                     <div className="flex flex-none gap-2">
                                         <button className="w-8 flex-none" onClick={() => openEdit(education)}>
                                             <img src={EditIcon} alt="Edit"/>
@@ -93,7 +93,7 @@ export default function ProfileEducation({ educations, setEducations }) {
                                         </button>
                                     </div>
                                 </div>
-                                <p className="text-Ironside font-medium">{education.degree}</p>
+                                <p className="text-Ironside font-medium overflow-hidden text-ellipsis">{education.degree}</p>
                                 <p className="text-Ironside font-medium">{education.startYear} - {education.endYear}</p>
                             </div>
                         ))

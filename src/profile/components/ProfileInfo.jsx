@@ -53,29 +53,32 @@ export default function ProfileInfo({ profile, setProfile, setSelectedProfileId,
                 onConfirm={removeProfile} onCancel={() => setIsDeleteOpen(false)}
             />
             <div className="flex flex-col gap-6 lg:p-8 w-full">
-                <div className="flex w-full gap-5 justify-between">
-                    <div className="flex gap-4 lg:gap-5 items-center">
-                        <h2 className="text-2xl font-semibold lg:font-medium">{profile.name}</h2>
-                        {
-                            profile.isPrimary &&
-                            <p className="text-white bg-Sapphire text-xs border-2 border-Sapphire font-bold px-4 py-0.5 rounded-full">
-                                Primaran
-                            </p>
-                        }
-
-                        {
-                            !profile.isPrimary &&
-                            <button
-                                className="text-Sapphire font-bold text-xs border-2 border-Sapphire px-4 py-0.5 rounded-full"
-                                onClick={setPrimary}
-                            >
-                                Postavi primarni
-                            </button>
-                        }
+                <div className="flex flex-col lg:flex-row w-full gap-5 justify-between">
+                    <div className="flex gap-4 lg:gap-5 items-center order-2 lg:order-1">
+                        <h2 className="text-2xl font-semibold lg:font-medium lg:max-w-xs overflow-hidden text-ellipsis">{profile.name}</h2>
                     </div>
-                    <div className="flex gap-4 flex-none">
+                    <div className="flex gap-4 flex-none order-1 lg:order-2 ml-auto lg:ml-0">
+                        <div className="flex items-center">
+                            {
+                                profile.isPrimary
+                                    ? (
+                                        <p className="text-white bg-Sapphire text-xs border-2 border-Sapphire font-bold px-4 py-0.5 rounded-full">
+                                            Primaran
+                                        </p>
+                                    )
+                                    : (
+                                        <button
+                                            className="text-Sapphire font-bold text-xs border-2 border-Sapphire px-4 py-0.5 rounded-full"
+                                            onClick={setPrimary}
+                                        >
+                                            Postavi primarni
+                                        </button>
+                                    )
+                            }
+                        </div>
+
                         <button onClick={openEdit}>
-                        <img src={EditIcon} alt="Edit"/>
+                            <img src={EditIcon} alt="Edit"/>
                         </button>
                         <button onClick={openRemove}>
                             <img src={DeleteIcon} alt="Delete"/>

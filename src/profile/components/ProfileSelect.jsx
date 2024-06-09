@@ -20,7 +20,7 @@ export default function ProfileSelect({ value, options, onSelect, createProfile 
                         <img src={AddIcon} alt="Add"/>
                     </button>
                 </div>
-                <div className="lg:hidden">
+                <div className="lg:hidden mt-2">
                     <Select
                         value={value}
                         onChange={(option) => onSelect(option.id)}
@@ -35,7 +35,7 @@ export default function ProfileSelect({ value, options, onSelect, createProfile 
                         options.map((option, index) => (
                             <div
                                 key={index}
-                                className={`px-4 py-2 font-bold text-base rounded-xl cursor-pointer ${option.id === value.id ? 'bg-Primary text-white' : ''}`}
+                                className={`px-4 py-2 font-bold text-base rounded-xl cursor-pointer overflow-hidden text-ellipsis ${option.id === value.id ? 'bg-Primary text-white' : ''}`}
                                 onClick={() => onSelect(option.id)}
                             >
                                 {option.name}

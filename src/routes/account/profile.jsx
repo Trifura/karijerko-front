@@ -102,7 +102,7 @@ export default function Profile() {
                 <UserInfo user={user}/>
                 <hr className="border-Swan"/>
                 <div className="flex h-full">
-                    <div className="w-[500px] border-r border-r-Swan">
+                    <div className="max-w-[350px] w-full border-r border-r-Swan">
                         <ProfileSelect value={profile} onSelect={setSelectedProfileId} createProfile={createProfile} options={profiles} />
                         <hr className="border-Swan"/>
                         <ProfileLanguages userLanguages={userLanguages} setUserLanguages={setUserLanguages} />
