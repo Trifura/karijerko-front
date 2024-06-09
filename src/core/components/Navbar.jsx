@@ -15,11 +15,32 @@ export default function Navbar({ showLink = true, showSearch = false }) {
   const { isAuthenticated, account } = useSelector((state) => state.auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedTerm, setDebouncedTerm] = useState("");
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedTerm(searchTerm);
+    }, 1500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (debouncedTerm) {
+      navigate(`/search?name=${encodeURIComponent(debouncedTerm)}`);
+    }
+  }, [debouncedTerm, navigate]);
+
+  const handleSearch = useCallback((event) => {
+    setSearchTerm(event.target.value);
+  }, []);
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -27,10 +48,6 @@ export default function Navbar({ showLink = true, showSearch = false }) {
       navigate(`/search?name=${encodeURIComponent(searchTerm)}`);
     }
   };
-
-  const handleSearch = useCallback((event) => {
-    setSearchTerm(event.target.value);
-  }, []);
 
   const handleLogout = async () => {
     await dispatch(logout());
@@ -83,12 +100,14 @@ export default function Navbar({ showLink = true, showSearch = false }) {
           </div>
           
           <Link
-            to="/profile"
+            to={account.role === 'company' ? "/dashboard" : "/profile"}
             className="text-right block px-4 py-2 mt-2 text-gray-800 hover:font-medium"
           >
             <div className="flex flex-row">
               <img className="w-4 mr-2" src={Profile} alt="" />
-              <div className="">Moj Profil</div>
+              <div className="">
+                {account.role === 'company' ? "Moj Dashboard" : "Moj Profil"}
+              </div>
             </div>
           </Link>
           <div
@@ -123,12 +142,12 @@ export default function Navbar({ showLink = true, showSearch = false }) {
               onChange={handleSearch}
               onKeyPress={handleKeyPress}
               placeholder="Pretraži firme..."
-              className="w-32 lg:w-40 px-4 py-2 border-2 border-gray-300 rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-500 ease-in-out focus:w-full"
-            />
+              className="w-32 lg:w-40 text-4 px-6 py-2 border-2 border-gray-300 rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-500 ease-in-out focus:w-full"
+                          />
             <img
               src={Search}
               alt="Search"
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
             />
           </form>
           {showLink && <div>{navbarButton}</div>}

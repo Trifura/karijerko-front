@@ -1,6 +1,6 @@
-import {createAsyncThunk} from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../services/index.js";
-import {setToken} from "../utils/TokenHelper.js";
+import { setToken } from "../utils/TokenHelper.js";
 
 export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
     try {
@@ -22,7 +22,6 @@ export const register = createAsyncThunk('auth/register/user', async (userData, 
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
-
 
 export const registerCompany = createAsyncThunk('auth/register/company', async (companyData, thunkAPI) => {
     try {
@@ -56,7 +55,16 @@ export const authenticateGoogle = createAsyncThunk('auth/authenticateGoogle', as
 
 export const fetchUser = createAsyncThunk('auth/fetchUser', async (_, thunkAPI) => {
     try {
-        return await authService.fetchUser()
+        return await authService.fetchUser();
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+});
+
+export const fetchCompany = createAsyncThunk('auth/fetchCompany', async (companyData, thunkAPI) => {
+    try {
+        const response = await authService.company(companyData);
+        return response;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
     }
