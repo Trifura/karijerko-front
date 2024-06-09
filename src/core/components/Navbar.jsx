@@ -24,16 +24,6 @@ export default function Navbar({ showLink = true, showSearch = false }) {
   };
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedTerm(searchTerm);
-    }, 1500);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [searchTerm]);
-
-  useEffect(() => {
     if (debouncedTerm) {
       navigate(`/search?name=${encodeURIComponent(debouncedTerm)}`);
     }
