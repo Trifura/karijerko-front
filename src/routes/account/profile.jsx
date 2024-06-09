@@ -18,6 +18,7 @@ import userLanguageService from "../../profile/services/userLanguage.js";
 
 import EmptyProfile from "../../profile/components/EmptyProfile.jsx";
 import {create} from "../../profile/store/actions.js";
+import educationService from "../../profile/services/education.js";
 
 
 export default function Profile() {
@@ -54,6 +55,12 @@ export default function Profile() {
         })
     }, [])
 
+    useEffect(() => {
+        educationService.fetchAll().then(data => {
+            setEducations(data)
+        })
+    }, [])
+
 
     const createProfile = async (createdProfile) => {
         const {payload} = await dispatch(create(createdProfile))
@@ -80,8 +87,7 @@ export default function Profile() {
                 <hr className="border-Swan"/>
                 <div className="p-8 flex flex-col gap-6">
                     <ProfileSelect value={profile} onSelect={setSelectedProfileId} createProfile={createProfile} options={profiles}/>
-                    <ProfileInfo profile={profile} setProfile={setProfile} setSelectedProfileId={setSelectedProfileId}
-                                 profiles={profiles}/>
+                    <ProfileInfo profile={profile} setProfile={setProfile} setSelectedProfileId={setSelectedProfileId} profiles={profiles}/>
                 </div>
                 <hr className="border-Swan"/>
                 <ProfilePortfolio profile={profile} projects={profile.projects} setProjects={setProjects} />
@@ -90,7 +96,7 @@ export default function Profile() {
                 <hr className="border-Swan"/>
                 <ProfileLanguages userLanguages={userLanguages} setUserLanguages={setUserLanguages} />
                 <hr className="border-Swan"/>
-                <ProfileEducation educations={educations}/>
+                <ProfileEducation educations={educations} setEducations={setEducations} />
             </div>
             <div className="hidden lg:block border-2 border-Swan rounded-2xl mt-32 mb-10 max-w-5xl mx-auto">
                 <UserInfo user={user}/>
@@ -101,7 +107,7 @@ export default function Profile() {
                         <hr className="border-Swan"/>
                         <ProfileLanguages userLanguages={userLanguages} setUserLanguages={setUserLanguages} />
                         <hr className="border-Swan" />
-                        <ProfileEducation educations={educations} />
+                        <ProfileEducation educations={educations} setEducations={setEducations} />
                     </div>
                     <div className="w-full">
                         <ProfileInfo profile={profile} setProfile={setProfile} setSelectedProfileId={setSelectedProfileId} profiles={profiles} />
