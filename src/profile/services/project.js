@@ -25,8 +25,6 @@ const formatContent = async (content) => {
 
     const data = await fileService.upload(content.file)
 
-    console.log(data);
-
     delete content.file
 
     return {
@@ -35,9 +33,17 @@ const formatContent = async (content) => {
     }
 }
 
+const fetchWebMetadata = async (url) => {
+    const { data } = await api.get(`/metadata/fetch?url=${url}`);
+
+    return data
+
+}
+
 export default {
     create,
     edit,
     remove,
-    formatContent
+    formatContent,
+    fetchWebMetadata
 }

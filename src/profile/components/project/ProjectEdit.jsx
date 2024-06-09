@@ -76,17 +76,8 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
         setContents([...contents, videoContent]);
     }
 
-    const addNewWebContent = (webLink) => {
-        if (!webLink) throw new Error('Web link is required');
-
-        const webContent = {
-            type: 'web',
-            url: webLink,
-            title: 'Placeholder title',
-            description: 'Placeholder description vamo tamo'
-        };
-
-        setContents([...contents, webContent]);
+    const addNewWebContent = (webContent) => {
+        setContents([...contents, {type: 'web', ...webContent}]);
     }
 
     const removeContent = (index) => {
