@@ -35,21 +35,24 @@ export default function Feed() {
   return (
     <>
       <Navbar showLink={true} showSearch={true} className="pb-20" />
-      <div className="flex justify-center mt-14">
-        <div className="flex w-full max-w-6xl mt-20">
-          <div className="flex-grow flex flex-col items-center mx-auto relative">
+      <div className="flex justify-center mt-14 px-4">
+        <div className="flex flex-col lg:flex-row w-full gap-4 max-w-6xl mt-20 relative">
+          <div className="flex-grow flex flex-col items-center w-full mx-auto order-2 lg:order-1">
             <div className="w-full max-w-2xl">
               <div className="flex flex-col items-center w-full gap-3">
                 {companies.map((company) => (
-                  <Link to={`/company/${company.slug}`} key={company.id} className="w-full">
-                    <CompanyCard company={company} />
-                  </Link>
+                    <Link to={`/company/${company.slug}`} key={company.id} className="w-full">
+                      <CompanyCard company={company}/>
+                    </Link>
                 ))}
               </div>
+              <div className="h-[1000px]">
+
+              </div>
             </div>
-            <div className="hidden xl:block fixed xl:ml-[1050px] 2xl:ml-[1200px]">
-              <SideProfile selectedProfileId={selectedProfileId} setSelectedProfileId={setSelectedProfileId} account={account} profiles={profiles} />
-            </div>
+          </div>
+          <div className="order-1 lg:order-2 w-full">
+            <SideProfile selectedProfileId={selectedProfileId} setSelectedProfileId={setSelectedProfileId} account={account} profiles={profiles}/>
           </div>
         </div>
       </div>
