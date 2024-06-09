@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../auth/store/actions.js";
 import { useState, useEffect, useRef, useCallback } from "react";
 import Search from "../../assets/icons/Search.svg";
+import NotificationImg from "../../assets/icons/Notifications.svg";
 
 export default function Navbar({ showLink = true, showSearch = false }) {
   const dispatch = useDispatch();
@@ -110,6 +111,17 @@ export default function Navbar({ showLink = true, showSearch = false }) {
               </div>
             </div>
           </Link>
+          {account.role === 'company' && (
+            <Link
+              to="/company-notification"
+              className="text-right block px-4 py-2 text-gray-800 cursor-pointer hover:font-medium"
+            >
+              <div className="flex flex-row">
+                <img className="w-4 mr-2" src={NotificationImg} alt="" />
+                <div>Pošalji obavijest</div>
+              </div>
+            </Link>
+          )}
           <div
             onClick={handleLogout}
             className="text-right block px-4 py-2 text-gray-800 cursor-pointer hover:font-medium"
@@ -143,7 +155,7 @@ export default function Navbar({ showLink = true, showSearch = false }) {
               onKeyPress={handleKeyPress}
               placeholder="Pretraži firme..."
               className="w-32 lg:w-40 text-4 px-6 py-2 border-2 border-gray-300 rounded-full bg-white text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-500 ease-in-out focus:w-full"
-                          />
+            />
             <img
               src={Search}
               alt="Search"

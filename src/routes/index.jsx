@@ -20,6 +20,7 @@ import Portfolio from "./user/portfolio.jsx";
 import Project from "./user/project.jsx";
 import Dashboard from "./company/dashboard.jsx";
 import Contact from "./root/contact.jsx"
+import Notification from "./root/Notification.jsx";
 
 // Loaders
 import { fetchCompanies } from "./user/feed.js";
@@ -147,6 +148,15 @@ const router = createBrowserRouter([
 
       <ProtectedRouteCompany>
         <Dashboard />
+        </ProtectedRouteCompany>
+    ),
+  },
+  {
+    path: "/company-notification",
+    element: (
+
+      <ProtectedRouteCompany>
+        <Notification />
         </ProtectedRouteCompany>
     ),
   },
