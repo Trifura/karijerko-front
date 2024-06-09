@@ -9,7 +9,7 @@ function SideProfile({ selectedProfileId, setSelectedProfileId, account, profile
 
   return (
     <>
-      <div className="border-[3px] border-Swan rounded-3xl w-full min-w-[300px] h-fit lg:max-w-[400px] sticky top-24 p-5">
+      <div className="border-[3px] border-Swan rounded-3xl w-full lg:w-fit min-w-[300px] h-fit lg:max-w-[400px] sticky top-24 p-5">
         <div className="flex">
           <div className="flex flex-row">
             <img

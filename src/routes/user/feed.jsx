@@ -48,7 +48,7 @@ export default function Feed() {
               </div>
             </div>
           </div>
-          <div className="order-1 lg:order-2 w-full">
+          <div className="order-1 lg:order-2 w-full lg:w-fit">
             <SideProfile selectedProfileId={selectedProfileId} setSelectedProfileId={setSelectedProfileId} account={account} profiles={profiles}/>
           </div>
         </div>
