@@ -40,14 +40,14 @@ function SideProfile() {
 
             <div className="ml-3">
               <div className="font-medium flex flex-row underline underline-offset-4 items-center">
-                <div>{profileData.name}</div>
+                <div>{account.firstName} {account.lastName}</div>
                 <div className="ml-1">
                   <img src={Verified} alt="" />
                 </div>
               </div>
               <div className="w-[14px] h-[14px] flex flex-row items-center">
                 <img src={Pin} alt="" />
-                <div className="text-md">Lokacija</div>
+                <div className="text-md">Zagreb</div>
               </div>
             </div>
           </div>

@@ -17,12 +17,13 @@ export default function Search() {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedTerm(searchTerm);
+      navigate(`/search?name=${encodeURIComponent(searchTerm)}`);
     }, 500);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [searchTerm]);
+  }, [searchTerm, navigate]);
 
   useEffect(() => {
     async function fetchAndSetCompanies() {
@@ -43,7 +44,6 @@ export default function Search() {
     }
   };
 
-  
   return (
     <>
       <Navbar showLink={true} className="pb-20" />
@@ -51,7 +51,7 @@ export default function Search() {
         <div className="flex w-full max-w-6xl mt-20">
           <div className="flex-grow flex flex-col items-center mx-auto relative">
             <div className="w-full max-w-2xl">
-              <form className="w-full mb-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="w-full mb-6 text-4" onSubmit={(e) => e.preventDefault()}>
                 <label
                   htmlFor="company-search"
                   className="mb-2 text-sm font-medium sr-only"
