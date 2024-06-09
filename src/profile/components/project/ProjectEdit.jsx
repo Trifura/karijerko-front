@@ -40,7 +40,7 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
     };
 
     const addImageContent = (image) => {
-        if (!image) throw new Error('Image is required');
+        if (!image) return
 
         const imageContent = {
             type: 'image',
@@ -53,7 +53,7 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
     }
 
     const addNewFileContent = (file) => {
-        if (!file) throw new Error('File is required');
+        if (!file) return
 
         const fileContent = {
             type: 'file',
@@ -67,6 +67,8 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
     }
 
     const addNewVideoContent = (videoLink) => {
+        if (!videoLink) return
+
         const videoContent = {
             type: 'video',
             description: '',
@@ -77,6 +79,8 @@ export default function ProjectEdit({ value, onCancel, onConfirm, isOpen }) {
     }
 
     const addNewWebContent = (webContent) => {
+        if (!webContent?.url) return
+
         setContents([...contents, {type: 'web', ...webContent}]);
     }
 

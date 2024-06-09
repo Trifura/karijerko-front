@@ -1,7 +1,7 @@
 import LinkIcon from "../../../../assets/icons/Link.svg";
 import DialogWrapper from "../../../../core/components/DialogWrapper.jsx";
 import SimpleInput from "../../../../core/components/form/SimpleInput.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import WebContent from "../content/WebContent.jsx";
 import projectService from "../../../services/project.js";
 
@@ -11,7 +11,17 @@ export default function WebInput({ onInput }) {
     const [content, setContent] = useState({})
     const [error, setError] = useState('')
 
+    useEffect(() => {
+        if (isOpen) {
+            setUrl('')
+            setContent({})
+            setError('')
+        }
+    }, [isOpen]);
+
     const onConfirm = () => {
+        if (error) return
+
         onInput(content)
         setIsOpen(false)
         setUrl('')
@@ -44,7 +54,7 @@ export default function WebInput({ onInput }) {
             >
                 <img src={LinkIcon} alt="Attach web link" className="w-5 h-5"/>
             </button>
-            <DialogWrapper title="Dodaj web link" isOpen={isOpen} disableScroll={false} onCancel={onCancel} onConfirm={onConfirm}>
+            <DialogWrapper title="Dodaj web link" isOpen={isOpen} onCancel={onCancel} onConfirm={onConfirm}>
                 <div className="flex flex-col gap-2">
                     <SimpleInput value={url} label="Web link" placeholder="Unesite web link..." onChange={onUrlInput}/>
                     {error && <p className="text-Coral font-semibold">{error}</p>}
