@@ -4,6 +4,7 @@ import Navbar from "../../core/components/Navbar.jsx";
 import CompanyCard from "../../company/components/CompanyCard.jsx";
 import SearchIcon from "../../assets/icons/Search.svg";
 import { fetchCompanies } from "./feed.js";
+import Footer from "../../core/components/Footer.jsx";
 
 export default function Search() {
   const location = useLocation();
@@ -83,11 +84,16 @@ export default function Search() {
                   </Link>
                 ))}
               </div>
-              <div className="h-[1000px]"></div>
+
+
+
+
             </div>
           </div>
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 }

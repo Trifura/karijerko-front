@@ -72,7 +72,7 @@ function Dashboard() {
       <>
       <Navbar></Navbar>
       <div className="mt-16 p-12">
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-4 max-w-3xl mx-auto" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label htmlFor="profilePicture" className="font-medium">Profilna Slika</label>
           <input type="text" id="profilePicture" name="profilePicture" className="border p-2 rounded" placeholder="URL profilne slike" value={formData.profilePicture} onChange={handleChange} />
@@ -111,7 +111,7 @@ function Dashboard() {
         </div>
         <div className="flex flex-col">
           <label htmlFor="description" className="font-medium">Opis</label>
-          <ReactQuill theme="snow" value={formData.description} onChange={handleQuillChange} className="border p-2 rounded" />
+          <ReactQuill theme="snow" value={formData.description} onChange={handleQuillChange} className="min-h-xl border p-2 rounded" />
         </div>
         <button type="submit" className="p-2 bg-blue-500 text-white rounded">Podnesi</button>
       </form>
