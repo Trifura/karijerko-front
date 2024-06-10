@@ -29,7 +29,6 @@ export default function CompanyView() {
         } else {
             api.get(`/company/slug/${companySlug}/user`).then((response) => {
                 setCompany(response.data);
-                console.log('logg');
             })
         }
     }, [isAuthenticated, isLoading, companySlug]);
