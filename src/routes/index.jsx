@@ -24,7 +24,6 @@ import Notification from "./root/Notification.jsx";
 
 // Loaders
 import { fetchCompanies } from "./user/feed.js";
-import { fetchCompany } from "./user/company-view.js";
 
 // Protected Routes
 import ProtectedRoute from "./ProtectedRoute.jsx";
@@ -54,7 +53,6 @@ const router = createBrowserRouter([
   {
     path: "/company/:companySlug",
     element: <CompanyView />,
-    loader: fetchCompany,
   },
 
 

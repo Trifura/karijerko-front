@@ -1,14 +1,57 @@
 import Notifications from "../../assets/icons/Notifications.svg";
+import NotificationsFilled from "../../assets/icons/NotificationsFilled.svg";
 import Open_in_new from "../../assets/icons/Open_in_new.svg";
 import Local_phone from "../../assets/icons/Local_phone.svg";
 import GMaps from "../../assets/maps.png";
 import Pin_fill from "../../assets/icons/Pin_fill.svg";
-import { useLoaderData } from "react-router-dom";
 import ChatComponent from "../../chat/components/ChatComponent.jsx";
 import Navbar from "../../core/components/Navbar.jsx";
+import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import api from "../../core/utils/api.js";
+import {useParams} from "react-router-dom";
+import LoadingPage from "../../core/components/LoadingPage.jsx";
+import subscriptionService from "../../company/services/subscription.js";
 
 export default function CompanyView() {
-    const { company } = useLoaderData();
+    const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
+    const [ company, setCompany ] = useState(null);
+
+    const { companySlug} = useParams();
+
+    useEffect(() => {
+        if (isLoading) return
+
+        if (!isAuthenticated) {
+            api.get(`/company/slug/${companySlug}`).then((response) => {
+                setCompany(response.data);
+            })
+        } else {
+            api.get(`/company/slug/${companySlug}/user`).then((response) => {
+                setCompany(response.data);
+                console.log('logg');
+            })
+        }
+    }, [isAuthenticated, isLoading, companySlug]);
+
+    const toggleSubscribe = async () => {
+        try {
+            const updatedCompany = { ...company, isSubscribed: !company.isSubscribed };
+            setCompany(updatedCompany);
+            if (company.isSubscribed) {
+                await subscriptionService.unsubscribe(company.id);
+            } else {
+                await subscriptionService.subscribe(company.id);
+            }
+        } catch (error) {
+            setCompany({ ...company, isSubscribed: !company.isSubscribed });
+        }
+    };
+
+
+    if (!company) {
+        return <LoadingPage />
+    }
 
     return (
         <>
@@ -27,8 +70,13 @@ export default function CompanyView() {
                                 alt={`${company.name} Logo`}
                                 className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg border-2 border-Swan"
                             />
-                            <img src={Notifications} alt="Nofitications"
-                                 className="w-8 h-8 lg:w-9 lg:h-9 cursor-pointer"/>
+                            <button onClick={toggleSubscribe}>
+                                {
+                                    company.isSubscribed
+                                        ? <img src={NotificationsFilled} alt="Nofitications" className="w-8 h-8 lg:w-9 lg:h-9 cursor-pointer"/>
+                                        : <img src={Notifications} alt="Nofitications" className="w-8 h-8 lg:w-9 lg:h-9 cursor-pointer"/>
+                                }
+                            </button>
                         </div>
                         <h1 className="text-2xl lg:text-4xl font-bold">{company.name}</h1>
                         <h2 className="text-base lg:text-lg font-medium">{company.tagline}</h2>
