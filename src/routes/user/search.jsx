@@ -81,7 +81,7 @@ export default function Search() {
 
 */}
 
-              <form className="relative flex-grow">
+              <form className="mt-2 relative flex-grow">
             <input
               type="text"
               name="search"
