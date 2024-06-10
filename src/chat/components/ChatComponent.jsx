@@ -6,7 +6,7 @@ import LoginMessage from "./LoginMessage.jsx";
 import {useSelector} from "react-redux";
 
 
-export default function ChatComponent({ companyId }) {
+export default function ChatComponent({ companyId, companyName }) {
     const [isChatOpen, setIsChatOpen] = useState(false)
     const [messages, setMessages] = useState([])
     const [isTyping, setIsTyping] = useState(false)
@@ -30,12 +30,19 @@ export default function ChatComponent({ companyId }) {
     }
 
     useEffect(() => {
+        if (!isAuthenticated) return;
+
+        const defaultMessage = {
+            role: 'assistant',
+            content: `Bok ja sam Karijerko. Kako ti mogu pomoći da impresioniraš firmu ${companyName}? 🚀`
+        }
+
         api.get(`assistant/messages/${companyId}/`).then(r => {
-            setMessages(r.data);
+            setMessages([defaultMessage, ...r.data]);
         }).catch(e => {
             console.error(e);
         })
-    }, [companyId]);
+    }, [companyId, isAuthenticated]);
 
     const openChat = () => {
         if (!isAuthenticated) {

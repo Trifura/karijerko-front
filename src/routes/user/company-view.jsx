@@ -1,4 +1,3 @@
-import Arrow_back from "../../assets/icons/Arrow_back.svg";
 import Notifications from "../../assets/icons/Notifications.svg";
 import Open_in_new from "../../assets/icons/Open_in_new.svg";
 import Local_phone from "../../assets/icons/Local_phone.svg";
@@ -109,7 +108,7 @@ export default function CompanyView() {
                     </div>
                 </div>
             </div>
-            <ChatComponent companyId={company.id} />
+            <ChatComponent companyId={company.id} companyName={company.name} />
         </>
     );
 }
