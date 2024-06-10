@@ -92,7 +92,7 @@ export default function Search() {
               className="w-full text-4 px-6 py-2 border-2 border-gray-300 rounded-full bg-white text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-500 ease-in-out focus:w-full"
             />
             <img
-              src={Search}
+              src={SearchIcon}
               alt="Search"
               className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
             />
