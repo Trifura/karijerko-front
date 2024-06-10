@@ -5,7 +5,7 @@ import AIStars from "../../assets/icons/AI_Stars.svg";
 import LoginMessage from "./LoginMessage.jsx";
 import {useSelector} from "react-redux";
 
-export default function ChatComponent({ companyId, companyName }) {
+export default function GeneralChat() {
     const [isChatOpen, setIsChatOpen] = useState(false)
     const [messages, setMessages] = useState([])
     const [isTyping, setIsTyping] = useState(false)
@@ -22,7 +22,7 @@ export default function ChatComponent({ companyId, companyName }) {
             setIsTyping(true)
         }, 500)
 
-        const {data} = await api.post(`assistant/message/${companyId}/`, { content });
+        const {data} = await api.post(`assistant/general-message`, { content });
 
         setIsTyping(false)
         setMessages([...updatedMessages, { role: 'assistant', content: data.content }]);
@@ -33,15 +33,15 @@ export default function ChatComponent({ companyId, companyName }) {
 
         const defaultMessage = {
             role: 'assistant',
-            content: `Bok ja sam Karijerko. Želiš li da ti pomognem impresionirati firmu ${companyName}? 🚀`
+            content: `Bok, piši mi što te zanima i ja ću ti preporučiti firme!`
         }
 
-        api.get(`assistant/messages/${companyId}/`).then(r => {
+        api.get(`assistant/general-message/`).then(r => {
             setMessages([defaultMessage, ...r.data]);
         }).catch(e => {
             console.error(e);
         })
-    }, [companyId, isAuthenticated]);
+    }, [isAuthenticated]);
 
     const openChat = () => {
         if (!isAuthenticated) {

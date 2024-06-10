@@ -5,6 +5,7 @@ import CompanyCard from "../../company/components/CompanyCard.jsx";
 import SideProfile from "../../core/components/side-profile";
 import {fetchCompanies, fetchFeed} from "./feed.js";
 import {useSelector} from "react-redux";
+import GeneralChat from "../../chat/components/GeneralChat.jsx";
 
 export default function Feed() {
 
@@ -53,6 +54,7 @@ export default function Feed() {
           </div>
         </div>
       </div>
+      <GeneralChat />
     </>
   );
 }

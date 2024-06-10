@@ -3,7 +3,6 @@ import { useState } from "react";
 import ChatMessages from "./ChatMessages.jsx";
 import ChatInput from "./ChatInput.jsx";
 
-
 export default function Chat({ messages, addMessage, setIsChatOpen, isTyping }) {
     const [newMessage, setNewMessage] = useState('');
 
@@ -18,7 +17,8 @@ export default function Chat({ messages, addMessage, setIsChatOpen, isTyping }) 
     return (
         <>
             <div className="hidden md:flex border-4 border-Swan rounded-3xl w-full h-full py-4 flex-col">
-                <div className="pb-4 flex justify-end px-6">
+                <div className="pb-4 flex justify-between px-6 border-b border-Swan">
+                    <span className="text-3xl font-bold text-Primary">karijerko</span>
                     <button onClick={() => setIsChatOpen(false)}>
                         <img src={CloseRound} alt="Close" className="w-8 h-8"/>
                     </button>
