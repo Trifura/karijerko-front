@@ -1,23 +1,19 @@
 import React from 'react';
 import LogoFull from '../../assets/Logo_full.svg';
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="mt-20 bg-gray-100 shadow-2xl border-t-2 border-Swan sticky">
+    <footer className="bg-gray-100 shadow-2xl border-t-2 border-Swan mt-auto">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <img src={LogoFull} className="w-52" alt="Logo" />
           <ul className="flex flex-wrap items-center p-2 mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li className='mr-4'>
-            <Link to="/about-us" className="hover:underline mr-4 md:mr-6">
-            O nama
-          </Link>
+              <Link to="/about-us" className="hover:underline mr-4 md:mr-6">O nama</Link>
             </li>
             <li>
-            <Link to="/contact" className="hover:underline mr-4 md:mr-6">
-            Kontakt
-          </Link>
+              <Link to="/contact" className="hover:underline mr-4 md:mr-6">Kontakt</Link>
             </li>
           </ul>
         </div>
