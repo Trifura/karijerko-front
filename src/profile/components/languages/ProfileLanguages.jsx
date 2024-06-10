@@ -6,7 +6,7 @@ import {useState} from "react";
 import userLanguageService from "../../services/userLanguage.js";
 import { proficiencyOptions } from "../../../core/constants/Language.js";
 
-export default function ProfileLanguages({ userLanguages, setUserLanguages }) {
+export default function ProfileLanguages({ userLanguages, setUserLanguages, isPublic }) {
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [isCreateOpen, setIsCreateOpen] = useState(false)
 
@@ -40,14 +40,18 @@ export default function ProfileLanguages({ userLanguages, setUserLanguages }) {
             <div className="p-8 flex flex-col gap-2">
                 <div className="w-full flex justify-between">
                     <h2 className="text-xl font-semibold">Jezici</h2>
-                    <div className="flex gap-4">
-                        <button onClick={() => setIsEditOpen(true)}>
-                            <img src={EditIcon} alt="Edit"/>
-                        </button>
-                        <button onClick={() => setIsCreateOpen(true)}>
-                            <img src={AddIcon} alt="Add"/>
-                        </button>
-                    </div>
+                    {
+                        !isPublic && (
+                            <div className="flex gap-4">
+                                <button onClick={() => setIsEditOpen(true)}>
+                                    <img src={EditIcon} alt="Edit"/>
+                                </button>
+                                <button onClick={() => setIsCreateOpen(true)}>
+                                    <img src={AddIcon} alt="Add"/>
+                                </button>
+                            </div>
+                        )
+                    }
                 </div>
                 <div className="flex flex-col gap-1">
                     {

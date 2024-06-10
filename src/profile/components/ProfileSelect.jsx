@@ -3,7 +3,7 @@ import Select from "react-select";
 import ProfileCreate from "./ProfileCreate.jsx";
 import {useProfileDialogs} from "../hooks/useProfileDialogs.js";
 
-export default function ProfileSelect({ value, options, onSelect, createProfile }) {
+export default function ProfileSelect({ value, options, onSelect, createProfile, isPublic }) {
     const { isCreateOpen, openCreate, closeCreate } = useProfileDialogs();
 
     const onConfirmCreate = async (profile) => {
@@ -16,9 +16,14 @@ export default function ProfileSelect({ value, options, onSelect, createProfile 
             <div className="lg:p-8 flex flex-col gap-2 lg:gap-4">
                 <div className="w-full flex justify-between">
                     <h2 className="text-xl font-semibold">Profili</h2>
-                    <button onClick={openCreate}>
-                        <img src={AddIcon} alt="Add"/>
-                    </button>
+                    {
+                        !isPublic && (
+                            <button onClick={openCreate}>
+                                <img src={AddIcon} alt="Add"/>
+                            </button>
+                        )
+                    }
+
                 </div>
                 <div className="lg:hidden mt-2">
                     <Select

@@ -14,7 +14,8 @@ const DialogWrapper = ({
                            disableScroll = true,
                            isLoading = false,
                            confirmColor = 'bg-Primary',
-                           isSimple = false
+                           isSimple = false,
+                           hideActions = false
                        }) => {
     useEffect(() => {
         if (!disableScroll) return;
@@ -44,24 +45,30 @@ const DialogWrapper = ({
                         {children}
                     </div>
                 </div>
-                <div className={`px-8 py-4 flex justify-end space-x-2 ${fullscreen ? 'fixed bottom-0 w-full space-x-6 bg-white border-t z-50 border-t-Swan' : ''}`}>
-                    <button
-                        onClick={onCancel}
-                        className="text-base px-6 py-2 font-semibold rounded-md border-2 border-Swan"
-                    >
-                        {cancelText}
-                    </button>
-                    <button
-                        onClick={onConfirm}
-                        className={`text-white text-base lg:text-md px-6 py-2 font-semibold rounded-md flex gap-3 items-center ${confirmColor}`}
-                    >
-                        {
-                            isLoading &&
-                            <div className="border-PrimaryLight h-6 w-6 animate-spin rounded-full border-4 border-t-white"/>
-                        }
-                        {confirmText}
-                    </button>
-                </div>
+                {
+                    !hideActions && (
+                        <div
+                            className={`px-8 py-4 flex justify-end space-x-2 ${fullscreen ? 'fixed bottom-0 w-full space-x-6 bg-white border-t z-50 border-t-Swan' : ''}`}>
+                            <button
+                                onClick={onCancel}
+                                className="text-base px-6 py-2 font-semibold rounded-md border-2 border-Swan"
+                            >
+                                {cancelText}
+                            </button>
+                            <button
+                                onClick={onConfirm}
+                                className={`text-white text-base lg:text-md px-6 py-2 font-semibold rounded-md flex gap-3 items-center ${confirmColor}`}
+                            >
+                                {
+                                    isLoading &&
+                                    <div
+                                        className="border-PrimaryLight h-6 w-6 animate-spin rounded-full border-4 border-t-white"/>
+                                }
+                                {confirmText}
+                            </button>
+                        </div>
+                    )
+                }
             </div>
         </div>,
         document.body

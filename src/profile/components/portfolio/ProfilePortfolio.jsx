@@ -5,7 +5,7 @@ import ProjectEdit from "../project/ProjectEdit.jsx";
 import {useState} from "react";
 
 
-export default function ProfilePortfolio({ profile, projects, setProjects }) {
+export default function ProfilePortfolio({ profile, projects, setProjects, isPublic }) {
     const [isCreating, setIsCreating] = useState(false);
 
     const saveProject = async (project) => {
@@ -42,18 +42,22 @@ export default function ProfilePortfolio({ profile, projects, setProjects }) {
             <div className="p-8 flex flex-col gap-6 w-full">
                 <div className="flex w-full justify-between">
                     <h2 className="text-2xl font-semibold lg:font-medium">Portfolio</h2>
-                    <button onClick={() => setIsCreating(true)}>
-                        <img src={AddIcon} alt="Add"/>
-                    </button>
+                    {
+                        !isPublic && (
+                            <button onClick={() => setIsCreating(true)}>
+                                <img src={AddIcon} alt="Add"/>
+                            </button>
+                        )
+                    }
                 </div>
                 <div className="flex flex-wrap justify-between lg:justify-start gap-2 lg:gap-6">
                     {
-                        projects.map((project) => (<ProjectCard key={project.id} project={project} onSave={saveProject} onDelete={deleteProject} />))
+                        projects.map((project) => (<ProjectCard key={project.id} project={project} onSave={saveProject} onDelete={deleteProject} isPublic={isPublic} />))
                     }
                     {
                         !projects.length && (
                             <p className="text-center w-full text-Ironside font-medium">
-                                Trenutno nemate projekte u portfoliu
+                                Trenutno nema projekta u portfoliu
                             </p>
                         )
                     }

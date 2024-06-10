@@ -25,10 +25,13 @@ import Notification from "./root/Notification.jsx";
 // Loaders
 import { fetchCompanies } from "./user/feed.js";
 
+import userService from "../core/services/user.js";
+
 // Protected Routes
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import ProtectedRouteCompany from "./ProtectedRouteCompany.jsx";
 import ProtectedRouteUser from "./ProtectedRouteUser.jsx";
+import PublicView from "./user/publicView.jsx";
 
 const router = createBrowserRouter([
   // ROOT
@@ -53,6 +56,11 @@ const router = createBrowserRouter([
   {
     path: "/company/:companySlug",
     element: <CompanyView />,
+  },
+  {
+    path: "/u/:userSlug",
+    element: <PublicView />,
+    loader: ({params}) => userService.fetchPublic(params.userSlug)
   },
 
 

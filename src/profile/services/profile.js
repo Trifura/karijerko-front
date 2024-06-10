@@ -31,10 +31,17 @@ const fetchAll = async () => {
 
 }
 
+const fetchPublic = async (profileId) => {
+    const { data } = await api.get(`/profile/public/${profileId}`);
+
+    return data
+}
+
 export default {
     fetch,
     create,
     edit,
     remove,
-    fetchAll
+    fetchAll,
+    fetchPublic
 }

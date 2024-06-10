@@ -8,7 +8,7 @@ import {useState} from "react";
 import educationService from "../../services/education.js";
 import ConfirmDialog from "../../../core/components/ConfirmDialog.jsx";
 
-export default function ProfileEducation({ educations, setEducations }) {
+export default function ProfileEducation({ educations, setEducations, isPublic }) {
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -74,24 +74,32 @@ export default function ProfileEducation({ educations, setEducations }) {
             <div className="p-8 flex flex-col gap-8">
                 <div className="w-full flex justify-between">
                     <h2 className="text-xl font-semibold">Obrazovanje</h2>
-                    <button onClick={() => setIsCreateOpen(true)}>
-                        <img src={AddIcon} alt="Add"/>
-                    </button>
+                    {
+                        !isPublic && (
+                            <button onClick={() => setIsCreateOpen(true)}>
+                                <img src={AddIcon} alt="Add"/>
+                            </button>
+                        )
+                    }
                 </div>
                 <div className="flex flex-col max-w-full gap-5">
-                    {
+                {
                         educations.map((education) => (
                             <div key={education.id}>
                                 <div className="flex gap-5 justify-between items-start">
                                     <h3 className="text-xl font-semibold overflow-hidden text-ellipsis">{education.institution}</h3>
-                                    <div className="flex flex-none gap-2">
-                                        <button className="w-8 flex-none" onClick={() => openEdit(education)}>
-                                            <img src={EditIcon} alt="Edit"/>
-                                        </button>
-                                        <button className="w-8 flex-none" onClick={() => openDelete(education)}>
-                                            <img src={DeleteIcon} alt="Delete"/>
-                                        </button>
-                                    </div>
+                                    {
+                                        !isPublic && (
+                                            <div className="flex flex-none gap-2">
+                                                <button className="w-8 flex-none" onClick={() => openEdit(education)}>
+                                                    <img src={EditIcon} alt="Edit"/>
+                                                </button>
+                                                <button className="w-8 flex-none" onClick={() => openDelete(education)}>
+                                                    <img src={DeleteIcon} alt="Delete"/>
+                                                </button>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                                 <p className="text-Ironside font-medium overflow-hidden text-ellipsis">{education.degree}</p>
                                 <p className="text-Ironside font-medium">{education.startYear} - {education.endYear}</p>

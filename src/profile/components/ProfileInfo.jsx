@@ -7,7 +7,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {edit, remove} from "../store/actions.js";
 
-export default function ProfileInfo({ profile, setProfile, setSelectedProfileId, profiles }) {
+export default function ProfileInfo({ profile, setProfile, setSelectedProfileId, profiles, isPublic }) {
     const dispatch = useDispatch()
     const { isEditOpen, openEdit, closeEdit } = useProfileDialogs();
 
@@ -66,22 +66,26 @@ export default function ProfileInfo({ profile, setProfile, setSelectedProfileId,
                                             Primaran
                                         </p>
                                     )
-                                    : (
+                                    : !isPublic ? (
                                         <button
                                             className="text-Sapphire font-bold text-xs border-2 border-Sapphire px-4 py-0.5 rounded-full"
                                             onClick={setPrimary}
                                         >
                                             Postavi primarni
                                         </button>
-                                    )
+                                    ) : null
                             }
                         </div>
 
-                        <button onClick={openEdit}>
-                            <img src={EditIcon} alt="Edit"/>
-                        </button>
                         {
-                            !profile.isPrimary && (
+                            !isPublic && (
+                                <button onClick={openEdit}>
+                                    <img src={EditIcon} alt="Edit"/>
+                                </button>
+                            )
+                        }
+                        {
+                            !profile.isPrimary && !isPublic && (
                                 <button onClick={openRemove}>
                                     <img src={DeleteIcon} alt="Delete"/>
                                 </button>

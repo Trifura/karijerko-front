@@ -1,4 +1,4 @@
-export default function ProfileSkills({ skills }) {
+export default function ProfileSkills({ skills, isPublic }) {
     return (
         <div className="p-8 flex flex-col gap-6">
             <h2 className="text-2xl font-semibold lg:font-medium">Vještine</h2>
@@ -14,7 +14,11 @@ export default function ProfileSkills({ skills }) {
                 {
                     !skills.length && (
                         <p className="text-Ironside font-medium text-center w-full">
-                            Vještine će vam se prikazati nakon što ih dodate u projektu
+                            {
+                                isPublic
+                                    ? "Trenutno nema vještina u portfoliu"
+                                    : "Vještine će vam se prikazati nakon što ih dodate u projektu"
+                            }
                         </p>
                     )
                 }
