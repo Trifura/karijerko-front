@@ -101,7 +101,7 @@ export default function Search() {
 
 
 
-              <div className="flex flex-col items-center w-full gap-3">
+              <div className="flex flex-col items-center w-full mt-3 gap-3">
                 {companies.map((company) => (
                   <Link to={`/company/${company.slug}`} key={company.id} className="w-full">
                     <CompanyCard company={company} />
