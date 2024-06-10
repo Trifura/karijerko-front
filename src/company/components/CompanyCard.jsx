@@ -14,13 +14,13 @@ export default function CompanyCard({ company }) {
             <span className="text-base font-medium">{company.industry?.nameHr}</span>
             <span className="text-sm font-medium">{company?.specialties}</span>
           </div>
-          <div className="text-xs text-neutral-500 flex gap-1">
+          <div className="text-sm text-neutral-500 flex gap-1">
             <span>{company.companySize?.nameHr}</span>
             •
             <span>{company?.headquarters}</span>
           </div>
           <div>
-            <p className="text-xs">
+            <p className="text-sm">
               {company?.tagline}
             </p>
           </div>
