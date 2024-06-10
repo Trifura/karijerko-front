@@ -14,3 +14,9 @@ export async function fetchFeed(profileId) {
 
     return data
 }
+
+export async function fetchSubscriptions() {
+    const { data } = await api.get(`/user/subscription`);
+
+    return data
+}

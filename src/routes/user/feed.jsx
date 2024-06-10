@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../../core/components/Navbar.jsx";
 import CompanyCard from "../../company/components/CompanyCard.jsx";
 import SideProfile from "../../core/components/side-profile";
-import {fetchCompanies, fetchFeed} from "./feed.js";
+import {fetchCompanies, fetchFeed, fetchSubscriptions} from "./feed.js";
 import {useSelector} from "react-redux";
 import GeneralChat from "../../chat/components/GeneralChat.jsx";
 
@@ -15,6 +15,20 @@ export default function Feed() {
 
   const [companies, setCompanies] = useState([]);
   const [selectedProfileId, setSelectedProfileId] = useState(null);
+
+  const [view, setView] = useState('feed');
+
+  const onFetchFeed = async () => {
+    const data = await fetchFeed(selectedProfileId);
+    setCompanies(data);
+    setView('feed');
+  }
+
+  const onFetchSubscriptions = async () => {
+    const data = await fetchSubscriptions();
+    setCompanies(data);
+    setView('subscriptions');
+  }
 
   useEffect(() => {
     // Ensure profiles are loaded before setting the selected profile
@@ -30,8 +44,11 @@ export default function Feed() {
       return
     }
 
-    fetchFeed(selectedProfileId).then((data) => setCompanies(data))
+    onFetchFeed()
   }, [selectedProfileId]);
+
+
+
 
   return (
     <>
@@ -39,13 +56,26 @@ export default function Feed() {
       <div className="flex justify-center mt-14 px-4">
         <div className="flex flex-col lg:flex-row w-full gap-4 max-w-6xl mt-20 relative">
           <div className="flex-grow flex flex-col items-center w-full mx-auto order-2 lg:order-1">
-            <div className="w-full max-w-2xl">
+            <div className="w-full max-w-2xl mt-10 lg:mt-0">
+              <div className="flex gap-6 text-lg">
+                <button onClick={onFetchFeed}>
+                  <h1 className={`font-semibold ${view !== 'feed' && 'text-Hare'}`}>Preporučeno</h1>
+                </button>
+                <button onClick={onFetchSubscriptions}>
+                  <h1 className={`font-semibold ${view !== 'subscriptions' && 'text-Hare'}`}>Pretplate</h1>
+                </button>
+              </div>
+              <hr className="my-3"/>
               <div className="flex flex-col items-center w-full gap-3">
                 {companies.map((company) => (
                     <Link to={`/company/${company.slug}`} key={company.id} className="w-full">
                       <CompanyCard company={company}/>
                     </Link>
                 ))}
+                {
+                    companies.length === 0 && view === 'subscriptions' &&
+                    <h1 className="text-center text-xl text-Ironside font-semibold">Ne pratite niti jednu firmu</h1>
+                }
               </div>
             </div>
           </div>
