@@ -34,6 +34,7 @@ const profileSlice = createSlice({
                 state.error = action.payload;
             })
             .addCase(fetchAll.fulfilled, (state, action) => {
+                'wtff'
                 state.profiles = action.payload;
                 state.error = null;
             })

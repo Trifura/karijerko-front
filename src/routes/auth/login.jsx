@@ -7,6 +7,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import { authenticateGoogle, login } from "../../auth/store/actions.js";
 import { useDispatch, useSelector } from "react-redux";
 import {Helmet} from "react-helmet";
+import {fetchAll} from "../../profile/store/actions.js";
 
 function Login() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function Login() {
       if (role === 'company') {
         navigate('/dashboard');
       } else {
+        dispatch(fetchAll())
         navigate('/feed');
       }
     } else {
@@ -56,6 +58,7 @@ function Login() {
       if (role === 'company') {
         navigate('/dashboard');
       } else {
+        dispatch(fetchAll())
         navigate('/feed');
       }
     }
