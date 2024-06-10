@@ -7,13 +7,13 @@ const App = () => {
   const people = [
     {
         name: 'Ivan Mikodanić',
-        bio: 'Jane is a UX designer with a passion for creating intuitive and beautiful user experiences.',
+        bio: 'Posvećeni 20-godišnji softverski inženjer s čvrstim temeljem u frontend i backend razvoju. S 4 godine praktičnog iskustva u izradi responzivnih i korisnički prijateljskih web sučelja i 1 godinom stručnosti u izradi učinkovitih aplikacija na strani poslužitelja.',
         image: 'https://media.licdn.com/dms/image/D4D03AQGiiaGJjB31QQ/profile-displayphoto-shrink_200_200/0/1666043344530?e=1723680000&v=beta&t=UI-xBZq6-qZuybpvE8GjmOY7NNZWZ6iAl4Els8b3acA',
         link: 'https://www.linkedin.com/in/ivan-mikodanic/'
       },
     {
       name: 'Benjamin Sabo',
-      bio: 'Benjamin Sabo je jako dobar čovek.',
+      bio: 'Posvećeni 20-godišnji softverski inženjer s čvrstim temeljem u frontend razvoju. Iako nemam formalnog radnog iskustva u tvrtki, samostalno sam radio na izradi responzivnih i korisnički prijateljskih web sučelja (kao npr. Karijerko).',
       image: 'https://media.licdn.com/dms/image/D4D03AQHqe3q7qQA3XQ/profile-displayphoto-shrink_100_100/0/1714681109181?e=1723680000&v=beta&t=fIsu0Tjzn61rBv18QyDbdLdlsjUb8rdf5ZhjE_WQNuI',
       link: 'https://www.linkedin.com/in/bsabo44/'
     }
