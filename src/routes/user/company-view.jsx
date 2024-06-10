@@ -13,7 +13,7 @@ export default function CompanyView() {
 
     return (
         <>
-            <Navbar />
+            <Navbar showSearch={true} />
             <div className="lg:border-4 lg:max-w-4xl lg:mx-auto border-Swan rounded-3xl mt-24 pt-6">
                 {/*<div className="px-4 pt-4 pb-2 lg:px-5 lg:py-4">*/}
                 {/*    <Link to="/feed">*/}
