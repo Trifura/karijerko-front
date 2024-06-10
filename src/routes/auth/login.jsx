@@ -39,7 +39,7 @@ function Login() {
       if (role === 'company') {
         navigate('/dashboard');
       } else {
-        dispatch(fetchAll())
+        await dispatch(fetchAll())
         navigate('/feed');
       }
     } else {
@@ -58,14 +58,14 @@ function Login() {
       if (role === 'company') {
         navigate('/dashboard');
       } else {
-        dispatch(fetchAll())
+        await dispatch(fetchAll())
         navigate('/feed');
       }
     }
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/profile" replace />;
+    return <Navigate to="/feed" replace />;
   }
 
   return (
