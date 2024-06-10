@@ -7,7 +7,11 @@ import SimpleInput from "../../core/components/form/SimpleInput.jsx";
 
 import companyService from '../../company/services/index.js';
 import companySizeService from "../../core/services/companySize.js";
+import industryService from "../../core/services/industry.js";
 import Select from "react-select";
+import AsyncSelect from "react-select/async";
+import debounce from "debounce";
+import skillService from "../../core/services/skill.js";
 
 
 function Dashboard() {
@@ -24,12 +28,19 @@ function Dashboard() {
   const [foundedAt, setFoundedAt] = useState('');
 
     const [companySizes, setCompanySizes] = useState([]);
+    const [industries, setIndustries] = useState([]);
 
     useEffect(() => {
         companySizeService.fetch().then(data => {
             setCompanySizes(data);
         })
+
+        industryService.fetch().then(data => {
+            setIndustries(data);
+        })
+
         companyService.fetchInfo().then(data => {
+            setProfilePicture(data.profilePicture || '');
             setName(data.name || '');
             setTagline(data.tagline || '');
             setCompanySize(data.companySize || '');
@@ -46,6 +57,7 @@ function Dashboard() {
 
   const saveInfo = async () => {
     const companyInfo = {
+        profilePicture,
       name,
       tagline,
       companySize,
@@ -61,16 +73,21 @@ function Dashboard() {
     await companyService.saveInfo(companyInfo);
   };
 
+    const debouncedFetchSkills = debounce((search, callback) => {
+        skillService.fetch(search).then((result) => callback(result))
+    }, 500);
+
   return (
       <>
 
           <Navbar />
           <div className="mt-16 p-12 flex flex-col gap-2">
+              <SimpleInput label="Profilna slika" placeholder="Unesite link slike..." value={profilePicture} onChange={setProfilePicture}/>
               <SimpleInput
                   label="Ime tvrtke"
                   placeholder="Unesite ime tvrtke..." value={name} onChange={setName}
               />
-              <SimpleInput  label="Slogan" placeholder="Unesite slogan..." value={tagline} onChange={setTagline} />
+              <SimpleInput label="Slogan" placeholder="Unesite slogan..." value={tagline} onChange={setTagline}/>
 
               <div className="flex flex-col gap-1 mb-2">
                   <label id="company-size" className="font-semibold">Veličina tvrtke</label>
@@ -86,17 +103,46 @@ function Dashboard() {
                   />
               </div>
 
-              <SimpleInput label="Sjedište" placeholder="Sjedište" value={headquarters} onChange={setHeadquarters} />
+              <SimpleInput label="Sjedište" placeholder="Sjedište" value={headquarters} onChange={setHeadquarters}/>
 
-              <SimpleInput label="Industrija" placeholder="Industrija" value={industry} onChange={setIndustry} />
-              <SimpleInput label="Specijalnosti" placeholder="Specijalnosti" value={skills} onChange={setSkills} />
+              <div className="flex flex-col gap-1 mb-2">
+                  <label id="company-size" className="font-semibold">Industrija</label>
+                  <Select
+                      id="company-size"
+                      placeholder="Odaberite industriju..."
+                      value={industry}
+                      onChange={setIndustry}
+                      isSearchable={true}
+                      options={industries}
+                      getOptionLabel={(option) => option.nameHr}
+                      getOptionValue={(option) => option.id}
+                  />
+              </div>
 
-              <SimpleInput label="Web Stranica" placeholder="Unesite link..." value={website} onChange={setWebsite} />
-              <SimpleInput label="Telefon" placeholder="Unesite broj telefona..." value={phone} onChange={setPhone} />
-              <ReactQuill label="Opis" placeholder="Unesite opis..." value={description} onChange={setDescription} />
-              <SimpleInput label="Osnovano" type="number" placeholder="Osnovano" value={foundedAt} onChange={setFoundedAt} />
+              <div className="flex flex-col gap-1 mb-2">
+                  <label id="company-size" className="font-semibold">Specijalnosti</label>
+                  <AsyncSelect
+                      id="project-skills"
+                      value={skills}
+                      isMulti={true}
+                      closeMenuOnSelect={false}
+                      placeholder="Pretražite specijalnosti."
+                      loadOptions={debouncedFetchSkills}
+                      getOptionValue={(option) => `${option.id}`}
+                      getOptionLabel={(option) => `${option.name}`}
+                      onChange={setSkills}
+                      defaultOptions={skills}
+                  />
+              </div>
+              <SimpleInput label="Web Stranica" placeholder="Unesite link..." value={website} onChange={setWebsite}/>
+              <SimpleInput label="Telefon" placeholder="Unesite broj telefona..." value={phone} onChange={setPhone}/>
+              <ReactQuill label="Opis" placeholder="Unesite opis..." value={description} onChange={setDescription}/>
+              <SimpleInput label="Osnovano godine" type="number" placeholder="Unesite godinu..." value={foundedAt}
+                           onChange={setFoundedAt}
+              />
 
-              <button type="submit" className="p-2 w-full bg-Primary text-white rounded-xl" onClick={saveInfo}>Spremi</button>
+              <button type="submit" className="p-2 w-full bg-Primary text-white rounded-xl" onClick={saveInfo}>Spremi
+              </button>
           </div>
           <div className='shadow'>
               <Footer/>
