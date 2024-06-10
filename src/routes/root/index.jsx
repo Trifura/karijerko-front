@@ -8,11 +8,19 @@ import Send from "../../assets/icons/Send.svg";
 import {useSelector} from "react-redux";
 import {Helmet} from "react-helmet";
 import Footer from "../../core/components/Footer.jsx";
+import {useEffect, useState} from "react";
+import {fetchCompanies} from "../user/feed.js";
 
 function Root() {
-    const companies = []
+    const [companies, setCompanies] = useState([])
 
     const {isAuthenticated} = useSelector((state) => state.auth)
+
+    useEffect(() => {
+        fetchCompanies().then(({companies}) => {
+            setCompanies(companies)
+        })
+    }, []);
 
     // TODO: handle this better because it gitters
     if (isAuthenticated) {
@@ -58,13 +66,13 @@ function Root() {
                 <div>
                     <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 pt-10 justify-center">
                         {companies.map((company) => (
-                            <Link to={`/company/${company.id}`} key={company.id}>
+                            <Link to={`/company/${company.slug}`} key={company.id}>
                                 <SimpleCompanyCard key={company.id} company={company} />
                             </Link>
                         ))}
                     </div>
                 </div>
-                <Link to="/companies" className="text-xl font-semibold flex items-center">
+                <Link to="/search" className="text-xl font-semibold flex items-center">
                     Pogledaj sve firme
                     <img src={ArrowRight} alt=""/>
                 </Link>

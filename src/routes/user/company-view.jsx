@@ -69,13 +69,19 @@ export default function CompanyView() {
                                 alt={`${company.name} Logo`}
                                 className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg border-2 border-Swan"
                             />
-                            <button onClick={toggleSubscribe}>
-                                {
-                                    company.isSubscribed
-                                        ? <img src={NotificationsFilled} alt="Nofitications" className="w-8 h-8 lg:w-9 lg:h-9 cursor-pointer"/>
-                                        : <img src={Notifications} alt="Nofitications" className="w-8 h-8 lg:w-9 lg:h-9 cursor-pointer"/>
-                                }
-                            </button>
+                            {
+                                isAuthenticated && (
+                                    <button onClick={toggleSubscribe}>
+                                        {
+                                            company.isSubscribed
+                                                ? <img src={NotificationsFilled} alt="Nofitications"
+                                                       className="w-8 h-8 lg:w-9 lg:h-9 cursor-pointer"/>
+                                                : <img src={Notifications} alt="Nofitications"
+                                                       className="w-8 h-8 lg:w-9 lg:h-9 cursor-pointer"/>
+                                        }
+                                    </button>
+                                )
+                            }
                         </div>
                         <h1 className="text-2xl lg:text-4xl font-bold">{company.name}</h1>
                         <h2 className="text-base lg:text-lg font-medium">{company.tagline}</h2>
