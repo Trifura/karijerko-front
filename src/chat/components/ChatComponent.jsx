@@ -34,7 +34,7 @@ export default function ChatComponent({ companyId, companyName }) {
 
         const defaultMessage = {
             role: 'assistant',
-            content: `Bok ja sam Karijerko. Kako ti mogu pomoći da impresioniraš firmu ${companyName}? 🚀`
+            content: `Bok ja sam Karijerko. Želiš li da ti pomognem impresionirati firmu ${companyName}? 🚀`
         }
 
         api.get(`assistant/messages/${companyId}/`).then(r => {
