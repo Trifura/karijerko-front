@@ -2,12 +2,18 @@ import Chat from "./Chat.jsx";
 import {useEffect, useState} from "react";
 import api from "../../core/utils/api.js";
 import AIStars from "../../assets/icons/AI_Stars.svg";
+import LoginMessage from "./LoginMessage.jsx";
+import {useSelector} from "react-redux";
 
 
 export default function ChatComponent({ companyId }) {
     const [isChatOpen, setIsChatOpen] = useState(false)
     const [messages, setMessages] = useState([])
     const [isTyping, setIsTyping] = useState(false)
+    const [showLoginMessage, setShowLoginMessage] = useState(false);
+
+    const { isAuthenticated } = useSelector(state => state.auth);
+
 
     const addMessage = async (content) => {
         const updatedMessages = [...messages, { role: 'user', content }];
@@ -31,8 +37,18 @@ export default function ChatComponent({ companyId }) {
         })
     }, [companyId]);
 
+    const openChat = () => {
+        if (!isAuthenticated) {
+            setShowLoginMessage(true);
+            return;
+        }
+
+        setIsChatOpen(true);
+    }
+
     return (
         <>
+            {showLoginMessage && <LoginMessage onClose={() => setShowLoginMessage(false)} />}
             {
                 isChatOpen ? (
                     <div className="fixed h-full w-full z-50 bg-white overscroll-none md:h-[640px] md:w-[420px] top-0 left-0 md:top-auto md:left-auto md:bottom-5 md:right-5">
@@ -40,7 +56,7 @@ export default function ChatComponent({ companyId }) {
                     </div>
                 ) : (
                     <div className="fixed bottom-5 right-5 w-16 h-16 bg-white border-2 border-Swan rounded-full flex justify-center items-center">
-                        <button onClick={() => setIsChatOpen(true)}>
+                        <button onClick={openChat}>
                             <img src={AIStars} alt="Chat" className="w-full h-full p-2" />
                         </button>
                     </div>

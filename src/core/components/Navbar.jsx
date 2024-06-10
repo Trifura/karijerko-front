@@ -16,18 +16,11 @@ export default function Navbar({ showLink = true, showSearch = false }) {
   const { isAuthenticated, account } = useSelector((state) => state.auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [debouncedTerm, setDebouncedTerm] = useState("");
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-
-  useEffect(() => {
-    if (debouncedTerm) {
-      navigate(`/search?name=${encodeURIComponent(debouncedTerm)}`);
-    }
-  }, [debouncedTerm, navigate]);
 
   const handleSearch = useCallback((event) => {
     setSearchTerm(event.target.value);
@@ -78,7 +71,7 @@ export default function Navbar({ showLink = true, showSearch = false }) {
           alt=""
         />
       </div>
-      {dropdownOpen && (
+      {dropdownOpen && account && (
         <div className="absolute right-0 mt-2 w-[305px] py-2 bg-white border border-gray-200 rounded-md shadow-lg">
           <div className="px-4 border-b-2 py-2">
             <div className="text-[18px] flex flex-row items-center">

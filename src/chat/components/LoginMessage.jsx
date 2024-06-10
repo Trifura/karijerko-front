@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo_short.svg';
 import Close from '../../assets/icons/Close_round.svg';
@@ -29,7 +29,7 @@ function LoginMessage({ onClose, message }) {
         <p className="mb-5 text-[20px] font-semibold">
           {message || (
             <>
-              Molimo Vas prijavite se da koristite našeg Karijerka<br />
+              Molimo Vas da se prijavite kako bi koristili Karijerka<br />
               <div className='font-medium text-[15px]'>
               Koji će Vam pomoći pri vašem karijernom usmjeravanju
               </div>
@@ -37,7 +37,7 @@ function LoginMessage({ onClose, message }) {
           )}
         </p>
         <Link to="/login" className="p-2  bg-Primary text-white font-semibold rounded-lg">
-          Go to Login
+          Prijava
         </Link>
       </div>
     </div>

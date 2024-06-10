@@ -81,7 +81,7 @@ function Dashboard() {
       <>
 
           <Navbar />
-          <div className="mt-16 p-12 flex flex-col gap-2">
+          <div className="mt-16 lg:mt-32 p-12 flex flex-col gap-2 lg:border-4 lg:max-w-4xl lg:mx-auto border-Swan rounded-3xl">
               <SimpleInput label="Profilna slika" placeholder="Unesite link slike..." value={profilePicture} onChange={setProfilePicture}/>
               <SimpleInput
                   label="Ime tvrtke"
