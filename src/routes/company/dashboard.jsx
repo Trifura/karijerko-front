@@ -1,126 +1,106 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { registerCompany } from '../../auth/store/actions'; // Adjust the import path as needed
+import {useEffect, useState} from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import the styles
 import Navbar from '../../core/components/Navbar';
 import Footer from '../../core/components/Footer';
+import SimpleInput from "../../core/components/form/SimpleInput.jsx";
+
+import companyService from '../../company/services/index.js';
+import companySizeService from "../../core/services/companySize.js";
+import Select from "react-select";
+
 
 function Dashboard() {
-  const [formData, setFormData] = useState({
-    profilePicture: '',
-    name: '',
-    tagline: '',
-    companySize: {
-      nameHr: ''
-    },
-    headquarters: '',
-    industry: {
-      nameHr: ''
-    },
-    specialties: '',
-    website: '',
-    phone: '',
-    description: ''
-  });
+  const [profilePicture, setProfilePicture] = useState('');
+  const [name, setName] = useState('');
+  const [tagline, setTagline] = useState('');
+  const [companySize, setCompanySize] = useState('');
+  const [headquarters, setHeadquarters] = useState('');
+  const [industry, setIndustry] = useState('');
+  const [skills, setSkills] = useState([]);
+  const [website, setWebsite] = useState('');
+  const [phone, setPhone] = useState('');
+  const [description, setDescription] = useState('');
+  const [foundedAt, setFoundedAt] = useState('');
 
-  const dispatch = useDispatch();
+    const [companySizes, setCompanySizes] = useState([]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name.includes('.')) {
-      const [mainKey, subKey] = name.split('.');
-      setFormData({
-        ...formData,
-        [mainKey]: {
-          ...formData[mainKey],
-          [subKey]: value
-        }
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value
-      });
-    }
-  };
+    useEffect(() => {
+        companySizeService.fetch().then(data => {
+            setCompanySizes(data);
+        })
+        companyService.fetchInfo().then(data => {
+            setName(data.name || '');
+            setTagline(data.tagline || '');
+            setCompanySize(data.companySize || '');
+            setHeadquarters(data.headquarters || '');
+            setIndustry(data.industry || '');
+            setSkills(data.skills || []);
+            setWebsite(data.website || '');
+            setPhone(data.phone || '');
+            setDescription(data.description || '');
+            setFoundedAt(data.foundedAt ? new Date(data.foundedAt).getFullYear() : '');
+        })
+    }, []);
 
-  const handleQuillChange = (value) => {
-    setFormData({
-      ...formData,
-      description: value
-    });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const saveInfo = async () => {
+    const companyInfo = {
+      name,
+      tagline,
+      companySize,
+      headquarters,
+      industry: industry || null,
+      skills,
+      website,
+      phone,
+      description,
+      foundedAt: foundedAt ? new Date(foundedAt) : null,
+    };
 
-    // Dispatch the registerCompany action
-    dispatch(registerCompany(formData))
-      .unwrap()
-      .then((response) => {
-        // Handle success
-        console.log('Company registered successfully', response);
-      })
-      .catch((error) => {
-        // Handle error
-        console.error('Error registering company', error);
-      });
+    await companyService.saveInfo(companyInfo);
   };
 
   return (
       <>
-      <Navbar></Navbar>
-      <div className="mt-16 p-12">
-      <form className="flex flex-col gap-4 max-w-3xl mx-auto" onSubmit={handleSubmit}>
-        <div className="flex flex-col">
-          <label htmlFor="profilePicture" className="font-medium">Profilna Slika</label>
-          <input type="text" id="profilePicture" name="profilePicture" className="border p-2 rounded" placeholder="URL profilne slike" value={formData.profilePicture} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="name" className="font-medium">Ime Tvrtke</label>
-          <input type="text" id="name" name="name" className="border p-2 rounded" placeholder="Ime tvrtke" value={formData.name} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="tagline" className="font-medium">Slogan</label>
-          <input type="text" id="tagline" name="tagline" className="border p-2 rounded" placeholder="Slogan" value={formData.tagline} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="companySize.nameHr" className="font-medium">Veličina Tvrtke</label>
-          <input type="text" id="companySize.nameHr" name="companySize.nameHr" className="border p-2 rounded" placeholder="Veličina tvrtke" value={formData.companySize.nameHr} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="headquarters" className="font-medium">Sjedište</label>
-          <input type="text" id="headquarters" name="headquarters" className="border p-2 rounded" placeholder="Sjedište" value={formData.headquarters} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="industry.nameHr" className="font-medium">Industrija</label>
-          <input type="text" id="industry.nameHr" name="industry.nameHr" className="border p-2 rounded" placeholder="Industrija" value={formData.industry.nameHr} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="specialties" className="font-medium">Specijalnosti</label>
-          <input type="text" id="specialties" name="specialties" className="border p-2 rounded" placeholder="Specijalnosti" value={formData.specialties} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="website" className="font-medium">Web Stranica</label>
-          <input type="text" id="website" name="website" className="border p-2 rounded" placeholder="Web stranica" value={formData.website} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="phone" className="font-medium">Telefon</label>
-          <input type="text" id="phone" name="phone" className="border p-2 rounded" placeholder="Telefon" value={formData.phone} onChange={handleChange} />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="description" className="font-medium">Opis</label>
-          <ReactQuill theme="snow" value={formData.description} onChange={handleQuillChange} className="min-h-xl border p-2 rounded" />
-        </div>
-        <button type="submit" className="p-2 bg-blue-500 text-white rounded">Podnesi</button>
-      </form>
-    </div>
-    <div className='shadow'>
-    <Footer/>
-    </div>
 
-    
+          <Navbar />
+          <div className="mt-16 p-12 flex flex-col gap-2">
+              <SimpleInput
+                  label="Ime tvrtke"
+                  placeholder="Unesite ime tvrtke..." value={name} onChange={setName}
+              />
+              <SimpleInput  label="Slogan" placeholder="Unesite slogan..." value={tagline} onChange={setTagline} />
+
+              <div className="flex flex-col gap-1 mb-2">
+                  <label id="company-size" className="font-semibold">Veličina tvrtke</label>
+                  <Select
+                      id="company-size"
+                      placeholder="Odaberite veličinu tvrtke..."
+                      value={companySize}
+                      onChange={setCompanySize}
+                      isSearchable={false}
+                      options={companySizes}
+                      getOptionLabel={(option) => option.nameHr}
+                      getOptionValue={(option) => option.id}
+                  />
+              </div>
+
+              <SimpleInput label="Sjedište" placeholder="Sjedište" value={headquarters} onChange={setHeadquarters} />
+
+              <SimpleInput label="Industrija" placeholder="Industrija" value={industry} onChange={setIndustry} />
+              <SimpleInput label="Specijalnosti" placeholder="Specijalnosti" value={skills} onChange={setSkills} />
+
+              <SimpleInput label="Web Stranica" placeholder="Unesite link..." value={website} onChange={setWebsite} />
+              <SimpleInput label="Telefon" placeholder="Unesite broj telefona..." value={phone} onChange={setPhone} />
+              <ReactQuill label="Opis" placeholder="Unesite opis..." value={description} onChange={setDescription} />
+              <SimpleInput label="Osnovano" type="number" placeholder="Osnovano" value={foundedAt} onChange={setFoundedAt} />
+
+              <button type="submit" className="p-2 w-full bg-Primary text-white rounded-xl" onClick={saveInfo}>Spremi</button>
+          </div>
+          <div className='shadow'>
+              <Footer/>
+          </div>
       </>
   );
 }
