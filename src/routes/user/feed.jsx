@@ -12,6 +12,8 @@ export default function Feed() {
   const { account } = useSelector(state => state.auth);
   const { profiles } = useSelector(state => state.profile);
 
+  const [isLoading, setIsLoading] = useState(true);
+
 
   const [companies, setCompanies] = useState([]);
   const [selectedProfileId, setSelectedProfileId] = useState(null);
@@ -19,6 +21,13 @@ export default function Feed() {
   const [view, setView] = useState('feed');
 
   const onFetchFeed = async () => {
+    if (!selectedProfileId) {
+      const { companies } = await fetchCompanies();
+      setCompanies(companies);
+      return
+    }
+
+
     const data = await fetchFeed(selectedProfileId);
     setCompanies(data);
     setView('feed');
@@ -36,14 +45,12 @@ export default function Feed() {
       const primaryProfile = profiles.find(profile => profile.isPrimary);
       setSelectedProfileId(primaryProfile?.id);
     }
+
+    setIsLoading(false)
   }, [profiles]);
 
   useEffect(() => {
-    if (!selectedProfileId) {
-      fetchCompanies().then((data) => setCompanies(data.companies))
-      return
-    }
-
+    if (isLoading) return;
     onFetchFeed()
   }, [selectedProfileId]);
 
