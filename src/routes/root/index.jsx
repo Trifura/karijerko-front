@@ -17,8 +17,9 @@ function Root() {
     const {isAuthenticated} = useSelector((state) => state.auth)
 
     useEffect(() => {
-        fetchCompanies().then(({companies}) => {
-            setCompanies(companies)
+        fetchCompanies().then((data) => {
+            const topCompanies = data.companies.slice(0, 3);
+            setCompanies(topCompanies)
         })
     }, []);
 
@@ -61,8 +62,8 @@ function Root() {
                     <path d="M1440 220.568C1440 220.568 1178.25 103.162 772.125 234.115C366 365.067 5.98252e-06 220.568 5.98252e-06 220.568L2.52652e-05 -1.29082e-05L1440 0.000112981L1440 220.568Z" fill="#58CC02"/>
                 </svg>
             </div>
-            <div className="px-8 flex flex-col gap-5">
-                <h2 className="text-4xl lg:text-6xl lg:text-center pt-10 font-bold">Firme za tebe</h2>
+            <div className="px-8 flex flex-col gap-5 w-fit mx-auto">
+                <h2 className="text-4xl lg:text-6xl lg:text-center pt-10 font-bold">Top firme</h2>
                 <div>
                     <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 pt-10 justify-center">
                         {companies.map((company) => (
@@ -96,11 +97,9 @@ function Root() {
                 </div>
             </div>
 
-            <div className="h-40 lg:h-80 bg-Primary rounded-t-[40px] lg:rounded-t-[160px] w-full">
-</div>
-<div className="mt-[-100px] shadow-2xl">
-  <Footer/>
-</div>
+            <div className="mt-[-100px] shadow-2xl">
+                <Footer/>
+            </div>
 
         </div>
     );
