@@ -21,16 +21,16 @@ export default function Feed() {
   const [view, setView] = useState('feed');
 
   const onFetchFeed = async () => {
+    setView('feed');
+
     if (!selectedProfileId) {
       const { companies } = await fetchCompanies();
       setCompanies(companies);
       return
     }
 
-
     const data = await fetchFeed(selectedProfileId);
     setCompanies(data);
-    setView('feed');
   }
 
   const onFetchSubscriptions = async () => {
