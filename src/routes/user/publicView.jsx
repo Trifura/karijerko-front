@@ -43,7 +43,7 @@ export default function PublicView() {
         <>
             <Navbar />
             <div className="lg:hidden mt-20">
-                <UserInfo user={user}/>
+                <UserInfo user={user} isPublic={true} />
                 <hr className="border-Swan"/>
                 <div className="p-8 flex flex-col gap-6">
                     <ProfileSelect value={profile} onSelect={setSelectedProfileId} options={user.profiles} isPublic={true} />
@@ -59,7 +59,7 @@ export default function PublicView() {
                 <ProfileEducation educations={user.educations} isPublic={true} />
             </div>
             <div className="hidden lg:block border-2 border-Swan rounded-2xl mt-32 mb-10 max-w-5xl mx-auto">
-                <UserInfo user={user}/>
+                <UserInfo user={user} isPublic={true} />
                 <hr className="border-Swan"/>
                 <div className="flex h-full">
                     <div className="max-w-[350px] w-full border-r border-r-Swan">
