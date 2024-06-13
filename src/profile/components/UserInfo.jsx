@@ -1,6 +1,6 @@
 export default function UserInfo({ user, isPublic }) {
     return (
-        <div className="p-8 flex justify-between">
+        <div className="p-8 flex flex-col lg:flex-row gap-5 justify-between">
             <div className="flex gap-4 items-center">
                 <img src={user.profilePicture} className="w-20 h-20 rounded-full" alt=""/>
                 <div className="flex flex-col gap-1.5">
