@@ -6,6 +6,7 @@ import SideProfile from "../../core/components/side-profile";
 import {fetchCompanies, fetchFeed, fetchSubscriptions} from "./feed.js";
 import {useSelector} from "react-redux";
 import GeneralChat from "../../chat/components/GeneralChat.jsx";
+import Footer from "../../core/components/Footer.jsx";
 
 export default function Feed() {
 
@@ -92,6 +93,11 @@ export default function Feed() {
         </div>
       </div>
       <GeneralChat />
+{companies == '' && <div className="mt-[1000px] md:mt-[2000px]"></div>}
+<div className="mt-20">
+
+</div>
+      <Footer />
     </>
   );
 }
