@@ -13,7 +13,7 @@ const App = () => {
       },
     {
       name: 'Benjamin Sabo',
-      bio: 'Posvećeni 20-godišnji softverski inženjer s čvrstim temeljem u frontend razvoju. Iako nemam formalnog radnog iskustva u tvrtki, samostalno sam radio na izradi responzivnih i korisnički prijateljskih web sučelja (kao npr. Karijerko).',
+      bio: '21 godišnji softverski inženjer s čvrstim temeljem u frontend razvoju. Iako nemam formalnog radnog iskustva u front-endu, samostalno sam radio na izradi responzivnih i korisnički prijateljskih web sučelja ( kao npr. Karijerko :D ).',
       image: 'https://media.licdn.com/dms/image/D4D03AQHqe3q7qQA3XQ/profile-displayphoto-shrink_100_100/0/1714681109181?e=1723680000&v=beta&t=fIsu0Tjzn61rBv18QyDbdLdlsjUb8rdf5ZhjE_WQNuI',
       link: 'https://www.linkedin.com/in/bsabo44/'
     }
