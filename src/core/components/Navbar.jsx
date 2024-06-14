@@ -17,6 +17,15 @@ export default function Navbar({ showLink = true, showSearch = false }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const dropdownRef = useRef(null);
+  const [top, setTop] = useState(true);
+
+  useEffect(() => {
+    const scrollHandler = () => {
+      window.scrollY > 10 ? setTop(false) : setTop(true)
+    };
+    window.addEventListener('scroll', scrollHandler);
+    return () => window.removeEventListener('scroll', scrollHandler);
+  }, [top]);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -53,7 +62,7 @@ export default function Navbar({ showLink = true, showSearch = false }) {
   const loginButton = (
     <Link
       to={"/login"}
-      className="text-white text-base lg:text-md p-2 font-semibold bg-Primary rounded-md border-2 border-gray-200"
+      className="text-white text-base lg:text-md p-2 font-semibold bg-Primary rounded-md hover:bg-PrimaryDark transition duration-300 ease-in-out"
     >
       Prijavi se
     </Link>
@@ -122,7 +131,7 @@ export default function Navbar({ showLink = true, showSearch = false }) {
   const navbarButton = isAuthenticated ? accountButton : loginButton;
 
   return (
-    <div className="flex px-6 lg:px-16 py-4 shadow-md fixed w-full top-0 z-40 bg-white justify-between items-center">
+    <div className={`flex px-6 lg:px-16 py-4 fixed w-full top-0 z-40 bg-white justify-between items-center ${!top && 'shadow-md'}`}>
       <Link to={"/"} className="flex items-center flex-none">
         <img src={LogoFull} alt="" className="h-10 hidden lg:block" />
         <img src={LogoShort} alt="" className="h-10 lg:hidden" />
@@ -149,6 +158,19 @@ export default function Navbar({ showLink = true, showSearch = false }) {
         </div>
       ) : (
         <div className="flex items-center space-x-4 ml-auto">
+          {!isAuthenticated && (
+              <div className="hidden lg:flex lg:mr-20 gap-5">
+                <Link to='/search' className="font-semibold hover:underline">
+                  Istraži firme
+                </Link>
+                <Link to='/about-us' className="font-semibold hover:underline">
+                  O nama
+                </Link>
+                <Link to='/contact' className="font-semibold hover:underline">
+                  Kontakt
+                </Link>
+              </div>
+          )}
           {showLink && <div>{navbarButton}</div>}
         </div>
       )}

@@ -17,7 +17,8 @@ export default {
         Ironside: '#676767',
         Smoke: '#F5F5F5',
         Coral: '#FF4B4B',
-        Sapphire: '#1F57C3'
+        Sapphire: '#1F57C3',
+        Fox: '#FF9600',
       },
       keyframes: {
         'loading-bar': {

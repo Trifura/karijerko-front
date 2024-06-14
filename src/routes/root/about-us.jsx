@@ -1,7 +1,6 @@
 import '../../index.css';
 import Navbar from '../../core/components/Navbar';
 import Footer from '../../core/components/Footer';
-import NavbarPublic from "../../core/components/NavbarPublic.jsx";
 
 const App = () => {
   const people = [
