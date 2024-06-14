@@ -1,13 +1,13 @@
-import React from 'react';
 import '../../index.css';
 import Navbar from '../../core/components/Navbar';
 import Footer from '../../core/components/Footer';
+import NavbarPublic from "../../core/components/NavbarPublic.jsx";
 
 const App = () => {
   const people = [
     {
         name: 'Ivan Mikodanić',
-        bio: 'Posvećeni 20-godišnji softverski inženjer s čvrstim temeljem u frontend i backend razvoju. S 4 godine praktičnog iskustva u izradi responzivnih i korisnički prijateljskih web sučelja i 1 godinom stručnosti u izradi učinkovitih aplikacija na strani poslužitelja.',
+        bio: 'Posvećeni 20-godišnji softverski inženjer s čvrstim temeljem u frontend i backend razvoju. S 2 godine praktičnog iskustva u izradi responzivnih i korisnički prijateljskih web sučelja i 2 godine stručnosti u izradi učinkovitih aplikacija na strani poslužitelja.',
         image: 'https://media.licdn.com/dms/image/D4D03AQGiiaGJjB31QQ/profile-displayphoto-shrink_200_200/0/1666043344530?e=1723680000&v=beta&t=UI-xBZq6-qZuybpvE8GjmOY7NNZWZ6iAl4Els8b3acA',
         link: 'https://www.linkedin.com/in/ivan-mikodanic/'
       },
@@ -36,7 +36,7 @@ const App = () => {
     <>
       <Navbar/>
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-4xl font-bold mb-8">About Us</h1>
+        <h1 className="text-4xl font-bold mb-8">O nama</h1>
         <div className="flex flex-wrap justify-center">
           {people.map((person, index) => (
             <Person key={index} {...person} />
