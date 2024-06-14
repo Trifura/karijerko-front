@@ -23,7 +23,7 @@ export default function VerifyEmail() {
 
     return (
         <div>
-            Confirming Email...
+            Potvrđujemo vašu e-mail adresu...
         </div>
     );
 }
