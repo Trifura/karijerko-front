@@ -108,46 +108,46 @@ function RegisterFirma() {
       <div className="pt-16 sm:pt-0 flex flex-col justify-center items-center h-screen">
         <div className="mb-5 text-[25px] font-bold">Registracija</div>
         <div className="flex justify-center w-auto h-auto p-3 border-4 border-Swan rounded-xl max-w-[400px]">
-          <div className="flex flex-col mt-4 p-2">
+          <form onSubmit={handleSubmit} className="flex flex-col mt-4 p-2">
             <div className="p-2">Ime firme</div>
             <input
-                type="text"
-                placeholder="Unesite ime firme..."
-                value={name}
-                onChange={handleNameChange}
-                className="p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]"
+              type="text"
+              placeholder="Unesite ime firme..."
+              value={name}
+              onChange={handleNameChange}
+              className="p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]"
             />
 
             <div className="p-2">E-mail adresa</div>
             <input
-                type="email"
-                placeholder="Unesite e-mail..."
-                value={email}
-                onChange={handleEmailChange}
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-h-[40px] ${
-                    emailValid ? "border-Swan" : "border-red-500"
-                }`}
+              type="email"
+              placeholder="Unesite e-mail..."
+              value={email}
+              onChange={handleEmailChange}
+              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-h-[40px] ${
+                emailValid ? "border-Swan" : "border-red-500"
+              }`}
             />
             {!emailValid && (
-                <p className="text-red-500 text-xs ml-2">
-                  Unesite validnu e-mail adresu
-                </p>
+              <p className="text-red-500 text-xs ml-2">
+                Unesite validnu e-mail adresu
+              </p>
             )}
             <div className="p-2">Lozinka</div>
             <div className="w-full relative">
               <div className="relative">
                 <input
-                    type={passwordVisible ? "text" : "password"}
-                    placeholder="Unesite lozinku..."
-                    value={password}
-                    onChange={handlePasswordChange}
-                    className="p-2 border-2 border-Swan mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10"
+                  type={passwordVisible ? "text" : "password"}
+                  placeholder="Unesite lozinku..."
+                  value={password}
+                  onChange={handlePasswordChange}
+                  className="p-2 border-2 border-Swan mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10"
                 />
                 <div className="absolute mb-2 inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                   {passwordVisible ? (
-                      <HiEyeOff onClick={handleTogglePasswordVisibility}/>
+                    <HiEyeOff onClick={handleTogglePasswordVisibility} />
                   ) : (
-                      <HiEye onClick={handleTogglePasswordVisibility}/>
+                    <HiEye onClick={handleTogglePasswordVisibility} />
                   )}
                 </div>
               </div>
@@ -157,55 +157,52 @@ function RegisterFirma() {
             <div className="flex justify-center w-full relative">
               <div className="relative w-full">
                 <input
-                    type={passwordVisibleConfirmation ? "text" : "password"}
-                    placeholder="Potvrdite lozinku..."
-                    value={passwordConfirmation}
-                    onChange={handlePasswordConfirmationChange}
-                    className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10 ${
-                        passwordConfirmationValid ? "border-Swan" : "border-red-500"
-                    }`}
+                  type={passwordVisibleConfirmation ? "text" : "password"}
+                  placeholder="Potvrdite lozinku..."
+                  value={passwordConfirmation}
+                  onChange={handlePasswordConfirmationChange}
+                  className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10 ${
+                    passwordConfirmationValid ? "border-Swan" : "border-red-500"
+                  }`}
                 />
                 <div className="absolute mb-2 inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                   {passwordVisibleConfirmation ? (
-                      <HiEyeOff
-                          onClick={handleTogglePasswordVisibilityConfirmation}
-                      />
+                    <HiEyeOff
+                      onClick={handleTogglePasswordVisibilityConfirmation}
+                    />
                   ) : (
-                      <HiEye
-                          onClick={handleTogglePasswordVisibilityConfirmation}
-                      />
+                    <HiEye
+                      onClick={handleTogglePasswordVisibilityConfirmation}
+                    />
                   )}
                 </div>
               </div>
             </div>
 
             {!passwordConfirmationValid && (
-                <p className="text-red-500 text-xs ml-2">
-                  Lozinke se ne podudaraju
-                </p>
+              <p className="text-red-500 text-xs ml-2">
+                Lozinke se ne podudaraju
+              </p>
             )}
 
-
             <div className="my-4 flex justify-center items-center">
-              <hr className="w-64 border-gray-300"/>
+              <hr className="w-64 border-gray-300" />
             </div>
 
             <button
-                className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md"
-                onClick={handleSubmit}
-                disabled={isLoading}
+              className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md"
+              type="submit"
+              disabled={isLoading}
             >
               {isLoading ? "Registriranje..." : "Registriraj se"}
             </button>
 
             {error && (
-                <p className="text-red-500 text-xs ml-2">
-                  {error}
-                </p>
+              <p className="text-red-500 text-xs ml-2">
+                {error}
+              </p>
             )}
-
-
-          </div>
+          </form>
         </div>
 
         <div className="flex justify-center mt-2 items-center">

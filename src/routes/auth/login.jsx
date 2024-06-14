@@ -6,8 +6,8 @@ import GoogleLoginButton from "../../auth/components/GoogleLoginButton.jsx";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { authenticateGoogle, login } from "../../auth/store/actions.js";
 import { useDispatch, useSelector } from "react-redux";
-import {Helmet} from "react-helmet";
-import {fetchAll} from "../../profile/store/actions.js";
+import { Helmet } from "react-helmet";
+import { fetchAll } from "../../profile/store/actions.js";
 
 function Login() {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleEmailChange = (e) => {
     const enteredEmail = e.target.value;
@@ -39,11 +40,11 @@ function Login() {
       if (role === 'company') {
         navigate('/dashboard');
       } else {
-        await dispatch(fetchAll())
+        await dispatch(fetchAll());
         navigate('/feed');
       }
     } else {
-      console.error(result.payload);
+      setErrorMessage("Krivi email ili password");
     }
   };
 
@@ -58,9 +59,15 @@ function Login() {
       if (role === 'company') {
         navigate('/dashboard');
       } else {
-        await dispatch(fetchAll())
+        await dispatch(fetchAll());
         navigate('/feed');
       }
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
     }
   };
 
@@ -73,7 +80,7 @@ function Login() {
       <Navbar showLink={false} />
 
       <Helmet>
-        <meta name="description" content="Prijavi se u Karijerka i rasturi svoje karijerne ciljeve."/>
+        <meta name="description" content="Prijavi se u Karijerka i rasturi svoje karijerne ciljeve." />
         <title>Karijerko - Prijava</title>
       </Helmet>
 
@@ -87,25 +94,31 @@ function Login() {
               placeholder="Unesite e-mail..."
               value={email}
               onChange={handleEmailChange}
+              onKeyPress={handleKeyPress}
               className={`p-2 border-2 border-Swan mb-4 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]`}
             />
             <div className="p-2">Lozinka</div>
-              <div className="relative w-full">
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  placeholder="Unesite lozinku..."
-                  value={password}
-                  onChange={handlePasswordChange}
-                  className="p-2 border-2 border-Swan mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10"
-                />
-                <div className="absolute inset-y-0 right-0 flex items-center mb-2 pr-3 cursor-pointer">
-                  {passwordVisible ? (
-                    <HiEyeOff onClick={handleTogglePasswordVisibility} />
-                  ) : (
-                    <HiEye onClick={handleTogglePasswordVisibility} />
-                  )}
-                </div>
+            <div className="relative w-full">
+              <input
+                type={passwordVisible ? "text" : "password"}
+                placeholder="Unesite lozinku..."
+                value={password}
+                onChange={handlePasswordChange}
+                onKeyPress={handleKeyPress}
+                className="p-2 border-2 border-Swan mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10"
+              />
+              <div className="absolute inset-y-0 right-0 flex items-center mb-2 pr-3 cursor-pointer">
+                {passwordVisible ? (
+                  <HiEyeOff onClick={handleTogglePasswordVisibility} />
+                ) : (
+                  <HiEye onClick={handleTogglePasswordVisibility} />
+                )}
               </div>
+            </div>
+
+            {errorMessage && (
+              <div className="text-red-500 text-4 text-center mb-4">{errorMessage}</div>
+            )}
 
             <div
               className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md cursor-pointer"
