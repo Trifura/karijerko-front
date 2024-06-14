@@ -4,6 +4,13 @@ import projectService from "../../services/project.js";
 import ProjectEdit from "../project/ProjectEdit.jsx";
 import {useState} from "react";
 
+const colors = [
+    'bg-[#264653]',
+    'bg-[#2a9d8f]',
+    'bg-[#e9c46a]',
+    'bg-[#f4a261]',
+    'bg-[#e76f51]',
+];
 
 export default function ProfilePortfolio({ profile, projects, setProjects, isPublic }) {
     const [isCreating, setIsCreating] = useState(false);
@@ -52,7 +59,7 @@ export default function ProfilePortfolio({ profile, projects, setProjects, isPub
                 </div>
                 <div className="flex flex-wrap justify-between lg:justify-start gap-2 lg:gap-6">
                     {
-                        projects.map((project) => (<ProjectCard key={project.id} project={project} onSave={saveProject} onDelete={deleteProject} isPublic={isPublic} />))
+                        projects.map((project, i) => (<ProjectCard key={project.id} color={colors[i % 5]} project={project} onSave={saveProject} onDelete={deleteProject} isPublic={isPublic} />))
                     }
                     {
                         !projects.length && (
