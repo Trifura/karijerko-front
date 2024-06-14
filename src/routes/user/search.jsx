@@ -118,6 +118,7 @@ export default function Search() {
               </div>
             </div>
           </div>
+          <div className="mt-10"></div>
           <Footer />
         </div>
       </>

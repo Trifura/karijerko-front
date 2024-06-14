@@ -52,6 +52,12 @@ function Register() {
     return emailPattern.test(email);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -110,52 +116,56 @@ function Register() {
           <div className="flex flex-col mt-4 p-2">
             <div className="p-2">Ime</div>
             <input
-                type="text"
-                placeholder="Unesite ime..."
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]`}
+              type="text"
+              placeholder="Unesite ime..."
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none min-w-[320px] min-h-[40px]`}
             />
 
             <div className="p-2">Prezime</div>
             <input
-                type="text"
-                placeholder="Unesite prezime..."
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none`}
+              type="text"
+              placeholder="Unesite prezime..."
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none`}
             />
 
             <div className="p-2">E-mail adresa</div>
             <input
-                type="email"
-                placeholder="Unesite e-mail..."
-                value={email}
-                onChange={handleEmailChange}
-                className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none ${
-                    emailValid ? "border-Swan" : "border-red-500"
-                }`}
+              type="email"
+              placeholder="Unesite e-mail..."
+              value={email}
+              onChange={handleEmailChange}
+              onKeyPress={handleKeyPress}
+              className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none ${
+                emailValid ? "border-Swan" : "border-red-500"
+              }`}
             />
             {!emailValid && (
-                <p className="text-red-500 text-xs ml-2">
-                  Unesite validnu e-mail adresu
-                </p>
+              <p className="text-red-500 text-xs ml-2">
+                Unesite validnu e-mail adresu
+              </p>
             )}
             <div className="p-2">Lozinka</div>
             <div className="w-full relative">
               <div className="relative">
                 <input
-                    type={passwordVisible ? "text" : "password"}
-                    placeholder="Unesite lozinku..."
-                    value={password}
-                    onChange={handlePasswordChange}
-                    className="p-2 border-2 border-Swan mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10"
+                  type={passwordVisible ? "text" : "password"}
+                  placeholder="Unesite lozinku..."
+                  value={password}
+                  onChange={handlePasswordChange}
+                  onKeyPress={handleKeyPress}
+                  className="p-2 border-2 border-Swan mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10"
                 />
                 <div className="absolute mb-2 inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                   {passwordVisible ? (
-                      <HiEyeOff onClick={handleTogglePasswordVisibility}/>
+                    <HiEyeOff onClick={handleTogglePasswordVisibility} />
                   ) : (
-                      <HiEye onClick={handleTogglePasswordVisibility}/>
+                    <HiEye onClick={handleTogglePasswordVisibility} />
                   )}
                 </div>
               </div>
@@ -165,45 +175,46 @@ function Register() {
             <div className="flex justify-center w-full relative">
               <div className="relative w-full">
                 <input
-                    type={passwordVisibleConfirmation ? "text" : "password"}
-                    placeholder="Potvrdite lozinku..."
-                    value={passwordConfirmation}
-                    onChange={handlePasswordConfirmationChange}
-                    className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10 ${
-                        passwordConfirmationValid ? "border-Swan" : "border-red-500"
-                    }`}
+                  type={passwordVisibleConfirmation ? "text" : "password"}
+                  placeholder="Potvrdite lozinku..."
+                  value={passwordConfirmation}
+                  onChange={handlePasswordConfirmationChange}
+                  onKeyPress={handleKeyPress}
+                  className={`p-2 border-2 mb-2 rounded-md bg-[#FBFBFB] outline-none w-full min-h-[40px] pr-10 ${
+                    passwordConfirmationValid ? "border-Swan" : "border-red-500"
+                  }`}
                 />
                 <div className="absolute mb-2 inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                   {passwordVisibleConfirmation ? (
-                      <HiEyeOff
-                          onClick={handleTogglePasswordVisibilityConfirmation}
-                      />
+                    <HiEyeOff
+                      onClick={handleTogglePasswordVisibilityConfirmation}
+                    />
                   ) : (
-                      <HiEye
-                          onClick={handleTogglePasswordVisibilityConfirmation}
-                      />
+                    <HiEye
+                      onClick={handleTogglePasswordVisibilityConfirmation}
+                    />
                   )}
                 </div>
               </div>
             </div>
             {!passwordConfirmationValid && (
-                <p className="text-red-500 text-xs ml-2">
-                  Lozinke se ne podudaraju
-                </p>
+              <p className="text-red-500 text-xs ml-2">
+                Lozinke se ne podudaraju
+              </p>
             )}
             <div
-                className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md cursor-pointer"
-                onClick={handleSubmit}
+              className="mt-2 p-1 text-white flex justify-center w-full bg-Primary rounded-md cursor-pointer"
+              onClick={handleSubmit}
             >
               Registriraj se
             </div>
             {error && <p className="text-red-500 text-xs ml-2">{error}</p>}
             <div className="mt-7 flex justify-center items-center">
-              <hr className="w-64 border-gray-300"/>
+              <hr className="w-64 border-gray-300" />
             </div>
 
             <div className="mt-4 flex justify-center items-center">
-              <GoogleLoginButton onSuccess={handleGoogleAuth}/>
+              <GoogleLoginButton onSuccess={handleGoogleAuth} />
             </div>
           </div>
         </div>
@@ -222,7 +233,7 @@ function Register() {
           </Link>
         </div>
 
-        {showEmailConfirmation && <EmailConfirmation onClose={handleCloseEmailConfirmation} isCompany={false}/>}
+        {showEmailConfirmation && <EmailConfirmation onClose={handleCloseEmailConfirmation} isCompany={false} />}
       </div>
     </div>
   );
