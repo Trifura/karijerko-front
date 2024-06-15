@@ -44,7 +44,7 @@ export default function Feed() {
   useEffect(() => {
     if (isLoading) return;
     onFetchFeed();
-  }, [selectedProfileId]);
+  }, [selectedProfileId, isLoading]);
 
   return (
     <div className="flex flex-col min-h-screen">
