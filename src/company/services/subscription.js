@@ -10,7 +10,17 @@ const unsubscribe = async (companyId) => {
     return response.data
 }
 
+const sendSubscriptionEmails = async (subject, content) => {
+    const response = await api.post(`/company/send-emails`, {
+        subject,
+        content
+    })
+
+    return response.data
+}
+
 export default {
     subscribe,
-    unsubscribe
+    unsubscribe,
+    sendSubscriptionEmails,
 }
